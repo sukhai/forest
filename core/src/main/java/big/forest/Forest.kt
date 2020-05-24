@@ -32,6 +32,10 @@ abstract class Forest {
             return getForest(name)
         }
 
+        fun clearForests() {
+            forests.clear()
+        }
+
         override fun plant(tree: Tree) {
             super.plant(tree)
             forests.values.forEach { forest ->
