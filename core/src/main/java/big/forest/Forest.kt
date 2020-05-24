@@ -16,8 +16,7 @@ abstract class Forest {
     companion object : Forest() {
         private val forests = ConcurrentHashMap<String, Forest>()
 
-        fun getForest(clazz: Class<*>): Forest {
-            val name = clazz.canonicalName ?: clazz.`package`.name ?: ""
+        fun getForest(name: String): Forest {
             return forests.getOrPut(name) {
                 RealForest().also { newForest ->
                     newForest.level = level
@@ -26,6 +25,11 @@ abstract class Forest {
                     trees.forEach { tree -> newForest.plant(tree) }
                 }
             }
+        }
+
+        fun getForest(clazz: Class<*>): Forest {
+            val name = clazz.canonicalName ?: clazz.`package`.name ?: ""
+            return getForest(name)
         }
 
         override fun plant(tree: Tree) {
