@@ -31,76 +31,76 @@ abstract class AbstractForest : Forest {
         preProcessLogCallback = callback
     }
 
-    override fun v(message: String, extras: Map<String, Any>) {
-        log(Forest.Level.VERBOSE, message, null, extras)
+    override fun v(message: String, attributes: Map<String, Any>) {
+        log(Forest.Level.VERBOSE, message, null, attributes)
     }
 
-    override fun v(message: String, throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.VERBOSE, message, throwable, extras)
+    override fun v(message: String, throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.VERBOSE, message, throwable, attributes)
     }
 
-    override fun v(throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.VERBOSE, null, throwable, extras)
+    override fun v(throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.VERBOSE, null, throwable, attributes)
     }
 
-    override fun d(message: String, extras: Map<String, Any>) {
-        log(Forest.Level.DEBUG, message, null, extras)
+    override fun d(message: String, attributes: Map<String, Any>) {
+        log(Forest.Level.DEBUG, message, null, attributes)
     }
 
-    override fun d(message: String, throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.DEBUG, message, throwable, extras)
+    override fun d(message: String, throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.DEBUG, message, throwable, attributes)
     }
 
-    override fun d(throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.DEBUG, null, throwable, extras)
+    override fun d(throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.DEBUG, null, throwable, attributes)
     }
 
-    override fun i(message: String, extras: Map<String, Any>) {
-        log(Forest.Level.INFO, message, null, extras)
+    override fun i(message: String, attributes: Map<String, Any>) {
+        log(Forest.Level.INFO, message, null, attributes)
     }
 
-    override fun i(message: String, throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.INFO, message, throwable, extras)
+    override fun i(message: String, throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.INFO, message, throwable, attributes)
     }
 
-    override fun i(throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.INFO, null, throwable, extras)
+    override fun i(throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.INFO, null, throwable, attributes)
     }
 
-    override fun w(message: String, extras: Map<String, Any>) {
-        log(Forest.Level.WARN, message, null, extras)
+    override fun w(message: String, attributes: Map<String, Any>) {
+        log(Forest.Level.WARN, message, null, attributes)
     }
 
-    override fun w(message: String, throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.WARN, message, throwable, extras)
+    override fun w(message: String, throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.WARN, message, throwable, attributes)
     }
 
-    override fun w(throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.WARN, null, throwable, extras)
+    override fun w(throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.WARN, null, throwable, attributes)
     }
 
-    override fun e(message: String, extras: Map<String, Any>) {
-        log(Forest.Level.ERROR, message, null, extras)
+    override fun e(message: String, attributes: Map<String, Any>) {
+        log(Forest.Level.ERROR, message, null, attributes)
     }
 
-    override fun e(message: String, throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.ERROR, message, throwable, extras)
+    override fun e(message: String, throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.ERROR, message, throwable, attributes)
     }
 
-    override fun e(throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.ERROR, null, throwable, extras)
+    override fun e(throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.ERROR, null, throwable, attributes)
     }
 
-    override fun f(message: String, extras: Map<String, Any>) {
-        log(Forest.Level.FATAL, message, null, extras)
+    override fun f(message: String, attributes: Map<String, Any>) {
+        log(Forest.Level.FATAL, message, null, attributes)
     }
 
-    override fun f(message: String, throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.FATAL, message, throwable, extras)
+    override fun f(message: String, throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.FATAL, message, throwable, attributes)
     }
 
-    override fun f(throwable: Throwable, extras: Map<String, Any>) {
-        log(Forest.Level.FATAL, null, throwable, extras)
+    override fun f(throwable: Throwable, attributes: Map<String, Any>) {
+        log(Forest.Level.FATAL, null, throwable, attributes)
     }
 
     override fun log(
@@ -137,7 +137,7 @@ abstract class AbstractForest : Forest {
         level: Forest.Level,
         message: String?,
         throwable: Throwable?,
-        extras: Map<String, Any>
+        attributes: Map<String, Any>
     ): LogEntry {
         val tag = name ?: getTag(throwable)
 
@@ -148,7 +148,7 @@ abstract class AbstractForest : Forest {
             message,
             tag,
             throwable,
-            extras
+            attributes
         )
     }
 

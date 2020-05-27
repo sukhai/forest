@@ -27,41 +27,41 @@ interface Forest {
 
     fun preProcessLog(callback: PreProcessLogCallback)
 
-    fun v(message: String, extras: Map<String, Any> = emptyMap())
+    fun v(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun v(message: String, throwable: Throwable, extras: Map<String, Any>)
+    fun v(message: String, throwable: Throwable, attributes: Map<String, Any>)
 
-    fun v(throwable: Throwable, extras: Map<String, Any>)
+    fun v(throwable: Throwable, attributes: Map<String, Any>)
 
-    fun d(message: String, extras: Map<String, Any> = emptyMap())
+    fun d(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun d(message: String, throwable: Throwable, extras: Map<String, Any>)
+    fun d(message: String, throwable: Throwable, attributes: Map<String, Any>)
 
-    fun d(throwable: Throwable, extras: Map<String, Any>)
+    fun d(throwable: Throwable, attributes: Map<String, Any>)
 
-    fun i(message: String, extras: Map<String, Any> = emptyMap())
+    fun i(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun i(message: String, throwable: Throwable, extras: Map<String, Any>)
+    fun i(message: String, throwable: Throwable, attributes: Map<String, Any>)
 
-    fun i(throwable: Throwable, extras: Map<String, Any>)
+    fun i(throwable: Throwable, attributes: Map<String, Any>)
 
-    fun w(message: String, extras: Map<String, Any> = emptyMap())
+    fun w(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun w(message: String, throwable: Throwable, extras: Map<String, Any>)
+    fun w(message: String, throwable: Throwable, attributes: Map<String, Any>)
 
-    fun w(throwable: Throwable, extras: Map<String, Any>)
+    fun w(throwable: Throwable, attributes: Map<String, Any>)
 
-    fun e(message: String, extras: Map<String, Any> = emptyMap())
+    fun e(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun e(message: String, throwable: Throwable, extras: Map<String, Any>)
+    fun e(message: String, throwable: Throwable, attributes: Map<String, Any>)
 
-    fun e(throwable: Throwable, extras: Map<String, Any>)
+    fun e(throwable: Throwable, attributes: Map<String, Any>)
 
-    fun f(message: String, extras: Map<String, Any> = emptyMap())
+    fun f(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun f(message: String, throwable: Throwable, extras: Map<String, Any>)
+    fun f(message: String, throwable: Throwable, attributes: Map<String, Any>)
 
-    fun f(throwable: Throwable, extras: Map<String, Any>)
+    fun f(throwable: Throwable, attributes: Map<String, Any>)
 
     fun log(
         level: Level,
