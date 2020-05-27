@@ -73,7 +73,7 @@ interface Forest {
     companion object : AbstractForest() {
         private val forests = ConcurrentHashMap<String, Forest>()
 
-        fun getForest(name: String, configure: (Config.() -> Unit) = {}): Forest {
+        fun getForest(name: String, configure: (ForestConfig.() -> Unit) = {}): Forest {
             val forest = forests.getOrPut(name) {
                 RealForest().also { newForest ->
                     newForest.level = level
@@ -83,7 +83,7 @@ interface Forest {
                 }
             } as AbstractForest
 
-            val config = Config(
+            val config = ForestConfig(
                 forest.level,
                 forest.preProcessLogCallback,
                 forest.trees.toMutableList()
@@ -94,7 +94,7 @@ interface Forest {
             return forest
         }
 
-        fun getForest(clazz: Class<*>, configure: (Config.() -> Unit) = {}): Forest {
+        fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
             val name = clazz.canonicalName ?: clazz.`package`.name ?: ""
             return getForest(name, configure)
         }
@@ -125,7 +125,7 @@ interface Forest {
             }
         }
 
-        private fun Forest.apply(config: Config) {
+        private fun Forest.apply(config: ForestConfig) {
             level = config.level
             preProcessLogCallback = config.preProcessLog
             allTrees = config.trees.toList()
@@ -135,10 +135,10 @@ interface Forest {
     }
 }
 
-fun getForest(name: String, configure: (Config.() -> Unit) = {}): Forest {
+fun getForest(name: String, configure: (ForestConfig.() -> Unit) = {}): Forest {
     return Forest.getForest(name, configure)
 }
 
-fun getForest(clazz: Class<*>, configure: (Config.() -> Unit) = {}): Forest {
+fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
     return Forest.getForest(clazz, configure)
 }

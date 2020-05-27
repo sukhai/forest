@@ -1,6 +1,6 @@
 package big.forest
 
-data class Config(
+data class ForestConfig(
     var level: Forest.Level,
     var preProcessLog: PreProcessLogCallback?,
     internal val trees: MutableList<Tree>
