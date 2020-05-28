@@ -1,5 +1,7 @@
 package big.forest
 
+import big.forest.Forest.Global.context
+import big.forest.context.ForestContext
 import java.util.concurrent.ConcurrentHashMap
 
 typealias PreProcessLogCallback = (LogEntry) -> LogEntry?
@@ -70,8 +72,10 @@ interface Forest {
         attributes: Map<String, Any> = emptyMap()
     )
 
-    companion object : AbstractForest() {
-        private val forests = ConcurrentHashMap<String, Forest>()
+    companion object Global : AbstractForest({ context }) {
+        var context: ForestContext = ForestContext.newDataContext()
+            private set
+        private val forests = ConcurrentHashMap<String, AbstractForest>()
 
         fun getForest(name: String, configure: (ForestConfig.() -> Unit) = {}): Forest {
             val forest = forests.getOrPut(name) {
@@ -81,7 +85,7 @@ interface Forest {
                     newForest.preProcessLogCallback = preProcessLogCallback
                     trees.forEach { tree -> newForest.plant(tree) }
                 }
-            } as AbstractForest
+            }
 
             val config = ForestConfig(
                 forest.level,
@@ -95,18 +99,24 @@ interface Forest {
         }
 
         fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
-            val name = clazz.canonicalName ?: clazz.`package`.name ?: ""
-            return getForest(name, configure)
+            return getForest(clazz.name(), configure)
         }
 
         fun clearForests() {
             forests.clear()
         }
 
+        fun changeContext(newContext: ForestContext) {
+            context = newContext
+        }
+
+        fun context(update: ForestContext.() -> Unit) {
+            update(context)
+        }
+
         override fun plant(tree: Tree) {
             super.plant(tree)
-            forests.values.forEach {
-                val forest = it as AbstractForest
+            forests.values.forEach { forest ->
                 val t = forest.allTrees.toMutableList()
                 if (!t.contains(tree)) {
                     t.add(tree)
@@ -117,8 +127,7 @@ interface Forest {
 
         override fun cut(tree: Tree) {
             super.cut(tree)
-            forests.values.forEach {
-                val forest = it as AbstractForest
+            forests.values.forEach { forest ->
                 val t = forest.allTrees.toMutableList()
                 t.remove(tree)
                 forest.allTrees = t
@@ -131,7 +140,17 @@ interface Forest {
             allTrees = config.trees.toList()
         }
 
-        internal class RealForest : AbstractForest()
+        private fun Class<*>.name(): String {
+            var name = canonicalName
+            if (!name.isNotBlank()) {
+                return name
+            }
+            name = `package`?.name ?: ""
+            name += if (name.isBlank()) simpleName else ".$simpleName"
+            return if (name.length <= 1) "" else name
+        }
+
+        internal class RealForest : AbstractForest({ context })
     }
 }
 

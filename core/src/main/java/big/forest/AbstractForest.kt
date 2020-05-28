@@ -1,6 +1,11 @@
 package big.forest
 
-abstract class AbstractForest : Forest {
+import big.forest.context.ForestContext
+
+abstract class AbstractForest(
+    private val context: () -> ForestContext
+) : Forest {
+
     override var level: Forest.Level = Forest.Level.VERBOSE
     override var name: String? = null
     override val trees: List<Tree>
@@ -145,6 +150,7 @@ abstract class AbstractForest : Forest {
             level,
             Thread.currentThread().id,
             System.currentTimeMillis(),
+            context.invoke(),
             message,
             tag,
             throwable,
