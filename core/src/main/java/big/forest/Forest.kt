@@ -142,11 +142,11 @@ interface Forest {
 
         private fun Class<*>.name(): String {
             var name = canonicalName
-            if (!name.isNotBlank()) {
+            if (!name.isNullOrBlank()) {
                 return name
             }
             name = `package`?.name ?: ""
-            name += if (name.isBlank()) simpleName else ".$simpleName"
+            name += if (name.isBlank()) simpleName else ""
             return if (name.length <= 1) "" else name
         }
 
