@@ -77,7 +77,7 @@ interface Forest {
             private set
         private val forests = ConcurrentHashMap<String, AbstractForest>()
 
-        fun getForest(name: String, configure: (ForestConfig.() -> Unit) = {}): Forest {
+        fun getForest(name: String = "", configure: (ForestConfig.() -> Unit) = {}): Forest {
             val forest = forests.getOrPut(name) {
                 RealForest().also { newForest ->
                     newForest.level = level
@@ -155,7 +155,7 @@ interface Forest {
     }
 }
 
-fun getForest(name: String, configure: (ForestConfig.() -> Unit) = {}): Forest {
+fun getForest(name: String = "", configure: (ForestConfig.() -> Unit) = {}): Forest {
     return Forest.getForest(name, configure)
 }
 
