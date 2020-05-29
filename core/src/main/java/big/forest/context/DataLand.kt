@@ -2,7 +2,7 @@ package big.forest.context
 
 import java.util.concurrent.ConcurrentHashMap
 
-class DataContext internal constructor() : ForestContext {
+class DataLand internal constructor() : Land {
     private val map = ConcurrentHashMap<String, Any>()
 
     override val size: Int

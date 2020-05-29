@@ -1,12 +1,12 @@
 package big.forest
 
-import big.forest.context.ForestContext
+import big.forest.context.Land
 
 data class LogEntry(
     val level: Forest.Level,
     val threadId: Long,
     val timestamp: Long,
-    val context: ForestContext = Forest.context,
+    val context: Land = Forest.land,
     val message: String? = null,
     val tag: String? = null,
     val throwable: Throwable? = null,

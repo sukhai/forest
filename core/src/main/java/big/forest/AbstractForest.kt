@@ -1,9 +1,9 @@
 package big.forest
 
-import big.forest.context.ForestContext
+import big.forest.context.Land
 
 abstract class AbstractForest(
-    private val context: () -> ForestContext
+    private val land: () -> Land
 ) : Forest {
 
     override var level: Forest.Level = Forest.Level.VERBOSE
@@ -156,7 +156,7 @@ abstract class AbstractForest(
             level,
             Thread.currentThread().id,
             System.currentTimeMillis(),
-            context.invoke(),
+            land.invoke(),
             message,
             tag,
             throwable,

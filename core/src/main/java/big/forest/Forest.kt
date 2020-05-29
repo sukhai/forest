@@ -1,7 +1,7 @@
 package big.forest
 
-import big.forest.Forest.Global.context
-import big.forest.context.ForestContext
+import big.forest.Forest.Global.land
+import big.forest.context.Land
 import java.util.concurrent.ConcurrentHashMap
 
 typealias PreProcessLogCallback = (LogEntry) -> LogEntry?
@@ -72,8 +72,8 @@ interface Forest {
         attributes: Map<String, Any> = emptyMap()
     )
 
-    companion object Global : AbstractForest({ context }) {
-        var context: ForestContext = ForestContext.newDataContext()
+    companion object Global : AbstractForest({ land }) {
+        var land: Land = Land.createDataLand()
             private set
         private val forests = ConcurrentHashMap<String, AbstractForest>()
 
@@ -102,12 +102,12 @@ interface Forest {
             return getForest(clazz.name(), configure)
         }
 
-        fun changeContext(newContext: ForestContext) {
-            context = newContext
+        fun changeContext(newContext: Land) {
+            land = newContext
         }
 
-        fun context(update: ForestContext.() -> Unit) {
-            update(context)
+        fun land(update: Land.() -> Unit) {
+            update(land)
         }
 
         override fun deforest() {
@@ -145,7 +145,7 @@ interface Forest {
             return if (name.length <= 1) "" else name
         }
 
-        internal class RealForest : AbstractForest({ context })
+        internal class RealForest : AbstractForest({ land })
     }
 }
 

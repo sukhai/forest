@@ -1,6 +1,6 @@
 package big.forest.context
 
-class NoOpContext internal constructor() : ForestContext {
+class NoOpLand internal constructor() : Land {
     override val size = 0
 
     override val entries: MutableSet<MutableMap.MutableEntry<String, Any>> = mutableSetOf()
