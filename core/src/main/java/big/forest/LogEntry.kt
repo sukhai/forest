@@ -6,7 +6,7 @@ data class LogEntry(
     val level: Forest.Level,
     val threadId: Long,
     val timestamp: Long,
-    val context: ForestContext,
+    val context: ForestContext = Forest.context,
     val message: String? = null,
     val tag: String? = null,
     val throwable: Throwable? = null,

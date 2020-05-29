@@ -31,39 +31,39 @@ interface Forest {
 
     fun v(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun v(message: String, throwable: Throwable, attributes: Map<String, Any>)
+    fun v(message: String, throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
-    fun v(throwable: Throwable, attributes: Map<String, Any>)
+    fun v(throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
     fun d(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun d(message: String, throwable: Throwable, attributes: Map<String, Any>)
+    fun d(message: String, throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
-    fun d(throwable: Throwable, attributes: Map<String, Any>)
+    fun d(throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
     fun i(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun i(message: String, throwable: Throwable, attributes: Map<String, Any>)
+    fun i(message: String, throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
-    fun i(throwable: Throwable, attributes: Map<String, Any>)
+    fun i(throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
     fun w(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun w(message: String, throwable: Throwable, attributes: Map<String, Any>)
+    fun w(message: String, throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
-    fun w(throwable: Throwable, attributes: Map<String, Any>)
+    fun w(throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
     fun e(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun e(message: String, throwable: Throwable, attributes: Map<String, Any>)
+    fun e(message: String, throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
-    fun e(throwable: Throwable, attributes: Map<String, Any>)
+    fun e(throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
     fun f(message: String, attributes: Map<String, Any> = emptyMap())
 
-    fun f(message: String, throwable: Throwable, attributes: Map<String, Any>)
+    fun f(message: String, throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
-    fun f(throwable: Throwable, attributes: Map<String, Any>)
+    fun f(throwable: Throwable, attributes: Map<String, Any> = emptyMap())
 
     fun log(
         level: Level,
@@ -93,7 +93,7 @@ interface Forest {
                 forest.trees.toMutableList()
             )
             configure(config)
-            forest.apply(config)
+            forest.updateWithConfig(config)
 
             return forest
         }
@@ -133,12 +133,6 @@ interface Forest {
                 t.remove(tree)
                 forest.allTrees = t
             }
-        }
-
-        private fun Forest.apply(config: ForestConfig) {
-            level = config.level
-            preProcessLogCallback = config.preProcessLog
-            allTrees = config.trees.toList()
         }
 
         private fun Class<*>.name(): String {

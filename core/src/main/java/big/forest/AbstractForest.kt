@@ -133,6 +133,12 @@ abstract class AbstractForest(
         }
     }
 
+    internal fun updateWithConfig(config: ForestConfig) {
+        level = config.level
+        preProcessLogCallback = config.preProcessLog
+        allTrees = config.trees.toList()
+    }
+
     private fun shouldLog(level: Forest.Level): Boolean {
         return this.level != Forest.Level.OFF && level != Forest.Level.OFF &&
                 level.ordinal <= this.level.ordinal
@@ -144,7 +150,7 @@ abstract class AbstractForest(
         throwable: Throwable?,
         attributes: Map<String, Any>
     ): LogEntry {
-        val tag = name ?: getTag(throwable)
+        val tag = getTag(throwable)
 
         return LogEntry(
             level,
@@ -159,11 +165,14 @@ abstract class AbstractForest(
     }
 
     private fun getTag(throwable: Throwable?): String? {
-        if (throwable == null) {
+        if (!name.isNullOrBlank()) {
+            return name
+        }
+
+        if (throwable == null || throwable.stackTrace.isEmpty()) {
             return null
         }
 
-        // TODO: Try to get tag from stacktrace
-        return null
+        return throwable.stackTrace[0].className
     }
 }
