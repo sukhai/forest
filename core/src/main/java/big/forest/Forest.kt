@@ -25,7 +25,7 @@ interface Forest {
 
     fun cut(tree: Tree)
 
-    fun clearTrees()
+    fun deforest()
 
     fun preProcessLog(callback: PreProcessLogCallback)
 
@@ -102,16 +102,17 @@ interface Forest {
             return getForest(clazz.name(), configure)
         }
 
-        fun clearForests() {
-            forests.clear()
-        }
-
         fun changeContext(newContext: ForestContext) {
             context = newContext
         }
 
         fun context(update: ForestContext.() -> Unit) {
             update(context)
+        }
+
+        override fun deforest() {
+            super.deforest()
+            forests.clear()
         }
 
         override fun plant(tree: Tree) {

@@ -26,7 +26,7 @@ abstract class AbstractForest(
         allTrees = t
     }
 
-    override fun clearTrees() {
+    override fun deforest() {
         val t = allTrees.toMutableList()
         t.clear()
         allTrees = t
