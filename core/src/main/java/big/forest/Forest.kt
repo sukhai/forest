@@ -73,8 +73,18 @@ interface Forest {
     )
 
     companion object Global : AbstractForest({ land }) {
+        override var level: Level = Level.VERBOSE
+            set(value) {
+                field = value
+                if (allowGlobalOverride) {
+                    forests.values.forEach { it.level = value }
+                }
+            }
+
         var land: Land = Land.createDataLand()
             private set
+
+        var allowGlobalOverride = true
         private val forests = ConcurrentHashMap<String, AbstractForest>()
 
         fun getForest(name: String = "", configure: (ForestConfig.() -> Unit) = {}): Forest {
@@ -90,6 +100,7 @@ interface Forest {
             val config = ForestConfig(
                 forest.level,
                 forest.preProcessLogCallback,
+                allowGlobalOverride,
                 forest.trees.toMutableList()
             )
             configure(config)
@@ -102,8 +113,8 @@ interface Forest {
             return getForest(clazz.name(), configure)
         }
 
-        fun changeContext(newContext: Land) {
-            land = newContext
+        fun moveLand(newLand: Land) {
+            land = newLand
         }
 
         fun land(update: Land.() -> Unit) {
@@ -117,22 +128,12 @@ interface Forest {
 
         override fun plant(tree: Tree) {
             super.plant(tree)
-            forests.values.forEach { forest ->
-                val t = forest.allTrees.toMutableList()
-                if (!t.contains(tree)) {
-                    t.add(tree)
-                }
-                forest.allTrees = t
-            }
+            forests.values.forEach { forest -> forest.tryPlant(tree) }
         }
 
         override fun cut(tree: Tree) {
             super.cut(tree)
-            forests.values.forEach { forest ->
-                val t = forest.allTrees.toMutableList()
-                t.remove(tree)
-                forest.allTrees = t
-            }
+            forests.values.forEach { forest -> forest.tryCut(tree) }
         }
 
         private fun Class<*>.name(): String {

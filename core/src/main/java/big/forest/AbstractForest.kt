@@ -7,12 +7,25 @@ abstract class AbstractForest(
 ) : Forest {
 
     override var level: Forest.Level = Forest.Level.VERBOSE
+        set(value) {
+            if (!allowGlobalOverride) {
+                return
+            }
+            field = value
+        }
     override var name: String? = null
     override val trees: List<Tree>
         get() = allTrees
 
-    internal var allTrees = listOf<Tree>()
     internal var preProcessLogCallback: PreProcessLogCallback? = null
+        set(value) {
+            if (!allowGlobalOverride) {
+                return
+            }
+            field = value
+        }
+    private var allTrees = listOf<Tree>()
+    private var allowGlobalOverride = true
 
     override fun plant(tree: Tree) {
         val t = allTrees.toMutableList()
@@ -137,6 +150,29 @@ abstract class AbstractForest(
         level = config.level
         preProcessLogCallback = config.preProcessLog
         allTrees = config.trees.toList()
+        allowGlobalOverride = config.allowGlobalOverride
+    }
+
+    internal fun tryPlant(tree: Tree) {
+        if (!allowGlobalOverride) {
+            return
+        }
+
+        val t = allTrees.toMutableList()
+        if (!t.contains(tree)) {
+            t.add(tree)
+        }
+        allTrees = t
+    }
+
+    internal fun tryCut(tree: Tree) {
+        if (!allowGlobalOverride) {
+            return
+        }
+
+        val t = allTrees.toMutableList()
+        t.remove(tree)
+        allTrees = t
     }
 
     private fun shouldLog(level: Forest.Level): Boolean {
