@@ -113,11 +113,11 @@ interface Forest {
             return getForest(clazz.name(), configure)
         }
 
-        fun moveLand(newLand: Land) {
+        fun moveTo(newLand: Land) {
             land = newLand
         }
 
-        fun land(update: Land.() -> Unit) {
+        fun updateLand(update: Land.() -> Unit) {
             update(land)
         }
 
