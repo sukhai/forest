@@ -1,5 +1,9 @@
 package big.forest.context
 
+/**
+ * A type of [Land] that does not provide any operation on any of its methods.
+ * You can create an instance of this class through [Land.createNoOpsLand].
+ */
 class NoOpLand internal constructor() : Land {
     override val size = 0
 

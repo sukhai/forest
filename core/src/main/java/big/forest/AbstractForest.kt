@@ -2,8 +2,17 @@ package big.forest
 
 import big.forest.context.Land
 
+/**
+ * An abstract class that implements the [Forest].
+ *
+ * @param land A [Land] that will be passed to the [Tree]s in this [Forest].
+ * @param name The name of the [Forest]. This value will be used as the [LogEntry.tag]
+ * if this value is not `null`. This value is set when [Forest.getForest]
+ * is called.
+ */
 abstract class AbstractForest(
-    private val land: () -> Land
+    private val land: () -> Land,
+    override val name: String? = null
 ) : Forest {
 
     override var level: Forest.Level = Forest.Level.VERBOSE
@@ -13,10 +22,14 @@ abstract class AbstractForest(
             }
             field = value
         }
-    override var name: String? = null
     override val trees: List<Tree>
         get() = allTrees
 
+    /**
+     * Update the [preProcessLogCallback]. This method is intended to be used
+     * by [Forest.Global] and will only update this property if
+     * [allowGlobalOverride] is set to `true`.
+     */
     internal var preProcessLogCallback: PreProcessLogCallback? = null
         set(value) {
             if (!allowGlobalOverride) {
@@ -146,6 +159,11 @@ abstract class AbstractForest(
         }
     }
 
+    /**
+     * Update this [Forest] with the given [config].
+     *
+     * @param config The configuration to be applied to this [Forest].
+     */
     internal fun updateWithConfig(config: ForestConfig) {
         level = config.level
         preProcessLogCallback = config.preProcessLog
@@ -153,6 +171,13 @@ abstract class AbstractForest(
         allowGlobalOverride = config.allowGlobalOverride
     }
 
+    /**
+     * Attempt to plant the [tree] into this [Forest].
+     * This method is intended to be used by [Forest.Global] and will only
+     * plant the [tree] if [allowGlobalOverride] is set to `true`.
+     *
+     * @param tree The [Tree] to be planted to this [Forest].
+     */
     internal fun tryPlant(tree: Tree) {
         if (!allowGlobalOverride) {
             return
@@ -165,6 +190,13 @@ abstract class AbstractForest(
         allTrees = t
     }
 
+    /**
+     * Attempt to cut the [tree] from this [Forest].
+     * This method is intended to be used by [Forest.Global] and will only
+     * cut the [tree] if [allowGlobalOverride] is set to `true`.
+     *
+     * @param tree The [Tree] to be cut from this [Forest].
+     */
     internal fun tryCut(tree: Tree) {
         if (!allowGlobalOverride) {
             return

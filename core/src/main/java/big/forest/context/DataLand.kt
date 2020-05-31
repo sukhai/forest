@@ -2,6 +2,11 @@ package big.forest.context
 
 import java.util.concurrent.ConcurrentHashMap
 
+/**
+ * A type of [Land] that store data in a [ConcurrentHashMap].
+ *
+ * You can instantiate an instance of this class through [Land.createDataLand].
+ */
 class DataLand internal constructor() : Land {
     private val map = ConcurrentHashMap<String, Any>()
 
