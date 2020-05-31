@@ -1,15 +1,25 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.71'
+    ext.versions = [
+        'kotlin' : '1.3.71',
+        'junit'  : '5.4.0',
+        'mockito': '2.2.0'
+    ]
+
+    List<String> PROPERTY_FILES = [
+        "$rootDir/local.properties",
+        "$rootDir/gradle/release.properties"
+    ] as String[]
+    ext.propertyFiles = PROPERTY_FILES
+
     repositories {
         google()
         jcenter()
-        
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -20,10 +30,49 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
+}
+
+subprojects {
+    group = getProp("release.group")
+    version = getProp("release.version")
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+String getProp(String key) {
+    String property = System.getenv(key)
+    if (property == null || property.isEmpty()) {
+        try {
+            property = getProperty(key)
+        } catch (Exception ignored) {
+            // Ignored
+        }
+    }
+
+    if (property != null && !property.isEmpty()) {
+        return property
+    }
+
+    for (String fileName in ext.propertyFiles) {
+        property = getPropertyFromFile(key, new File(fileName))
+        if (property != null && !property.isEmpty()) {
+            return property
+        }
+    }
+
+    throw new MissingPropertyException(key, String.class)
+}
+
+private static String getPropertyFromFile(String key, File file) {
+    Properties properties = new Properties()
+    try {
+        properties.load(file.newDataInputStream())
+    } catch (IOException e) {
+        println(e.message)
+    }
+
+    return properties.getProperty(key)
 }
