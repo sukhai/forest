@@ -1,6 +1,7 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 apply from: "$rootDir/gradle/ktlint.gradle"
+apply from: "$rootDir/gradle/java_library.gradle"
 
 test {
     useJUnitPlatform()
@@ -13,6 +14,3 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$versions.junit"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito"
 }
-
-//sourceCompatibility = "7"
-//targetCompatibility = "7"
