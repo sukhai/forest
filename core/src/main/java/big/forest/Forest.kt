@@ -2,7 +2,12 @@ package big.forest
 
 import big.forest.Forest.Global.land
 import big.forest.Forest.Global.name
-import big.forest.Forest.Level.*
+import big.forest.Forest.Level.DEBUG
+import big.forest.Forest.Level.ERROR
+import big.forest.Forest.Level.FATAL
+import big.forest.Forest.Level.INFO
+import big.forest.Forest.Level.VERBOSE
+import big.forest.Forest.Level.WARN
 import big.forest.context.Land
 import java.util.concurrent.ConcurrentHashMap
 
@@ -333,7 +338,7 @@ interface Forest {
      * both examples do the same thing.
      */
     companion object Global : AbstractForest({ land }) {
-        override var level: Level = VERBOSE
+        override var level: Level = Level.VERBOSE
             set(value) {
                 field = value
                 if (allowGlobalOverride) {

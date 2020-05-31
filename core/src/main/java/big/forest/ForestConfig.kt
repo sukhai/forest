@@ -38,4 +38,3 @@ data class ForestConfig internal constructor(
         trees.remove(tree)
     }
 }
-
