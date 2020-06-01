@@ -1,10 +1,12 @@
-package big.forest.context
+package big.forest.land
 
 import big.forest.Forest
 import big.forest.Tree
 
 /**
  * A modifiable collection that holds pairs of objects that use by [Forest] and [Tree].
+ *
+ * @sample DataLand
  */
 interface Land : MutableMap<String, Any> {
     /**

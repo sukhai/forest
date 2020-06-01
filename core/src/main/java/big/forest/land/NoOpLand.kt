@@ -1,4 +1,4 @@
-package big.forest.context
+package big.forest.land
 
 /**
  * A type of [Land] that does not provide any operation on any of its methods.

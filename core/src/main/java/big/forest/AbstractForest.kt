@@ -1,6 +1,6 @@
 package big.forest
 
-import big.forest.context.Land
+import big.forest.land.Land
 
 /**
  * An abstract class that implements the [Forest].

@@ -1,6 +1,6 @@
 package big.forest
 
-import big.forest.context.Land
+import big.forest.land.Land
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
