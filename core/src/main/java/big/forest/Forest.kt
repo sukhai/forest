@@ -1,7 +1,6 @@
 package big.forest
 
 import big.forest.Forest.Global.land
-import big.forest.Forest.Global.name
 import big.forest.Forest.Level.DEBUG
 import big.forest.Forest.Level.ERROR
 import big.forest.Forest.Level.FATAL
@@ -98,7 +97,7 @@ interface Forest {
      * called, then the [LogEntry] will not be logged because [INFO]
      * level is lower than [VERBOSE].
      *
-     * Setting this value to [OFF] will not log any [LogEntry] and none
+     * Setting this value to [Level.OFF] will not log any [LogEntry] and none
      * of the [Tree] this [Forest] holds will receive a [Tree.log] call.
      */
     var level: Level
@@ -406,7 +405,7 @@ interface Forest {
          * @param clazz The class that is going to use the returning [Forest].
          * @param configure To configure the returning [Forest] if it's being
          * created from this method.
-         * @return A [Forest] that has name equals to the [name] parameter.
+         * @return A [Forest] that has a name registered with the given [clazz].
          */
         fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
             return getForest(clazz.name(), configure)
@@ -489,7 +488,7 @@ fun getForest(name: String = "", configure: (ForestConfig.() -> Unit) = {}): For
  * @param clazz The class that is going to use the returning [Forest].
  * @param configure To configure the returning [Forest] if it's being
  * created from this method.
- * @return A [Forest] that has name equals to the [name] parameter.
+ * @return A [Forest] that has a name registered with the given [clazz].
  */
 fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
     return Forest.getForest(clazz, configure)

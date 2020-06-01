@@ -2,6 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 apply from: "$rootDir/gradle/ktlint.gradle"
 apply from: "$rootDir/gradle/java_library.gradle"
+apply from: "$rootDir/gradle/dokka.gradle"
 
 test {
     useJUnitPlatform()
