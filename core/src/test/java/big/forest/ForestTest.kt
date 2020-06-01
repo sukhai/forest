@@ -34,6 +34,8 @@ class ForestTest {
     private val expectedTimestamp = 234L
     private val expectedMessage = "this is a message"
     private val expectedTag = "a forest"
+    private val expectedThrowable = Exception("Test exception")
+    private val expectedAttributes = mapOf<String, Any>()
 
     @BeforeEach
     fun setup() {
@@ -47,8 +49,11 @@ class ForestTest {
 
     @Test
     fun `getForest - when passing a class to parameter, then return Forest with canonical name`() {
-        val forest = getForest(ForestTest::class.java)
-        assertEquals("big.forest.ForestTest", forest.name)
+        val forest1 = getForest(ForestTest::class.java)
+        assertEquals("big.forest.ForestTest", forest1.name)
+
+        val forest2 = Forest.getForest(ForestTest::class.java)
+        assertEquals("big.forest.ForestTest", forest2.name)
     }
 
     @Test
@@ -61,8 +66,11 @@ class ForestTest {
     @Test
     fun `getForest - when passing a name to parameter, then return Forest with the given name`() {
         val name = "a name"
-        val forest = getForest(name)
-        assertEquals(name, forest.name)
+        val forest1 = getForest(name)
+        assertEquals(name, forest1.name)
+
+        val forest2 = Forest.getForest(name)
+        assertEquals(name, forest2.name)
     }
 
     @Test
@@ -94,7 +102,7 @@ class ForestTest {
     }
 
     @Test
-    fun `when we plant a tree to global Forest, then the tree is added to all Forests`() {
+    fun `when plant a tree to global Forest, then the tree is added to all Forests`() {
         val tree: Tree = mock()
         val forestA = getForest("forestA")
         val forestB = getForest("forestB")
@@ -127,7 +135,7 @@ class ForestTest {
     }
 
     @Test
-    fun `when we plant a tree to global Forest, then only add tree to other Forests if the Forest does not have the tree`() {
+    fun `when plant a tree to global Forest, then only add tree to other Forests if the Forest does not have the tree`() {
         val tree: Tree = mock()
         val forest = getForest()
 
@@ -137,7 +145,7 @@ class ForestTest {
     }
 
     @Test
-    fun `when we cut a tree from a Forest, then the tree will be removed`() {
+    fun `when cut a tree from a Forest, then the tree will be removed`() {
         val tree: Tree = mock()
         val forest = getForest { plant(tree) }
 
@@ -148,7 +156,7 @@ class ForestTest {
     }
 
     @Test
-    fun `when we cut a tree from the global Forest, then the tree will be removed from all Forests`() {
+    fun `when cut a tree from the global Forest, then the tree will be removed from all Forests`() {
         val tree: Tree = mock()
         val forest = getForest { plant(tree) }
 
@@ -159,7 +167,7 @@ class ForestTest {
     }
 
     @Test
-    fun `when we log using a Forest, then the tree will receive correct LogEntry`() {
+    fun `when log message using a Forest, then the tree will receive correct LogEntry`() {
         val tree: Tree = mock()
         val forest = getForest(expectedTag) {
             level = Forest.Level.VERBOSE
@@ -168,26 +176,29 @@ class ForestTest {
         }
 
         forest.v(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE))
+        verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE, throwable = null))
 
         forest.d(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.DEBUG))
+        verify(tree).log(createExpectedLogEntry(Forest.Level.DEBUG, throwable = null))
 
         forest.i(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.INFO))
+        verify(tree).log(createExpectedLogEntry(Forest.Level.INFO, throwable = null))
 
         forest.w(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.WARN))
+        verify(tree).log(createExpectedLogEntry(Forest.Level.WARN, throwable = null))
 
         forest.e(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.ERROR))
+        verify(tree).log(createExpectedLogEntry(Forest.Level.ERROR, throwable = null))
 
         forest.f(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.FATAL))
+        verify(tree).log(createExpectedLogEntry(Forest.Level.FATAL, throwable = null))
+
+        forest.log(Forest.Level.OFF, expectedMessage, expectedThrowable)
+        verify(tree, never()).log(createExpectedLogEntry(Forest.Level.OFF))
     }
 
     @Test
-    fun `when we log using the global Forest, then the tree will receive correct LogEntry`() {
+    fun `when log message using the global Forest, then the tree will receive correct LogEntry`() {
         val tree: Tree = mock()
         val globalForestTag: String? = null
 
@@ -196,22 +207,206 @@ class ForestTest {
         Forest.preProcessLog(createTestPreProcessLogCallback())
 
         Forest.v(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE, globalForestTag))
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.VERBOSE,
+                tag = globalForestTag,
+                throwable = null
+            )
+        )
 
         Forest.d(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.DEBUG, globalForestTag))
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.DEBUG,
+                tag = globalForestTag,
+                throwable = null
+            )
+        )
 
         Forest.i(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.INFO, globalForestTag))
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.INFO,
+                tag = globalForestTag,
+                throwable = null
+            )
+        )
 
         Forest.w(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.WARN, globalForestTag))
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.WARN,
+                tag = globalForestTag,
+                throwable = null
+            )
+        )
 
         Forest.e(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.ERROR, globalForestTag))
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.ERROR,
+                tag = globalForestTag,
+                throwable = null
+            )
+        )
 
         Forest.f(expectedMessage)
-        verify(tree).log(createExpectedLogEntry(Forest.Level.FATAL, globalForestTag))
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.FATAL,
+                tag = globalForestTag,
+                throwable = null
+            )
+        )
+    }
+
+    @Test
+    fun `when log throwable using a Forest, then the tree will receive correct LogEntry`() {
+        val tree: Tree = mock()
+        val forest = getForest(expectedTag) {
+            level = Forest.Level.VERBOSE
+            preProcessLog = createTestPreProcessLogCallback()
+            plant(tree)
+        }
+
+        forest.v(expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE, message = null))
+
+        forest.d(expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.DEBUG, message = null))
+
+        forest.i(expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.INFO, message = null))
+
+        forest.w(expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.WARN, message = null))
+
+        forest.e(expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.ERROR, message = null))
+
+        forest.f(expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.FATAL, message = null))
+    }
+
+    @Test
+    fun `when log throwable using the global Forest, then the tree will receive correct LogEntry`() {
+        val tree: Tree = mock()
+        val globalForestTag = ForestTest::class.java.canonicalName
+
+        Forest.plant(tree)
+        Forest.level = Forest.Level.VERBOSE
+        Forest.preProcessLog(createTestPreProcessLogCallback())
+
+        Forest.v(expectedThrowable)
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.VERBOSE,
+                tag = globalForestTag,
+                message = null
+            )
+        )
+
+        Forest.d(expectedThrowable)
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.DEBUG,
+                tag = globalForestTag,
+                message = null
+            )
+        )
+
+        Forest.i(expectedThrowable)
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.INFO,
+                tag = globalForestTag,
+                message = null
+            )
+        )
+
+        Forest.w(expectedThrowable)
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.WARN,
+                tag = globalForestTag,
+                message = null
+            )
+        )
+
+        Forest.e(expectedThrowable)
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.ERROR,
+                tag = globalForestTag,
+                message = null
+            )
+        )
+
+        Forest.f(expectedThrowable)
+        verify(tree).log(
+            createExpectedLogEntry(
+                Forest.Level.FATAL,
+                tag = globalForestTag,
+                message = null
+            )
+        )
+    }
+
+    @Test
+    fun `when log message and throwable using a Forest, then the tree will receive correct LogEntry`() {
+        val tree: Tree = mock()
+        val forest = getForest(expectedTag) {
+            level = Forest.Level.VERBOSE
+            preProcessLog = createTestPreProcessLogCallback()
+            plant(tree)
+        }
+
+        forest.v(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE))
+
+        forest.d(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.DEBUG))
+
+        forest.i(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.INFO))
+
+        forest.w(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.WARN))
+
+        forest.e(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.ERROR))
+
+        forest.f(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.FATAL))
+    }
+
+    @Test
+    fun `when log message and throwable using the global Forest, then the tree will receive correct LogEntry`() {
+        val tree: Tree = mock()
+        val globalForestTag = ForestTest::class.java.canonicalName
+
+        Forest.plant(tree)
+        Forest.level = Forest.Level.VERBOSE
+        Forest.preProcessLog(createTestPreProcessLogCallback())
+
+        Forest.v(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE, tag = globalForestTag))
+
+        Forest.d(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.DEBUG, tag = globalForestTag))
+
+        Forest.i(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.INFO, tag = globalForestTag))
+
+        Forest.w(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.WARN, tag = globalForestTag))
+
+        Forest.e(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.ERROR, tag = globalForestTag))
+
+        Forest.f(expectedMessage, expectedThrowable)
+        verify(tree).log(createExpectedLogEntry(Forest.Level.FATAL, tag = globalForestTag))
     }
 
     @Test
@@ -392,12 +587,19 @@ class ForestTest {
         )
     }
 
-    private fun createExpectedLogEntry(level: Forest.Level, tag: String? = expectedTag) = LogEntry(
+    private fun createExpectedLogEntry(
+        level: Forest.Level,
+        message: String? = expectedMessage,
+        throwable: Throwable? = expectedThrowable,
+        tag: String? = expectedTag
+    ) = LogEntry(
         level = level,
         threadId = expectedThreadId,
         timestamp = expectedTimestamp,
-        message = expectedMessage,
-        tag = tag
+        message = message,
+        throwable = throwable,
+        tag = tag,
+        attributes = expectedAttributes
     )
 
     private fun Int.count() = downTo(0)

@@ -30,13 +30,6 @@ interface Land : MutableMap<String, Any> {
      */
     companion object Factory {
         /**
-         * Create an instance of [NoOpLand].
-         *
-         * @return A new instance of [NoOpLand].
-         */
-        fun createNoOpsLand() = NoOpLand()
-
-        /**
          * Create an instance of [DataLand].
          *
          * @return A new instance of [DataLand].
