@@ -4,3 +4,7 @@ dokka {
     outputFormat = 'html'
     outputDirectory = "$buildDir/dokka"
 }
+
+dependencies {
+    dokkaRuntime "org.jetbrains.dokka:dokka-fatjar:${versions.dokka}"
+}
