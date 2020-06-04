@@ -225,7 +225,7 @@ abstract class AbstractForest(
 
     private fun shouldLog(level: Forest.Level): Boolean {
         return this.level != Forest.Level.OFF && level != Forest.Level.OFF &&
-                level.ordinal <= this.level.ordinal
+            level.ordinal <= this.level.ordinal
     }
 
     private fun createLogEntry(
@@ -238,8 +238,6 @@ abstract class AbstractForest(
 
         return LogEntry(
             level,
-            Thread.currentThread().id,
-            System.currentTimeMillis(),
             land.invoke(),
             message,
             tag,

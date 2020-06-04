@@ -22,8 +22,6 @@ import big.forest.land.Land
  * An object that holds the information of a log.
  *
  * @param level The logging level of the log.
- * @param threadId The calling thread ID.
- * @param timestamp The timestamp when this log is logged. This timestamp is recorded when
  * the [Forest] received a logging call.
  * @param land The [Land] that contains the data from the [Forest].
  * @param message The message to be logged.
@@ -34,8 +32,6 @@ import big.forest.land.Land
  */
 data class LogEntry(
     val level: Forest.Level,
-    val threadId: Long,
-    val timestamp: Long,
     val land: Land = Forest.land,
     val message: String? = null,
     val tag: String? = null,

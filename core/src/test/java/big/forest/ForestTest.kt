@@ -30,8 +30,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class ForestTest {
-    private val expectedThreadId = 123L
-    private val expectedTimestamp = 234L
     private val expectedMessage = "this is a message"
     private val expectedTag = "a forest"
     private val expectedThrowable = Exception("Test exception")
@@ -44,6 +42,7 @@ class ForestTest {
 
     @AfterEach
     fun tearDown() {
+        Forest.preProcessLog { it }
         Forest.deforest()
     }
 
@@ -171,7 +170,6 @@ class ForestTest {
         val tree: Tree = mock()
         val forest = getForest(expectedTag) {
             level = Forest.Level.VERBOSE
-            preProcessLog = createTestPreProcessLogCallback()
             plant(tree)
         }
 
@@ -204,7 +202,6 @@ class ForestTest {
 
         Forest.plant(tree)
         Forest.level = Forest.Level.VERBOSE
-        Forest.preProcessLog(createTestPreProcessLogCallback())
 
         Forest.v(expectedMessage)
         verify(tree).log(
@@ -266,7 +263,6 @@ class ForestTest {
         val tree: Tree = mock()
         val forest = getForest(expectedTag) {
             level = Forest.Level.VERBOSE
-            preProcessLog = createTestPreProcessLogCallback()
             plant(tree)
         }
 
@@ -296,7 +292,6 @@ class ForestTest {
 
         Forest.plant(tree)
         Forest.level = Forest.Level.VERBOSE
-        Forest.preProcessLog(createTestPreProcessLogCallback())
 
         Forest.v(expectedThrowable)
         verify(tree).log(
@@ -358,7 +353,6 @@ class ForestTest {
         val tree: Tree = mock()
         val forest = getForest(expectedTag) {
             level = Forest.Level.VERBOSE
-            preProcessLog = createTestPreProcessLogCallback()
             plant(tree)
         }
 
@@ -388,7 +382,6 @@ class ForestTest {
 
         Forest.plant(tree)
         Forest.level = Forest.Level.VERBOSE
-        Forest.preProcessLog(createTestPreProcessLogCallback())
 
         Forest.v(expectedMessage, expectedThrowable)
         verify(tree).log(createExpectedLogEntry(Forest.Level.VERBOSE, tag = globalForestTag))
@@ -428,13 +421,10 @@ class ForestTest {
 
     @Test
     fun `when log an exception from a class without a logger name, then set tag to first stacktrace class name`() {
-        val expectedThreadId = 123L
-        val expectedTimestamp = 234L
         val tree: Tree = mock()
         val forest = getForest {
             level = Forest.Level.VERBOSE
             plant(tree)
-            preProcessLog = createTestPreProcessLogCallback()
         }
         val exception = Exception()
 
@@ -444,9 +434,7 @@ class ForestTest {
             LogEntry(
                 level = Forest.Level.ERROR,
                 tag = ForestTest::class.java.canonicalName,
-                throwable = exception,
-                timestamp = expectedTimestamp,
-                threadId = expectedThreadId
+                throwable = exception
             )
         )
     }
@@ -454,13 +442,10 @@ class ForestTest {
     @Test
     fun `when log an exception from a class with a logger name, then set tag to the logger name`() {
         val expectedName = "a name"
-        val expectedThreadId = 123L
-        val expectedTimestamp = 234L
         val tree: Tree = mock()
         val forest = getForest(expectedName) {
             level = Forest.Level.VERBOSE
             plant(tree)
-            preProcessLog = createTestPreProcessLogCallback()
         }
         val exception = Exception()
 
@@ -470,9 +455,7 @@ class ForestTest {
             LogEntry(
                 level = Forest.Level.ERROR,
                 tag = expectedName,
-                throwable = exception,
-                timestamp = expectedTimestamp,
-                threadId = expectedThreadId
+                throwable = exception
             )
         )
     }
@@ -523,14 +506,11 @@ class ForestTest {
         val newLand: Land = mock()
         Forest.moveTo(newLand)
         Forest.plant(tree)
-        Forest.preProcessLog(createTestPreProcessLogCallback())
         Forest.d(expectedMessage)
 
         verify(tree).log(
             LogEntry(
                 level = Forest.Level.DEBUG,
-                threadId = expectedThreadId,
-                timestamp = expectedTimestamp,
                 message = expectedMessage,
                 land = newLand
             )
@@ -543,7 +523,6 @@ class ForestTest {
         val land = Land.createDataLand()
         Forest.moveTo(land)
         Forest.plant(tree)
-        Forest.preProcessLog(createTestPreProcessLogCallback())
         Forest.updateLand {
             "key 1" to "value 1"
             "key 2" to 123
@@ -553,8 +532,6 @@ class ForestTest {
         verify(tree).log(
             LogEntry(
                 level = Forest.Level.DEBUG,
-                threadId = expectedThreadId,
-                timestamp = expectedTimestamp,
                 message = expectedMessage,
                 land = land
             )
@@ -580,13 +557,6 @@ class ForestTest {
         assertTrue(forest.trees.isEmpty())
     }
 
-    private fun createTestPreProcessLogCallback(): PreProcessLogCallback = {
-        it.copy(
-            threadId = expectedThreadId,
-            timestamp = expectedTimestamp
-        )
-    }
-
     private fun createExpectedLogEntry(
         level: Forest.Level,
         message: String? = expectedMessage,
@@ -594,8 +564,6 @@ class ForestTest {
         tag: String? = expectedTag
     ) = LogEntry(
         level = level,
-        threadId = expectedThreadId,
-        timestamp = expectedTimestamp,
         message = message,
         throwable = throwable,
         tag = tag,
