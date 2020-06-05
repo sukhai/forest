@@ -43,6 +43,18 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+/**
+ * Get a Gradle property. This method will search the 'key' in the following order:
+ * - System ENV VAR
+ * - Default gradle 'getProperty(String)' behavior
+ * - From ext.propertyFiles list
+ *
+ * If no property is found with the 'key', then 'MissingPropertyException' will be thrown.
+ *
+ * @param key The key of the gradle property.
+ * @return The value of the gradle property that associates with the given 'key'.
+ * @throw MissingPropertyException If no gradle property is found with the given 'key'.
+ */
 String getProp(String key) {
     String property = System.getenv(key)
     if (property == null || property.isEmpty()) {
