@@ -69,4 +69,8 @@ class DataLand internal constructor() : Land {
     override fun remove(key: String): Any? {
         return map.remove(key)
     }
+
+    override fun toString(): String {
+        return map.toString()
+    }
 }

@@ -1,0 +1,26 @@
+apply plugin: "de.mannodermaus.android-junit5"
+
+android {
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled true
+
+        unitTests {
+            includeAndroidResources = true
+        }
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:${versions.junit}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockito}"
+
+    androidTestImplementation "org.junit.jupiter:junit-jupiter:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.android_junit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.android_espresso}"
+    androidTestUtil "androidx.test:orchestrator:${versions.android_orchestrator}"
+}
