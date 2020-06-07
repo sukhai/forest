@@ -9,10 +9,10 @@ import big.forest.Tree
  * A debug tree that uses Android logging to log messages.
  */
 class DebugTree : Tree {
-    private companion object {
-        const val DEFAULT_TAG = "big.forest.trees.DebugTree"
-        const val FOREST_PACKAGE_NAME = "big.forest"
-        const val THREAD_PACKAGE_NAME = "java.lang.Thread"
+    companion object {
+        internal const val DEFAULT_TAG = "big.forest.trees.DebugTree"
+        private const val FOREST_PACKAGE_NAME = "big.forest"
+        private const val THREAD_PACKAGE_NAME = "java.lang.Thread"
     }
 
     override fun log(entry: LogEntry) {
