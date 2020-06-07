@@ -16,14 +16,14 @@
 
 package big.forest
 
-import big.forest.land.Land
+import big.forest.context.Context
 
 /**
  * An object that holds the information of a log.
  *
  * @param level The logging level of the log.
  * the [Forest] received a logging call.
- * @param land The [Land] that contains the data from the [Forest].
+ * @param context The [Context] that contains the data from the [Forest].
  * @param message The message to be logged.
  * @param tag The tag. The value is either the name of a [Forest] set from [getForest]
  * or the class name of the first stacktrace from the [throwable] if any.
@@ -32,7 +32,7 @@ import big.forest.land.Land
  */
 data class LogEntry(
     val level: Forest.Level,
-    val land: Land = Forest.land,
+    val context: Context = Forest.context,
     val message: String? = null,
     val tag: String? = null,
     val throwable: Throwable? = null,

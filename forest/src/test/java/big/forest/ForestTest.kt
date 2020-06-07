@@ -16,7 +16,7 @@
 
 package big.forest
 
-import big.forest.land.Land
+import big.forest.context.Context
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
@@ -501,10 +501,10 @@ class ForestTest {
     }
 
     @Test
-    fun `when move to a new land, then the tree will receive this new land`() {
+    fun `when set a new context, then the tree will receive this new context`() {
         val tree: Tree = mock()
-        val newLand: Land = mock()
-        Forest.moveTo(newLand)
+        val newContext: Context = mock()
+        Forest.changeContext(newContext)
         Forest.plant(tree)
         Forest.d(expectedMessage)
 
@@ -512,34 +512,32 @@ class ForestTest {
             LogEntry(
                 level = Forest.Level.DEBUG,
                 message = expectedMessage,
-                land = newLand
+                context = newContext
             )
         )
     }
 
     @Test
-    fun `when update the land, then the tree will receive the latest update from the land`() {
+    fun `when update the context, then the tree will receive the latest update from the context`() {
         val tree: Tree = mock()
-        val land = Land.createDataLand()
-        Forest.moveTo(land)
+        val context = Context.createDataContext()
+        Forest.changeContext(context)
         Forest.plant(tree)
-        Forest.updateLand {
-            "key 1" to "value 1"
-            "key 2" to 123
-        }
+        Forest.context["key 1"] = "value 1"
+        Forest.context["key 2"] = 123
         Forest.d(expectedMessage)
 
         verify(tree).log(
             LogEntry(
                 level = Forest.Level.DEBUG,
                 message = expectedMessage,
-                land = land
+                context = context
             )
         )
-        assertTrue(land.containsKey("key 1"))
-        assertTrue(land.containsKey("key 2"))
-        assertEquals("value 1", land["key 1"])
-        assertEquals(123, land["key 2"])
+        assertTrue(context.containsKey("key 1"))
+        assertTrue(context.containsKey("key 2"))
+        assertEquals("value 1", context["key 1"])
+        assertEquals(123, context["key 2"])
     }
 
     @Test

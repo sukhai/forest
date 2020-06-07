@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package big.forest.land
+package big.forest.context
 
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * A type of [Land] that store data in a [ConcurrentHashMap].
+ * A type of [Context] that store data in a [ConcurrentHashMap].
  *
- * You can instantiate an instance of this class through [Land.createDataLand].
+ * You can instantiate an instance of this class through [Context.createDataContext].
  */
-class DataLand internal constructor() : Land {
+class DataContext internal constructor() : Context {
     private val map = ConcurrentHashMap<String, Any>()
 
     override val size: Int

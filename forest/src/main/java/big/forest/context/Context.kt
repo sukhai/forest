@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package big.forest.land
+package big.forest.context
 
 import big.forest.Forest
 import big.forest.Tree
@@ -22,27 +22,18 @@ import big.forest.Tree
 /**
  * A modifiable collection that holds pairs of objects that use by [Forest] and [Tree].
  *
- * @sample DataLand
+ * @sample DataContext
  */
-interface Land : MutableMap<String, Any> {
+interface Context : MutableMap<String, Any> {
     /**
-     * A factory class that create different types of [Land].
+     * A factory class that create different types of [Context].
      */
     companion object Factory {
         /**
-         * Create an instance of [DataLand].
+         * Create an instance of [DataContext].
          *
-         * @return A new instance of [DataLand].
+         * @return A new instance of [DataContext].
          */
-        fun createDataLand() = DataLand()
-    }
-
-    /**
-     * Associates the specified key to the specified value in the map.
-     *
-     * @param that The value this key is associating to in the map.
-     */
-    infix fun String.to(that: Any) {
-        put(this, that)
+        fun createDataContext() = DataContext()
     }
 }

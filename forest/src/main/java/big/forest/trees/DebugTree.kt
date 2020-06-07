@@ -53,20 +53,20 @@ class DebugTree : Tree {
     private fun LogEntry.buildMessage(): String {
         val m = message ?: ""
 
-        val landString = if (land.isNotEmpty()) {
+        val contextString = if (context.isNotEmpty()) {
             val output = if (m.isNotEmpty()) "\n" else ""
-            "${output}Context:\n$land"
+            "${output}Context:\n$context"
         } else {
             ""
         }
 
         val attributesString = if (attributes.isNotEmpty()) {
-            val output = if (m.isNotEmpty() || landString.isNotEmpty()) "\n" else ""
+            val output = if (m.isNotEmpty() || contextString.isNotEmpty()) "\n" else ""
             "${output}Attributes:\n$attributes"
         } else {
             ""
         }
 
-        return "$m$landString$attributesString"
+        return "$m$contextString$attributesString"
     }
 }

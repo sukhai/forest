@@ -16,14 +16,14 @@
 
 package big.forest
 
-import big.forest.Forest.Global.land
+import big.forest.Forest.Global.context
 import big.forest.Forest.Level.DEBUG
 import big.forest.Forest.Level.ERROR
 import big.forest.Forest.Level.FATAL
 import big.forest.Forest.Level.INFO
 import big.forest.Forest.Level.VERBOSE
 import big.forest.Forest.Level.WARN
-import big.forest.land.Land
+import big.forest.context.Context
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -334,26 +334,19 @@ interface Forest {
      * to `false` to disable this setting. By default [Forest.allowGlobalOverride]
      * is `true`.
      *
-     * This global [Forest] has a special property called [land], which holds a
-     * sharable data across all the [Tree]s every [Forest]s hold. This [land] can
+     * This global [Forest] has a special property called [context], which holds a
+     * sharable data across all the [Tree]s every [Forest]s hold. This [context] can
      * be used to set global data that will be passed to every [Tree] every
      * [Forest]s this object hold.
-     * You can add data to the [land] through [updateLand]. For example:
+     * You can add data to the [context] like the following example:
      * ```
-     * Forest.updateLand {
-     *     "key1" to "value1"
-     *     "key2" to 123
-     * }
-     * ```
-     * or
-     * ```
-     * Forest.land["key1"] = "value1"
-     * Forest.land["key2"] = 123
+     * Forest.context["key1"] = "value1"
+     * Forest.context["key2"] = 123
      * ```
      * both examples do the same thing.
      */
-    companion object Global : AbstractForest({ land }) {
-        override var level: Level = Level.VERBOSE
+    companion object Global : AbstractForest({ context }) {
+        override var level: Level = VERBOSE
             set(value) {
                 field = value
                 if (allowGlobalOverride) {
@@ -362,9 +355,9 @@ interface Forest {
             }
 
         /**
-         * Gets the [Land] this [Forest] is in.
+         * Gets the [Context] this [Forest] is in.
          */
-        var land: Land = Land.createDataLand()
+        var context: Context = Context.createDataContext()
             private set
 
         /**
@@ -428,22 +421,13 @@ interface Forest {
         }
 
         /**
-         * Move this global [Forest] to a new [Land].
+         * Change this global [Forest]'s [Context].
          *
-         * @param newLand The new [Land] that store the data that are passed
+         * @param newContext The new [Context] that store the data that are passed
          * to all the [Tree]s.
          */
-        fun moveTo(newLand: Land) {
-            land = newLand
-        }
-
-        /**
-         * Update the [land] with data.
-         *
-         * @param update The block to update the [land].
-         */
-        fun updateLand(update: Land.() -> Unit) {
-            update(land)
+        fun changeContext(newContext: Context) {
+            context = newContext
         }
 
         override fun deforest() {
@@ -471,7 +455,7 @@ interface Forest {
             return if (name.length <= 1) "" else name
         }
 
-        private class RealForest(name: String?) : AbstractForest({ land }, name)
+        private class RealForest(name: String?) : AbstractForest({ context }, name)
     }
 }
 
