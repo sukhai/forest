@@ -1,0 +1,42 @@
+apply plugin: 'maven-publish'
+apply plugin: 'org.jetbrains.dokka'
+
+task install {
+    group = 'publishing'
+    description = 'Build and publish to maven local'
+}
+install.finalizedBy(assemble, publishToMavenLocal)
+
+task sourcesJar(type: Jar) {
+    group = 'publishing'
+    description = 'Create sources jar'
+
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.kotlin.srcDirs
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId "$project.group"
+                artifactId "$project.name"
+                version "$project.version"
+
+                from components.release
+                artifact sourcesJar
+
+                pom {
+                    name = 'Forest'
+                    description = 'A library that log messages.'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
