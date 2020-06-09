@@ -1,4 +1,4 @@
-[![](https://jitci.com/gh/sukhai/forest/svg)](https://jitci.com/gh/sukhai/forest)
+[![](https://jitci.com/gh/sukhai/forest/svg)](https://jitci.com/gh/sukhai/forest) [![](https://jitpack.io/v/sukhai/forest.svg)](https://jitpack.io/#sukhai/forest)
 
 License
 -------
