@@ -18,13 +18,14 @@ package big.forest.context
 
 import big.forest.Forest
 import big.forest.Tree
+import big.forest.context.Context.OnModifiedListener
 
 /**
  * A modifiable collection that holds pairs of objects that use by [Forest] and [Tree].
  *
  * @sample DataContext
  */
-interface Context : MutableMap<String, Any> {
+interface Context {
     /**
      * A factory class that create different types of [Context].
      */
@@ -36,4 +37,136 @@ interface Context : MutableMap<String, Any> {
          */
         fun createDataContext() = DataContext()
     }
+
+    /**
+     * A callback listener that report the state of the [Context] when
+     * it was modified.
+     */
+    interface OnModifiedListener {
+        /**
+         * This method is invoked when the [Context] has been modified.
+         *
+         * @param state The state of the modification.
+         */
+        fun onModified(state: ModifiedState)
+    }
+
+    /**
+     * Return the number of data in the context.
+     */
+    val size: Int
+
+    /**
+     * Return all the keys from the context.
+     */
+    val keys: Set<String>
+
+    /**
+     * Return all the values from the context.
+     */
+    val values: Collection<Any>
+
+    /**
+     * Check if this context contains the given [key].
+     *
+     * @param key The key to be checked.
+     * @return `true` if this context contains a data with the given [key],
+     * `false` otherwise.
+     */
+    fun containsKey(key: String): Boolean
+
+    /**
+     * Check if this context contains the given [value].
+     *
+     * @param value The value to be checked.
+     * @return `true` if this context contains a data with the given [value],
+     * `false` otherwise.
+     */
+    fun containsValue(value: Any): Boolean
+
+    /**
+     * Return a value with the given [key] found in the context.
+     *
+     * @param key The key to the value.
+     * @return The value that is associated with the given [key] if found,
+     * otherwise return `null`.
+     */
+    fun get(key: String): Any?
+
+    /**
+     * Check if this context is empty.
+     *
+     * @return `true` if this context is empty and contains no data, `false`
+     * otherwise.
+     */
+    fun isEmpty(): Boolean
+
+    /**
+     * Clear all the data from the context.
+     */
+    fun clear()
+
+    /**
+     * Maps the given [key] to the specified value in this context.
+     * Neither the key nor the value can be null.
+     * The value can be retrieved by calling the get method with a key that
+     * is equal to the original key.
+     *
+     * @param key The key with which the specified value is to be associated.
+     * @param value The value which is associated with the [key].
+     * @return The previous value associated with key, or null if there was
+     * no mapping for key.
+     */
+    fun put(key: String, value: Any): Any?
+
+    /**
+     * Removes the [key] (and its corresponding value) from this context.
+     * This method does nothing if the [key] is not in the context.
+     *
+     * @param key The key and its corresponding value to be removed from
+     * this context.
+     * @return The previous value associated with key, or null if there was
+     * no mapping for key.
+     */
+    fun remove(key: String): Any?
+
+    /**
+     * Set [OnModifiedListener] callback to the [Context].
+     *
+     * @param listener The [OnModifiedListener] to be set.
+     */
+    fun setOnModifiedListener(listener: OnModifiedListener)
+
+    /**
+     * Remove [OnModifiedListener] callback from the [Context].
+     */
+    fun removeOnModifiedListener()
+
+    /**
+     * Maps the given [key] to the specified value in this context.
+     * Neither the key nor the value can be null.
+     * The value can be retrieved by calling the get method with a key that
+     * is equal to the original key.
+     *
+     * @param key The key with which the specified value is to be associated.
+     * @param value The value which is associated with the [key].
+     * @return The previous value associated with key, or null if there was
+     * no mapping for key.
+     */
+    operator fun set(key: String, value: Any) {
+        put(key, value)
+    }
+}
+
+/**
+ * Set [OnModifiedListener] callback to the [Context].
+ *
+ * @param listener The [OnModifiedListener] to be set.
+ */
+fun Context.setOnModifiedListener(listener: (ModifiedState) -> Unit) {
+    setOnModifiedListener(object : OnModifiedListener {
+        override fun onModified(state: ModifiedState) {
+            listener(state)
+        }
+    })
 }

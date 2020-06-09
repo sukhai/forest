@@ -25,17 +25,15 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class DataContext internal constructor() : Context {
     private val map = ConcurrentHashMap<String, Any>()
+    private var listener: Context.OnModifiedListener? = null
 
     override val size: Int
         get() = map.size
 
-    override val entries: MutableSet<MutableMap.MutableEntry<String, Any>>
-        get() = map.entries
-
-    override val keys: MutableSet<String>
+    override val keys: Set<String>
         get() = map.keys
 
-    override val values: MutableCollection<Any>
+    override val values: Collection<Any>
         get() = map.values
 
     override fun containsKey(key: String): Boolean {
@@ -46,7 +44,7 @@ class DataContext internal constructor() : Context {
         return map.containsValue(value)
     }
 
-    override fun get(key: String): Any? {
+    override operator fun get(key: String): Any? {
         return map[key]
     }
 
@@ -59,15 +57,31 @@ class DataContext internal constructor() : Context {
     }
 
     override fun put(key: String, value: Any): Any? {
-        return map.put(key, value)
-    }
-
-    override fun putAll(from: Map<out String, Any>) {
-        map.putAll(from)
+        val old = map.put(key, value)
+        listener?.onModified(
+            if (old == null) {
+                ModifiedState.New(key, value)
+            } else {
+                ModifiedState.Updated(key, old, value)
+            }
+        )
+        return old
     }
 
     override fun remove(key: String): Any? {
-        return map.remove(key)
+        val old = map.remove(key)
+        if (old != null && listener != null) {
+            listener?.onModified(ModifiedState.Removed(key, old))
+        }
+        return old
+    }
+
+    override fun setOnModifiedListener(listener: Context.OnModifiedListener) {
+        this.listener = listener
+    }
+
+    override fun removeOnModifiedListener() {
+        listener = null
     }
 
     override fun toString(): String {

@@ -53,7 +53,7 @@ class DebugTree : Tree {
     private fun LogEntry.buildMessage(): String {
         val m = message ?: ""
 
-        val contextString = if (context.isNotEmpty()) {
+        val contextString = if (!context.isEmpty()) {
             val output = if (m.isNotEmpty()) "\n" else ""
             "${output}Context:\n$context"
         } else {

@@ -41,11 +41,6 @@ class DataContextTest {
     }
 
     @Test
-    fun `entries will return correct value`() {
-        assertEquals(expectedSize, context.entries.size)
-    }
-
-    @Test
     fun `keys will return correct value`() {
         assertEquals(expectedSize, context.keys.size)
         assertTrue(context.keys.contains("key1"))
@@ -85,7 +80,7 @@ class DataContextTest {
 
     @Test
     fun `clear will remove all data`() {
-        assertTrue(context.isNotEmpty())
+        assertFalse(context.isEmpty())
 
         context.clear()
         assertTrue(context.isEmpty())
@@ -103,9 +98,10 @@ class DataContextTest {
         assertTrue(testContext.isEmpty())
         assertEquals(0, testContext.size)
 
-        testContext.putAll(map)
+        testContext["key a"] = "value a"
+        testContext["key b"] = 2
 
-        assertTrue(testContext.isNotEmpty())
+        assertFalse(testContext.isEmpty())
         assertEquals(2, testContext.size)
     }
 
@@ -126,5 +122,82 @@ class DataContextTest {
         context["key2"] = 123
 
         assertEquals(expected, context.toString())
+    }
+
+    @Test
+    fun `add new value to the Context will notify listener`() {
+        val expectedKey = "key"
+        val expectedValue = "new value"
+        var actualKey: String? = null
+        var actualValue: Any? = null
+
+        context.clear()
+        context.setOnModifiedListener {
+            when (it) {
+                is ModifiedState.New -> {
+                    actualKey = it.key
+                    actualValue = it.value
+                }
+            }
+        }
+
+        context[expectedKey] = expectedValue
+
+        assertEquals(expectedKey, actualKey)
+        assertEquals(expectedValue, actualValue)
+    }
+
+    @Test
+    fun `update existing value to the Context will notify listener`() {
+        val expectedKey = "key"
+        val expectedOldValue = "old value"
+        val expectedNewValue = "new value"
+        var actualKey: String? = null
+        var actualOldValue: Any? = null
+        var actualNewValue: Any? = null
+
+        context.clear()
+        context[expectedKey] = expectedOldValue
+
+        context.setOnModifiedListener {
+            when (it) {
+                is ModifiedState.Updated -> {
+                    actualKey = it.key
+                    actualOldValue = it.oldValue
+                    actualNewValue = it.newValue
+                }
+            }
+        }
+
+        context[expectedKey] = expectedNewValue
+
+        assertEquals(expectedKey, actualKey)
+        assertEquals(expectedNewValue, actualNewValue)
+        assertEquals(expectedOldValue, actualOldValue)
+    }
+
+    @Test
+    fun `remove existing value from the Context will notify listener`() {
+        val expectedKey = "key"
+        val expectedValue = "old value"
+        var actualKey: String? = null
+        var actualValue: Any? = null
+
+        context.clear()
+        context[expectedKey] = expectedValue
+
+        context.setOnModifiedListener {
+            when (it) {
+                is ModifiedState.Removed -> {
+                    actualKey = it.key
+                    actualValue = it.value
+                }
+            }
+        }
+
+        context.remove(expectedKey)
+
+        assertEquals(expectedKey, actualKey)
+        assertEquals(expectedValue, actualValue)
     }
 }
