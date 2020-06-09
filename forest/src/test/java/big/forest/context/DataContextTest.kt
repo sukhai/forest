@@ -90,10 +90,6 @@ class DataContextTest {
     @Test
     fun `putAll will add all data into the context`() {
         val testContext = Context.createDataContext()
-        val map = mapOf(
-            "key a" to "value a",
-            "key b" to 2
-        )
 
         assertTrue(testContext.isEmpty())
         assertEquals(0, testContext.size)
