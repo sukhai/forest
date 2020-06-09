@@ -18,7 +18,6 @@ package big.forest.context
 
 import big.forest.Forest
 import big.forest.Tree
-import big.forest.context.Context.OnModifiedListener
 
 /**
  * A modifiable collection that holds pairs of objects that use by [Forest] and [Tree].
@@ -36,19 +35,6 @@ interface Context {
          * @return A new instance of [DataContext].
          */
         fun createDataContext() = DataContext()
-    }
-
-    /**
-     * A callback listener that report the state of the [Context] when
-     * it was modified.
-     */
-    interface OnModifiedListener {
-        /**
-         * This method is invoked when the [Context] has been modified.
-         *
-         * @param state The state of the modification.
-         */
-        fun onModified(state: ModifiedState)
     }
 
     /**
@@ -131,14 +117,14 @@ interface Context {
     fun remove(key: String): Any?
 
     /**
-     * Set [OnModifiedListener] callback to the [Context].
+     * Set a callback to the [Context].
      *
-     * @param listener The [OnModifiedListener] to be set.
+     * @param listener The callback listener to be set.
      */
-    fun setOnModifiedListener(listener: OnModifiedListener)
+    fun setOnModifiedListener(listener: (ModifiedState) -> Unit)
 
     /**
-     * Remove [OnModifiedListener] callback from the [Context].
+     * Remove the modified callback listener from the [Context].
      */
     fun removeOnModifiedListener()
 
@@ -156,17 +142,4 @@ interface Context {
     operator fun set(key: String, value: Any) {
         put(key, value)
     }
-}
-
-/**
- * Set [OnModifiedListener] callback to the [Context].
- *
- * @param listener The [OnModifiedListener] to be set.
- */
-fun Context.setOnModifiedListener(listener: (ModifiedState) -> Unit) {
-    setOnModifiedListener(object : OnModifiedListener {
-        override fun onModified(state: ModifiedState) {
-            listener(state)
-        }
-    })
 }

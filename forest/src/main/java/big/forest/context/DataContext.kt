@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class DataContext internal constructor() : Context {
     private val map = ConcurrentHashMap<String, Any>()
-    private var listener: Context.OnModifiedListener? = null
+    private var listener: ((ModifiedState) -> Unit)? = null
 
     override val size: Int
         get() = map.size
@@ -58,7 +58,7 @@ class DataContext internal constructor() : Context {
 
     override fun put(key: String, value: Any): Any? {
         val old = map.put(key, value)
-        listener?.onModified(
+        listener?.invoke(
             if (old == null) {
                 ModifiedState.New(key, value)
             } else {
@@ -71,12 +71,12 @@ class DataContext internal constructor() : Context {
     override fun remove(key: String): Any? {
         val old = map.remove(key)
         if (old != null && listener != null) {
-            listener?.onModified(ModifiedState.Removed(key, old))
+            listener?.invoke(ModifiedState.Removed(key, old))
         }
         return old
     }
 
-    override fun setOnModifiedListener(listener: Context.OnModifiedListener) {
+    override fun setOnModifiedListener(listener: (ModifiedState) -> Unit) {
         this.listener = listener
     }
 
