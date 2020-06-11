@@ -26,7 +26,7 @@ import big.forest.context.Context
  * @param context The [Context] that contains the data from the [Forest].
  * @param message The message to be logged.
  * @param tag The tag. The value is either the name of a [Forest] set from [getForest]
- * or the class name of the first stacktrace from the [throwable] if any.
+ * or the class name of the first stacktrace from the [throwable], if any.
  * @param throwable The [Throwable] to be logged.
  * @param attributes A collection of attributes to be added to this log.
  */
