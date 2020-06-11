@@ -30,10 +30,10 @@ Instead of extending Timber project, I decided to write it from scatch with some
 Add it in your root build.gradle at the end of repositories:
 ```groovy
 allprojects {
-	repositories {
-		// ...
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        // ...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
@@ -196,7 +196,7 @@ forest.plant(DebugTree())
 ```
 You can use the following methods to log a message to the local Forest:
 ```kotlin
-val forest = ...
+val forest = // ...
 
 forest.v("a message")
 forest.d("a message")
