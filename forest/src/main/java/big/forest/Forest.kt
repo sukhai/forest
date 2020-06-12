@@ -380,6 +380,7 @@ interface Forest {
          * created from this method.
          * @return A [Forest] that has name equals to the [name] parameter.
          */
+        @JvmOverloads
         fun getForest(name: String = "", configure: (ForestConfig.() -> Unit) = {}): Forest {
             val forest = forests.getOrPut(name) {
                 RealForest(name).also { newForest ->
@@ -416,6 +417,7 @@ interface Forest {
          * created from this method.
          * @return A [Forest] that has a name registered with the given [clazz].
          */
+        @JvmOverloads
         fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
             return getForest(clazz.name, configure)
         }
