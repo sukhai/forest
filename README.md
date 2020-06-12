@@ -4,7 +4,7 @@
 Forest is a Android-Kotlin first logging library. It is inspired by the [Timber](https://github.com/JakeWharton/timber) library. 
 Although Timber is good and easy to use, but it's missing some features that I wish it had when I was using it for some of my side projects.
 
-Instead of extending Timber project, I decided to write it from scatch with some features from Timber plus some of the features I wish it had.
+Instead of extending Timber project, I decided to write it from scratch with some features from Timber plus some of the features I wish it had.
 
 - [Overview](#overview)
 - [Getting Started](#getting-started)
