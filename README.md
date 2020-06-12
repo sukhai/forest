@@ -1,4 +1,4 @@
-[![](https://jitci.com/gh/sukhai/forest/svg)](https://jitci.com/gh/sukhai/forest) [![](https://jitpack.io/v/sukhai/forest.svg)](https://jitpack.io/#sukhai/forest)
+![](https://github.com/sukhai/forest/workflows/CI/badge.svg) [![](https://jitpack.io/v/sukhai/forest.svg)](https://jitpack.io/#sukhai/forest)
 
 # Overview
 Forest is a Android-Kotlin first logging library. It is inspired by the [Timber](https://github.com/JakeWharton/timber) library. 
