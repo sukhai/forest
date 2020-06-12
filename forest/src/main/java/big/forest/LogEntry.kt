@@ -30,10 +30,10 @@ import big.forest.context.Context
  * @param throwable The [Throwable] to be logged.
  * @param attributes A collection of attributes to be added to this log.
  */
-data class LogEntry(
+data class LogEntry @JvmOverloads constructor(
     val level: Forest.Level,
+    val message: String,
     val context: Context = Forest.context,
-    val message: String? = null,
     val tag: String? = null,
     val throwable: Throwable? = null,
     val attributes: Map<String, Any> = emptyMap()

@@ -10,7 +10,7 @@ import big.forest.Tree
  */
 class DebugTree : Tree {
     companion object {
-        internal const val DEFAULT_TAG = "big.forest.trees.DebugTree"
+        private const val DEFAULT_TAG = "big.forest.trees.DebugTree"
         private const val FOREST_PACKAGE_NAME = "big.forest"
         private const val THREAD_PACKAGE_NAME = "java.lang.Thread"
     }
@@ -51,22 +51,18 @@ class DebugTree : Tree {
     }
 
     private fun LogEntry.buildMessage(): String {
-        val m = message ?: ""
-
         val contextString = if (!context.isEmpty()) {
-            val output = if (m.isNotEmpty()) "\n" else ""
-            "${output}Context:\n$context"
+            "\nContext:\n$context"
         } else {
             ""
         }
 
         val attributesString = if (attributes.isNotEmpty()) {
-            val output = if (m.isNotEmpty() || contextString.isNotEmpty()) "\n" else ""
-            "${output}Attributes:\n$attributes"
+            "\nAttributes:\n$attributes"
         } else {
             ""
         }
 
-        return "$m$contextString$attributesString"
+        return "$message$contextString$attributesString"
     }
 }

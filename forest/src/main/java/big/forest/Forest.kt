@@ -417,7 +417,7 @@ interface Forest {
          * @return A [Forest] that has a name registered with the given [clazz].
          */
         fun getForest(clazz: Class<*>, configure: (ForestConfig.() -> Unit) = {}): Forest {
-            return getForest(clazz.name(), configure)
+            return getForest(clazz.name, configure)
         }
 
         /**
@@ -443,16 +443,6 @@ interface Forest {
         override fun cut(tree: Tree) {
             super.cut(tree)
             forests.values.forEach { forest -> forest.tryCut(tree) }
-        }
-
-        private fun Class<*>.name(): String {
-            var name = canonicalName
-            if (!name.isNullOrBlank()) {
-                return name
-            }
-            name = `package`?.name ?: ""
-            name += if (name.isBlank()) simpleName else ""
-            return if (name.length <= 1) "" else name
         }
 
         private class RealForest(name: String?) : AbstractForest({ context }, name)

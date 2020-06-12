@@ -238,8 +238,14 @@ abstract class AbstractForest(
 
         return LogEntry(
             level,
+            if (!message.isNullOrEmpty()) {
+                message
+            } else if (throwable != null) {
+                throwable.message ?: ""
+            } else {
+                ""
+            },
             context.invoke(),
-            message,
             tag,
             throwable,
             attributes

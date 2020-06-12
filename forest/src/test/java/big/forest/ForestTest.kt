@@ -59,7 +59,10 @@ class ForestTest {
     fun `getForest - when passing an anonymous class to parameter, then return Forest with package name`() {
         val anonymous = object : Dummy {}
         val forest = getForest(anonymous::class.java)
-        assertEquals("big.forest", forest.name)
+        assertEquals(
+            "big.forest.ForestTest\$getForest - when passing an anonymous class to parameter, then return Forest with package name\$anonymous$1",
+            forest.name
+        )
     }
 
     @Test
@@ -426,13 +429,14 @@ class ForestTest {
             level = Forest.Level.VERBOSE
             plant(tree)
         }
-        val exception = Exception()
+        val exception = Exception("an error")
 
         forest.e(exception)
 
         verify(tree).log(
             LogEntry(
                 level = Forest.Level.ERROR,
+                message = exception.message ?: "",
                 tag = ForestTest::class.java.canonicalName,
                 throwable = exception
             )
@@ -447,13 +451,14 @@ class ForestTest {
             level = Forest.Level.VERBOSE
             plant(tree)
         }
-        val exception = Exception()
+        val exception = Exception("an error")
 
         forest.e(exception)
 
         verify(tree).log(
             LogEntry(
                 level = Forest.Level.ERROR,
+                message = exception.message ?: "",
                 tag = expectedName,
                 throwable = exception
             )
@@ -562,7 +567,7 @@ class ForestTest {
         tag: String? = expectedTag
     ) = LogEntry(
         level = level,
-        message = message,
+        message = message ?: throwable?.message ?: "",
         throwable = throwable,
         tag = tag,
         attributes = expectedAttributes
