@@ -1,12 +1,22 @@
 ![](https://github.com/sukhai/forest/workflows/CI/badge.svg) [![](https://jitpack.io/v/sukhai/forest.svg)](https://jitpack.io/#sukhai/forest)
 
 # Overview
-Forest is a Android-Kotlin first logging library. It is inspired by the [Timber](https://github.com/JakeWharton/timber) library. 
-Although Timber is good and easy to use, but it's missing some features that I wish it had when I was using it for some of my side projects.
+Forest is a Android-Kotlin first logging library. It is inspired by the 
+[Timber](https://github.com/JakeWharton/timber) library. 
+Although Timber is good and easy to use, but it's missing some features that I wish it had when 
+I was using it for some of my side projects.
 
-Instead of extending Timber project, I decided to write it from scratch with some features from Timber plus some of the features I wish it had.
+Instead of extending Timber project, I decided to write it from scratch with some features from 
+Timber plus some of the features I wish it had. These are some of the features of this library:
+- Logging with a global logger. See [Global Forest](#global-forest).
+- Logging with a named logger. See [Local Forest](#local-forest).
+- Multiple log handlers. See [Tree](#tree).
+- Sharing data globally with every loggers. See [Context](#context).
+- Pre-processing a log. See [Pre-processing Callback](#pre-processing-callback).
 
+## Table of Contents
 - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
   - [Setting Up the Dependency](#setting-up-the-dependency)
     - [Step 1. Add the JitPack repository to your build file](#step-1-add-the-jitpack-repository-to-your-build-file)
@@ -51,31 +61,38 @@ Forest does not have any tree planted. However, this library comes with `DebugTr
 which will print the logs to the logcat.
 You can plant a tree like
 ```kotlin
-Forest.plant(DebugTree())
+Forest.plant(DebugTree())    // Java: Forest.Global.plant(new DebugTree());
 ```
 then start logging
 ```kotlin
 // Using global Forest
-Forest.v("a message")
-Forest.d("a message")
-Forest.i("a message")
-Forest.w("a message")
-Forest.e("a message")
-Forest.f("a message")
+Forest.v("a message")    // Java: Forest.Global.v("a message");
+Forest.d("a message")    // Java: Forest.Global.d("a message");
+Forest.i("a message")    // Java: Forest.Global.i("a message");
+Forest.w("a message")    // Java: Forest.Global.w("a message");
+Forest.e("a message")    // Java: Forest.Global.e("a message");
+Forest.f("a message")    // Java: Forest.Global.f("a message");
 
 // Or
 
 // Using local Forest
-val forest = getForest(MyClass::class.java)
-forest.v("a message")
-forest.d("a message")
-forest.i("a message")
-forest.w("a message")
-forest.e("a message")
-forest.f("a message")
+val forest = getForest(MyClass::class.java)    // Java: Forest forest = Forest.Global.getForest(MyClass.class);
+forest.v("a message")    // forest.v("a message");
+forest.d("a message")    // forest.d("a message");
+forest.i("a message")    // forest.i("a message");
+forest.w("a message")    // forest.w("a message");
+forest.e("a message")    // forest.e("a message");
+forest.f("a message")    // forest.f("a message");
 ```
 
 # More Usage Details
+**Note** 
+
+All of the examples in this section use Kotlin. The main difference between Kotlin
+and Java usage in this library is the global Forest, where in Kotlin, you can
+use it like `Forest.d`, while Java you will have to access the `Global` object, 
+such as `Forest.Global.d`.
+
 ## Tree
 A `Tree` is a handler for all the logs that you send through Forest logging
 methods. This library comes with `DebugTree`, which logs the log entry to
