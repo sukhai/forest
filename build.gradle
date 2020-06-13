@@ -16,7 +16,8 @@ buildscript {
         'mockito'             : '2.2.0',
         'sdk_compile'         : 28,
         'sdk_min'             : 23,
-        'sdk_target'          : 28
+        'sdk_target'          : 28,
+        'validator_version'   : '0.2.3'
     ]
 
     List<String> PROPERTY_FILES = [
@@ -35,8 +36,11 @@ buildscript {
         classpath "de.mannodermaus.gradle.plugins:android-junit5:${versions.mannodermaus}"
         classpath "com.github.dcendents:android-maven-gradle-plugin:${versions.android_maven}"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:${versions.dokka}"
+        classpath "org.jetbrains.kotlinx:binary-compatibility-validator:${versions.validator_version}"
     }
 }
+
+apply plugin: 'binary-compatibility-validator'
 
 allprojects {
     repositories {

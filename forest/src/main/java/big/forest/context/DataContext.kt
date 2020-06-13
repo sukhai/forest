@@ -19,11 +19,11 @@ package big.forest.context
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * A type of [Context] that store data in a [ConcurrentHashMap].
+ * A type of [ForestContext] that store data in a [ConcurrentHashMap].
  *
- * You can instantiate an instance of this class through [Context.createDataContext].
+ * You can instantiate an instance of this class through [ForestContext.createDataContext].
  */
-class DataContext internal constructor() : Context {
+class DataContext internal constructor() : ForestContext {
     private val map = ConcurrentHashMap<String, Any>()
     private var listener: ((ModifiedState) -> Unit)? = null
 

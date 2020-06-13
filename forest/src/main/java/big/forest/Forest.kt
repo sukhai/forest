@@ -23,7 +23,7 @@ import big.forest.Forest.Level.FATAL
 import big.forest.Forest.Level.INFO
 import big.forest.Forest.Level.VERBOSE
 import big.forest.Forest.Level.WARN
-import big.forest.context.Context
+import big.forest.context.ForestContext
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -355,9 +355,10 @@ interface Forest {
             }
 
         /**
-         * Gets the [Context] this [Forest] is in.
+         * Gets the [ForestContext] this [Forest] is in.
+         * The data that gets set in this context will be available to all the [trees] globally.
          */
-        var context: Context = Context.createDataContext()
+        var context: ForestContext = ForestContext.createDataContext()
             private set
 
         /**
@@ -423,12 +424,12 @@ interface Forest {
         }
 
         /**
-         * Change this global [Forest]'s [Context].
+         * Change this global [Forest]'s [ForestContext].
          *
-         * @param newContext The new [Context] that store the data that are passed
+         * @param newContext The new [ForestContext] that store the data that are passed
          * to all the [Tree]s.
          */
-        fun changeContext(newContext: Context) {
+        fun changeContext(newContext: ForestContext) {
             context = newContext
         }
 

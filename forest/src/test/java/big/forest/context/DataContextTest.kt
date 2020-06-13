@@ -28,7 +28,7 @@ class DataContextTest {
 
     @BeforeEach
     fun setup() {
-        context = Context.createDataContext()
+        context = ForestContext.createDataContext()
 
         for (i in 1..expectedSize) {
             context["key$i"] = "value$i"
@@ -73,7 +73,7 @@ class DataContextTest {
         assertFalse(context.isEmpty())
         assertEquals(expectedSize, context.size)
 
-        val anotherContext = Context.createDataContext()
+        val anotherContext = ForestContext.createDataContext()
         assertTrue(anotherContext.isEmpty())
         assertEquals(0, anotherContext.size)
     }
@@ -89,7 +89,7 @@ class DataContextTest {
 
     @Test
     fun `putAll will add all data into the context`() {
-        val testContext = Context.createDataContext()
+        val testContext = ForestContext.createDataContext()
 
         assertTrue(testContext.isEmpty())
         assertEquals(0, testContext.size)
