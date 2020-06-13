@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class DataContextTest {
-    private lateinit var context: DataContext
+class ForestDataContextTest {
+    private lateinit var context: ForestDataContext
     private val expectedSize = 2
 
     @BeforeEach

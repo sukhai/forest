@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap
  *
  * You can instantiate an instance of this class through [ForestContext.createDataContext].
  */
-class DataContext internal constructor() : ForestContext {
+class ForestDataContext internal constructor() : ForestContext {
     private val map = ConcurrentHashMap<String, Any>()
     private var listener: ((ModifiedState) -> Unit)? = null
 

@@ -22,7 +22,7 @@ import big.forest.Tree
 /**
  * A modifiable collection that holds pairs of objects that use by [Forest] and [Tree].
  *
- * @sample DataContext
+ * @sample ForestDataContext
  */
 interface ForestContext {
     /**
@@ -30,11 +30,11 @@ interface ForestContext {
      */
     companion object Factory {
         /**
-         * Create an instance of [DataContext].
+         * Create an instance of [ForestDataContext].
          *
-         * @return A new instance of [DataContext].
+         * @return A new instance of [ForestDataContext].
          */
-        fun createDataContext() = DataContext()
+        fun createDataContext() = ForestDataContext()
     }
 
     /**
