@@ -1,38 +1,6 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply from: "$rootDir/gradle/ktlint.gradle"
-apply from: "$rootDir/gradle/dokka.gradle"
-apply from: "$rootDir/gradle/android_tests.gradle"
-
-android {
-    compileSdkVersion versions.sdk_compile
-
-    defaultConfig {
-        minSdkVersion versions.sdk_min
-        targetSdkVersion versions.sdk_target
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-    }
-
-    packagingOptions {
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
-    }
-}
+apply from: "$rootDir/gradle/java_library.gradle"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 }
-
-apply from: "$rootDir/gradle/aar_publish.gradle"
