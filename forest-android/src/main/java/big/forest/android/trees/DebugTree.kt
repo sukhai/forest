@@ -1,4 +1,4 @@
-package big.forest.trees
+package big.forest.android.trees
 
 import android.util.Log
 import big.forest.Forest
@@ -6,11 +6,11 @@ import big.forest.LogEntry
 import big.forest.Tree
 
 /**
- * A debug tree that uses Android logging to log messages.
+ * A debug tree that uses Android logger to log messages.
  */
 class DebugTree : Tree {
     companion object {
-        private const val DEFAULT_TAG = "big.forest.trees.DebugTree"
+        private const val DEFAULT_TAG = "big.forest.android.trees.DebugTree"
         private const val FOREST_PACKAGE_NAME = "big.forest"
         private const val THREAD_PACKAGE_NAME = "java.lang.Thread"
     }
@@ -29,8 +29,9 @@ class DebugTree : Tree {
     }
 
     private fun LogEntry.getTag(): String {
-        if (!tag.isNullOrBlank()) {
-            return tag
+        val logTag = tag
+        if (!logTag.isNullOrBlank()) {
+            return logTag
         }
 
         val stackTrace = Thread.currentThread().stackTrace
