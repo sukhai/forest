@@ -349,9 +349,7 @@ interface Forest {
         override var level: Level = VERBOSE
             set(value) {
                 field = value
-                if (allowGlobalOverride) {
-                    forests.values.forEach { it.level = value }
-                }
+                forests.values.forEach { it.level = value }
             }
 
         /**
