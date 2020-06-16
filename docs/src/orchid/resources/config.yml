@@ -1,0 +1,81 @@
+site:
+  theme: Editorial
+  baseUrl: https://sukhai.github.io/forest
+  about:
+    siteName: Forest
+    siteDescription: A lightweight Android-Kotlin first logging library.
+theme:
+  primaryColor: '#963f00'
+  legacySearch: false
+  social:
+    other:
+      - link: '/'
+        label: 'Home'
+        icon: 'fas fa-home'
+    github: 'sukhai/forest'
+  metaComponents:
+    - type: 'orchidSearch'
+    - type: "prism"
+      scriptsOnly: 'true'
+      languages:
+        - 'clike'
+        - 'markup-templating'
+        - kotlin
+        - java
+        - groovy
+  extraCss:
+    - 'assets/css/prism.css'
+    - 'assets/css/forest.css'
+  extraJs:
+    - 'assets/js/prism.js'
+  menu:
+    - type: 'separator'
+      title: 'About'
+    - type: 'page'
+      title: 'Home'
+      itemId: 'Home'
+    - type: 'page'
+      itemId: 'Changelog'
+    - type: 'separator'
+      title: 'Wiki'
+    - type: 'wiki'
+    - type: 'separator'
+      title: 'API Docs'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+      moduleName: 'forest'
+      node: 'classes'
+      asSubmenu: true
+      submenuTitle: 'Classes'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+      moduleName: 'forest'
+      node: 'packages'
+      asSubmenu: true
+      submenuTitle: 'Packages'
+kotlindoc:
+  modules:
+    - name: 'forest'
+      sourceDirs: ['../../../../forest/src/main/java', '../../../../forest-android/src/main/java']
+      showRunnerLogs: false
+      homePageOnly: false
+      relatedModules: ['forest-android']
+    - name: 'forest-android'
+      sourceDirs: ['../../../../forest-android/src/main/java']
+      showRunnerLogs: false
+      homePageOnly: false
+      relatedModules: ['forest']
+  sourcePages:
+    menu:
+      - type: 'sourcedocPageLinks'
+        itemTitleType: 'signature'
+        includeItems: true
+services:
+  publications:
+    stages:
+      githubPages:
+        branch: gh-pages
+        repo: 'forest'
+        username: 'sukhai'
+      githubReleases:
+        repo: 'sukhai/forest'
