@@ -1,6 +1,7 @@
-![](https://github.com/sukhai/forest/workflows/CI/badge.svg) [![](https://jitpack.io/v/sukhai/forest.svg)](https://jitpack.io/#sukhai/forest)
+---
+title: Forest
+---
 
-# Forest
 Forest is A lightweight Android-Kotlin first logging library. It is inspired by the 
 [Timber](https://github.com/JakeWharton/timber) project. Although Timber is good and easy to use, 
 but it's missing some features that can work better on an Android project.
@@ -59,22 +60,7 @@ Features offer by this library includes:
 - Share data globally with all the log handlers. See {{ anchor(title='Forest Context', itemId='Forest Context', collectionType='wiki') }}.
 - Pre-process a log. See {{ anchor(title='pre-processing callback', itemId='Pre-process Log', collectionType='wiki') }}.
 
-## Full Documentation
-
-
-## License
-```
-Copyright 2020 Su Khai Koh
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+## Next Step
+- For more information on installation, see {{ anchor('installation guide', 'Installation') }}.
+- For more information on basic usage, see {{ anchor('basic usage guide', 'Getting Started') }}
+- For more information on Java usage, see {{ anchor('Java guide', 'Java') }}.
