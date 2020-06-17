@@ -22,13 +22,13 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class DataContextTest {
-    private lateinit var context: DataContext
+class ForestDataContextTest {
+    private lateinit var context: ForestDataContext
     private val expectedSize = 2
 
     @BeforeEach
     fun setup() {
-        context = Context.createDataContext()
+        context = ForestContext.createDataContext()
 
         for (i in 1..expectedSize) {
             context["key$i"] = "value$i"
@@ -73,7 +73,7 @@ class DataContextTest {
         assertFalse(context.isEmpty())
         assertEquals(expectedSize, context.size)
 
-        val anotherContext = Context.createDataContext()
+        val anotherContext = ForestContext.createDataContext()
         assertTrue(anotherContext.isEmpty())
         assertEquals(0, anotherContext.size)
     }
@@ -89,7 +89,7 @@ class DataContextTest {
 
     @Test
     fun `putAll will add all data into the context`() {
-        val testContext = Context.createDataContext()
+        val testContext = ForestContext.createDataContext()
 
         assertTrue(testContext.isEmpty())
         assertEquals(0, testContext.size)

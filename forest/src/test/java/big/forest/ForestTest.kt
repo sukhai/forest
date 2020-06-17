@@ -16,7 +16,7 @@
 
 package big.forest
 
-import big.forest.context.Context
+import big.forest.context.ForestContext
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
@@ -507,7 +507,7 @@ class ForestTest {
     @Test
     fun `when set a new context, then the tree will receive this new context`() {
         val tree: Tree = mock()
-        val newContext: Context = mock()
+        val newContext: ForestContext = mock()
         Forest.changeContext(newContext)
         Forest.plant(tree)
         Forest.d(expectedMessage)
@@ -524,7 +524,7 @@ class ForestTest {
     @Test
     fun `when update the context, then the tree will receive the latest update from the context`() {
         val tree: Tree = mock()
-        val context = Context.createDataContext()
+        val context = ForestContext.createDataContext()
         Forest.changeContext(context)
         Forest.plant(tree)
         Forest.context["key 1"] = "value 1"

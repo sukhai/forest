@@ -16,14 +16,14 @@
 
 package big.forest
 
-import big.forest.context.Context
+import big.forest.context.ForestContext
 
 /**
  * An object that holds the information of a log.
  *
  * @param level The logging level of the log.
  * the [Forest] received a logging call.
- * @param context The [Context] that contains the data from the [Forest].
+ * @param context The [ForestContext] that contains the data from the [Forest].
  * @param message The message to be logged.
  * @param tag The tag. The value is either the name of a [Forest] set from [getForest]
  * or the class name of the first stacktrace from the [throwable], if any.
@@ -33,7 +33,7 @@ import big.forest.context.Context
 data class LogEntry @JvmOverloads constructor(
     val level: Forest.Level,
     val message: String,
-    val context: Context = Forest.context,
+    val context: ForestContext = Forest.context,
     val tag: String? = null,
     val throwable: Throwable? = null,
     val attributes: Map<String, Any> = emptyMap()

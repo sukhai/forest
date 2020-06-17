@@ -1,16 +1,16 @@
 package big.forest.context
 
 /**
- * The state of the [Context] modification.
+ * The state of the [ForestContext] modification.
  *
  * @param key The key with which the specified value is to be associated.
  */
 sealed class ModifiedState(open val key: String) {
     /**
-     * A new key-value data has been added to the [Context].
+     * A new key-value data has been added to the [ForestContext].
      *
      * @param key The key with which the specified value is to be associated.
-     * @param value The new value which is added to the [Context] and
+     * @param value The new value which is added to the [ForestContext] and
      * is associated with the [key].
      */
     data class New(
@@ -19,7 +19,7 @@ sealed class ModifiedState(open val key: String) {
     ) : ModifiedState(key)
 
     /**
-     * A key-value data has been updated from the [Context].
+     * A key-value data has been updated from the [ForestContext].
      *
      * @param key The key with which the specified value is to be associated.
      * @param oldValue The previous value which is replaced with the
@@ -34,10 +34,10 @@ sealed class ModifiedState(open val key: String) {
     ) : ModifiedState(key)
 
     /**
-     * A key-value data has been removed from the [Context].
+     * A key-value data has been removed from the [ForestContext].
      *
      * @param key The key with which the specified value is to be associated.
-     * @param value The previous value which is removed from the [Context] and
+     * @param value The previous value which is removed from the [ForestContext] and
      * is associated with the [key].
      */
     data class Removed(

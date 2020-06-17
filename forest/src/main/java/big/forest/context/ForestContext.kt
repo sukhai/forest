@@ -22,19 +22,19 @@ import big.forest.Tree
 /**
  * A modifiable collection that holds pairs of objects that use by [Forest] and [Tree].
  *
- * @sample DataContext
+ * @sample ForestDataContext
  */
-interface Context {
+interface ForestContext {
     /**
-     * A factory class that create different types of [Context].
+     * A factory class that create different types of [ForestContext].
      */
     companion object Factory {
         /**
-         * Create an instance of [DataContext].
+         * Create an instance of [ForestDataContext].
          *
-         * @return A new instance of [DataContext].
+         * @return A new instance of [ForestDataContext].
          */
-        fun createDataContext() = DataContext()
+        fun createDataContext() = ForestDataContext()
     }
 
     /**
@@ -117,14 +117,14 @@ interface Context {
     fun remove(key: String): Any?
 
     /**
-     * Set a callback to the [Context].
+     * Set a callback to the [ForestContext].
      *
      * @param listener The callback listener to be set.
      */
     fun setOnModifiedListener(listener: (ModifiedState) -> Unit)
 
     /**
-     * Remove the modified callback listener from the [Context].
+     * Remove the modified callback listener from the [ForestContext].
      */
     fun removeOnModifiedListener()
 

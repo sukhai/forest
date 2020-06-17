@@ -17,18 +17,18 @@
 package big.forest
 
 import big.forest.Forest.Level
-import big.forest.context.Context
+import big.forest.context.ForestContext
 
 /**
  * An abstract class that implements the [Forest].
  *
- * @param context A [Context] that will be passed to the [Tree]s in this [Forest].
+ * @param context A [ForestContext] that will be passed to the [Tree]s in this [Forest].
  * @param name The name of the [Forest]. This value will be used as the [LogEntry.tag]
  * if this value is not `null`. This value is set when [Forest.getForest]
  * is called.
  */
 abstract class AbstractForest(
-    private val context: () -> Context,
+    private val context: () -> ForestContext,
     override val name: String? = null
 ) : Forest {
 
