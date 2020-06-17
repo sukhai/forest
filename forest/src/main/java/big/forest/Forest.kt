@@ -45,13 +45,13 @@ interface Forest {
      * A class that represents the logging level. A [Forest] will use the level
      * to determine if it should log a given [LogEntry].
      *
-     * The order of the levels is (except [Level.OFF]:
-     * 1. [FATAL]
-     * 2. [ERROR]
-     * 3. [WARN]
-     * 4. [INFO]
-     * 5. [DEBUG]
-     * 6. [VERBOSE]
+     * The order of the levels is (except [Level.OFF]):
+     * 1. [Level.FATAL]
+     * 2. [Level.ERROR]
+     * 3. [Level.WARN]
+     * 4. [Level.INFO]
+     * 5. [Level.DEBUG]
+     * 6. [Level.VERBOSE]
      */
     enum class Level {
         /**
@@ -349,9 +349,7 @@ interface Forest {
         override var level: Level = VERBOSE
             set(value) {
                 field = value
-                if (allowGlobalOverride) {
-                    forests.values.forEach { it.level = value }
-                }
+                forests.values.forEach { it.level = value }
             }
 
         /**
