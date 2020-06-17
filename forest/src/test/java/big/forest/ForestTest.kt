@@ -37,13 +37,12 @@ class ForestTest {
 
     @BeforeEach
     fun setup() {
-        Forest.level = Forest.Level.VERBOSE
+        reset()
     }
 
     @AfterEach
     fun tearDown() {
-        Forest.preProcessLog { it }
-        Forest.deforest()
+        reset()
     }
 
     @Test
@@ -558,6 +557,52 @@ class ForestTest {
 
         assertEquals(expectedLevel, forest.level)
         assertTrue(forest.trees.isEmpty())
+    }
+
+    @Test
+    fun `when allowGlobalOverride is set to true, then local Forest will get trees planted by global forest`() {
+        val tree: Tree = mock()
+        val forest = getForest("forest_with_tree") { allowGlobalOverride = true }
+        assertTrue(forest.trees.isEmpty())
+
+        Forest.allowGlobalOverride = false
+
+        val forestWithoutTree = getForest("forest_without_tree")
+        assertTrue(forestWithoutTree.trees.isEmpty())
+
+        Forest.plant(tree)
+
+        assertTrue(forest.trees.isNotEmpty())
+        assertTrue(forestWithoutTree.trees.isEmpty())
+        assertEquals(tree, forest.trees[0])
+    }
+
+    @Test
+    fun `when allowGlobalOverride is set to true, then local Forest will get level set by global forest`() {
+        val forest = getForest("forest_with_level_update") {
+            allowGlobalOverride = true
+            level = Forest.Level.VERBOSE
+        }
+        assertEquals(Forest.Level.VERBOSE, forest.level)
+
+        Forest.allowGlobalOverride = false
+
+        val forestWithoutLevelUpdate = getForest("forest_without_level_update") {
+            level = Forest.Level.DEBUG
+        }
+        assertEquals(Forest.Level.DEBUG, forestWithoutLevelUpdate.level)
+
+        Forest.level = Forest.Level.ERROR
+
+        assertEquals(Forest.Level.ERROR, forest.level)
+        assertEquals(Forest.Level.DEBUG, forestWithoutLevelUpdate.level)
+    }
+
+    private fun reset() {
+        Forest.level = Forest.Level.VERBOSE
+        Forest.allowGlobalOverride = true
+        Forest.preProcessLog { it }
+        Forest.deforest()
     }
 
     private fun createExpectedLogEntry(

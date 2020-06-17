@@ -1,2 +1,2 @@
 rootProject.name='forest'
-include ':forest'
+include ':docs', ':forest', ':forest-android'

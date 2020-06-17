@@ -1,0 +1,7 @@
+apply plugin: 'com.vanniktech.android.junit.jacoco'
+
+junitJacoco {
+    jacocoVersion = "${versions.jacoco}"
+    includeNoLocationClasses = true
+    includeInstrumentationCoverageInMergedReport = true
+}
