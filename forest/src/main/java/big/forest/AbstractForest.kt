@@ -16,6 +16,7 @@
 
 package big.forest
 
+import big.forest.Forest.Level
 import big.forest.context.Context
 
 /**
@@ -31,7 +32,7 @@ abstract class AbstractForest(
     override val name: String? = null
 ) : Forest {
 
-    override var level: Forest.Level = Forest.Level.VERBOSE
+    override var level: Level = Level.VERBOSE
         set(value) {
             if (!allowGlobalOverride) {
                 return
@@ -78,80 +79,248 @@ abstract class AbstractForest(
         preProcessLogCallback = callback
     }
 
+    /**
+     * Log a message with [Level.VERBOSE] level.
+     *
+     * @param message The message to be logged.
+     */
+    fun v(message: String) {
+        v(message, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.VERBOSE] level.
+     *
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun v(throwable: Throwable) {
+        v(throwable, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.VERBOSE] level.
+     *
+     * @param message The message to be logged.
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun v(message: String, throwable: Throwable) {
+        v(message, throwable, emptyMap())
+    }
+
     override fun v(message: String, attributes: Map<String, Any>) {
-        log(Forest.Level.VERBOSE, message, null, attributes)
+        log(Level.VERBOSE, message, null, attributes)
     }
 
     override fun v(message: String, throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.VERBOSE, message, throwable, attributes)
+        log(Level.VERBOSE, message, throwable, attributes)
     }
 
     override fun v(throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.VERBOSE, null, throwable, attributes)
+        log(Level.VERBOSE, null, throwable, attributes)
+    }
+
+    /**
+     * Log a message with [Level.DEBUG] level.
+     *
+     * @param message The message to be logged.
+     */
+    fun d(message: String) {
+        d(message, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.DEBUG] level.
+     *
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun d(throwable: Throwable) {
+        d(throwable, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.DEBUG] level.
+     *
+     * @param message The message to be logged.
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun d(message: String, throwable: Throwable) {
+        d(message, throwable, emptyMap())
     }
 
     override fun d(message: String, attributes: Map<String, Any>) {
-        log(Forest.Level.DEBUG, message, null, attributes)
+        log(Level.DEBUG, message, null, attributes)
     }
 
     override fun d(message: String, throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.DEBUG, message, throwable, attributes)
+        log(Level.DEBUG, message, throwable, attributes)
     }
 
     override fun d(throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.DEBUG, null, throwable, attributes)
+        log(Level.DEBUG, null, throwable, attributes)
+    }
+
+    /**
+     * Log a message with [Level.INFO] level.
+     *
+     * @param message The message to be logged.
+     */
+    fun i(message: String) {
+        i(message, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.INFO] level.
+     *
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun i(throwable: Throwable) {
+        i(throwable, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.INFO] level.
+     *
+     * @param message The message to be logged.
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun i(message: String, throwable: Throwable) {
+        i(message, throwable, emptyMap())
     }
 
     override fun i(message: String, attributes: Map<String, Any>) {
-        log(Forest.Level.INFO, message, null, attributes)
+        log(Level.INFO, message, null, attributes)
     }
 
     override fun i(message: String, throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.INFO, message, throwable, attributes)
+        log(Level.INFO, message, throwable, attributes)
     }
 
     override fun i(throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.INFO, null, throwable, attributes)
+        log(Level.INFO, null, throwable, attributes)
+    }
+
+    /**
+     * Log a message with [Level.WARN] level.
+     *
+     * @param message The message to be logged.
+     */
+    fun w(message: String) {
+        w(message, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.WARN] level.
+     *
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun w(throwable: Throwable) {
+        w(throwable, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.WARN] level.
+     *
+     * @param message The message to be logged.
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun w(message: String, throwable: Throwable) {
+        w(message, throwable, emptyMap())
     }
 
     override fun w(message: String, attributes: Map<String, Any>) {
-        log(Forest.Level.WARN, message, null, attributes)
+        log(Level.WARN, message, null, attributes)
     }
 
     override fun w(message: String, throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.WARN, message, throwable, attributes)
+        log(Level.WARN, message, throwable, attributes)
     }
 
     override fun w(throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.WARN, null, throwable, attributes)
+        log(Level.WARN, null, throwable, attributes)
+    }
+
+    /**
+     * Log a message with [Level.ERROR] level.
+     *
+     * @param message The message to be logged.
+     */
+    fun e(message: String) {
+        e(message, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.ERROR] level.
+     *
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun e(throwable: Throwable) {
+        e(throwable, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.ERROR] level.
+     *
+     * @param message The message to be logged.
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun e(message: String, throwable: Throwable) {
+        e(message, throwable, emptyMap())
     }
 
     override fun e(message: String, attributes: Map<String, Any>) {
-        log(Forest.Level.ERROR, message, null, attributes)
+        log(Level.ERROR, message, null, attributes)
     }
 
     override fun e(message: String, throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.ERROR, message, throwable, attributes)
+        log(Level.ERROR, message, throwable, attributes)
     }
 
     override fun e(throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.ERROR, null, throwable, attributes)
+        log(Level.ERROR, null, throwable, attributes)
+    }
+
+    /**
+     * Log a message with [Level.FATAL] level.
+     *
+     * @param message The message to be logged.
+     */
+    fun f(message: String) {
+        f(message, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.FATAL] level.
+     *
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun f(throwable: Throwable) {
+        f(throwable, emptyMap())
+    }
+
+    /**
+     * Log a message with [Level.FATAL] level.
+     *
+     * @param message The message to be logged.
+     * @param throwable The [Throwable] to be logged.
+     */
+    fun f(message: String, throwable: Throwable) {
+        f(message, throwable, emptyMap())
     }
 
     override fun f(message: String, attributes: Map<String, Any>) {
-        log(Forest.Level.FATAL, message, null, attributes)
+        log(Level.FATAL, message, null, attributes)
     }
 
     override fun f(message: String, throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.FATAL, message, throwable, attributes)
+        log(Level.FATAL, message, throwable, attributes)
     }
 
     override fun f(throwable: Throwable, attributes: Map<String, Any>) {
-        log(Forest.Level.FATAL, null, throwable, attributes)
+        log(Level.FATAL, null, throwable, attributes)
     }
 
     override fun log(
-        level: Forest.Level,
+        level: Level,
         message: String?,
         throwable: Throwable?,
         attributes: Map<String, Any>
@@ -223,13 +392,13 @@ abstract class AbstractForest(
         allTrees = t
     }
 
-    private fun shouldLog(level: Forest.Level): Boolean {
-        return this.level != Forest.Level.OFF && level != Forest.Level.OFF &&
+    private fun shouldLog(level: Level): Boolean {
+        return this.level != Level.OFF && level != Level.OFF &&
             level.ordinal <= this.level.ordinal
     }
 
     private fun createLogEntry(
-        level: Forest.Level,
+        level: Level,
         message: String?,
         throwable: Throwable?,
         attributes: Map<String, Any>
