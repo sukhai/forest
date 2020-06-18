@@ -1,0 +1,1853 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://sukhai.github.io/forest/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>ForestContext</title>
+
+
+<meta name="description" content="A lightweight Android-Kotlin first logging library.">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/prism.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/forest.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/assets/css/orchidSourceDoc.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://sukhai.github.io/forest","environment":"prod","version":"1.1.0"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="is-loading">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://sukhai.github.io/forest" class="logo">Forest</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="/" class="icon fas fa-home">
+                <span class="label">Home</span>
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/sukhai/forest" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>ForestContext</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="sourcedoc-page orchid-sourcedoc content">
+  
+<div class="sourcedoc-section section-root section-level-1" id="ForestContext">
+
+
+  
+
+  
+    <div class="sourcedoc-section section-element" id="34fffd6667ecb21c376e214bfafdae3dd21abc70">
+      
+      <p class="sourcedoc-section section-signature">
+        <code>interface <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>: Any</code>
+      </p>
+
+      
+        
+    <!-- start:inject components -->
+    
+    <!-- end:inject components -->
+
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>A modifiable collection that holds pairs of objects that use by <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> and <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>.</p><pre class="language-kotlin"><code class="language-kotlin">/**
+ * A type of [ForestContext] that store data in a [ConcurrentHashMap].
+ *
+ * You can instantiate an instance of this class through [ForestContext.createDataContext].
+ */
+class ForestDataContext internal constructor() : ForestContext {
+    private val map = ConcurrentHashMap<String, Any>()
+    private var listener: ((ModifiedState) -> Unit)? = null
+
+    override val size: Int
+        get() = map.size
+
+    override val keys: Set<String>
+        get() = map.keys
+
+    override val values: Collection<Any>
+        get() = map.values
+
+    override fun containsKey(key: String): Boolean {
+        return map.containsKey(key)
+    }
+
+    override fun containsValue(value: Any): Boolean {
+        return map.containsValue(value)
+    }
+
+    override operator fun get(key: String): Any? {
+        return map[key]
+    }
+
+    override fun isEmpty(): Boolean {
+        return map.isEmpty()
+    }
+
+    override fun clear() {
+        map.clear()
+    }
+
+    override fun put(key: String, value: Any): Any? {
+        val old = map.put(key, value)
+        listener?.invoke(
+            if (old == null) {
+                ModifiedState.New(key, value)
+            } else {
+                ModifiedState.Updated(key, old, value)
+            }
+        )
+        return old
+    }
+
+    override fun remove(key: String): Any? {
+        val old = map.remove(key)
+        if (old != null && listener != null) {
+            listener?.invoke(ModifiedState.Removed(key, old))
+        }
+        return old
+    }
+
+    override fun setOnModifiedListener(listener: (ModifiedState) -> Unit) {
+        this.listener = listener
+    }
+
+    override fun removeOnModifiedListener() {
+        listener = null
+    }
+
+    override fun toString(): String {
+        return map.toString()
+    }
+}</code></pre>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="fields">
+
+
+  <p class="sourcedoc-section section-name"><strong>Fields</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f59e1fff6200eefb4fd113f98a886a4d3b65de28">
+        <td class="sourcedoc-section section-signature">
+          <code>abstract size: Int</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>Return the number of data in the context.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="c50d58bbb9b74351a85c001770aef33af5a3eef6">
+        <td class="sourcedoc-section section-signature">
+          <code>abstract keys: Set&lt;String&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>Return all the keys from the context.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="41a9e1e54744150d4fae85ecf4cf6b889aec32db">
+        <td class="sourcedoc-section section-signature">
+          <code>abstract values: Collection&lt;Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>Return all the values from the context.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="methods">
+
+
+  
+    <h2 class="sourcedoc-section section-name">Methods</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="ab2c7cec823bc89909b5e2ad5c48fda14cfa2533">
+      
+      <h3 class="sourcedoc-section element-name">containsKey</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun containsKey(key: String): Boolean</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Check if this context contains the given key.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="cd48f086ab051b47f0662b4795cdf389ef441c96">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6d962dea0ce9c8247fa8770df4f119feb1a25993">
+        <td class="sourcedoc-section section-signature">
+          <code>key: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The key to be checked.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="cd42fd4801730604abc4acab90a66a042e2f34df">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="b76ff4906f33c2dd97ddd929b9662ba8cac6174c">
+        <td class="sourcedoc-section section-signature">
+          <code>Boolean</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p><code>true</code> if this context contains a data with the given key,
+<code>false</code> otherwise.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="bd8561b542985b4378db3923f4abff1d76a3f3cf">
+      
+      <h3 class="sourcedoc-section element-name">containsValue</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun containsValue(value: Any): Boolean</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Check if this context contains the given value.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="60d4f683be445c69bdabcbd68a56778d12af87a1">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="31979fd0f250bf52bb0c55ecb09310b63e19a20b">
+        <td class="sourcedoc-section section-signature">
+          <code>value: Any</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The value to be checked.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="7a52c5d928f7054ca133d3a3f1e52413f88b3170">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="b76ff4906f33c2dd97ddd929b9662ba8cac6174c">
+        <td class="sourcedoc-section section-signature">
+          <code>Boolean</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p><code>true</code> if this context contains a data with the given value,
+<code>false</code> otherwise.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="5ccb6e1695bbbdaa9f50861363ecde6f6849043c">
+      
+      <h3 class="sourcedoc-section element-name">get</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun get(key: String): Any?</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Return a value with the given key found in the context.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="39e96d7863fd74f0cfc5b06191d8d26d2fb2bf43">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6d962dea0ce9c8247fa8770df4f119feb1a25993">
+        <td class="sourcedoc-section section-signature">
+          <code>key: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The key to the value.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="04420ff9ee3482fc78add89d07bc56125a5fd2ab">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="08f6f58ec775d700381dd640ba6410aeb16ecc9a">
+        <td class="sourcedoc-section section-signature">
+          <code>Any?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The value that is associated with the given key if found,
+otherwise return <code>null</code>.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="3d36770c8d1964d5d2a5449cee80c80b7805f64a">
+      
+      <h3 class="sourcedoc-section element-name">isEmpty</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun isEmpty(): Boolean</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Check if this context is empty.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="1cf3a2e104fa47aaaefffd8c438abadfa11bbb4a">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="b76ff4906f33c2dd97ddd929b9662ba8cac6174c">
+        <td class="sourcedoc-section section-signature">
+          <code>Boolean</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p><code>true</code> if this context is empty and contains no data, <code>false</code>
+otherwise.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="4f25f2266862c89a77c0105ca1b56875199300cc">
+      
+      <h3 class="sourcedoc-section element-name">clear</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun clear()</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Clear all the data from the context.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="b2da5dc1fd258251dc9b8720e60ad866504dcc27">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="13f9c5fba76b7d796b8b1a91a4b66154e6d76a82">
+      
+      <h3 class="sourcedoc-section element-name">put</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun put(key: String, value: Any): Any?</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Maps the given key to the specified value in this context.
+Neither the key nor the value can be null.
+The value can be retrieved by calling the get method with a key that
+is equal to the original key.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="c4658021bfe3a3f4204313cbf3ad90e3ae835576">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6d962dea0ce9c8247fa8770df4f119feb1a25993">
+        <td class="sourcedoc-section section-signature">
+          <code>key: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The key with which the specified value is to be associated.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="31979fd0f250bf52bb0c55ecb09310b63e19a20b">
+        <td class="sourcedoc-section section-signature">
+          <code>value: Any</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The value which is associated with the key.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="074f9fc67bd0bdc4b2659890ae801784f29eb1ac">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="08f6f58ec775d700381dd640ba6410aeb16ecc9a">
+        <td class="sourcedoc-section section-signature">
+          <code>Any?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The previous value associated with key, or null if there was
+no mapping for key.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="084839987ccd51bb598794ebccbf4a2b07687092">
+      
+      <h3 class="sourcedoc-section element-name">remove</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun remove(key: String): Any?</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Removes the key (and its corresponding value) from this context.
+This method does nothing if the key is not in the context.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="248f9b160bfd33cf150fb4d40d82fe209b50e466">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6d962dea0ce9c8247fa8770df4f119feb1a25993">
+        <td class="sourcedoc-section section-signature">
+          <code>key: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The key and its corresponding value to be removed from
+this context.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="0fd4f753b8f1f5a6acd3e10e5f72a1a5b6903730">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="08f6f58ec775d700381dd640ba6410aeb16ecc9a">
+        <td class="sourcedoc-section section-signature">
+          <code>Any?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The previous value associated with key, or null if there was
+no mapping for key.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="139665fa51cdab44a9ef2ac63f6c0b212d526431">
+      
+      <h3 class="sourcedoc-section element-name">setOnModifiedListener</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun setOnModifiedListener(listener: (<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate">ModifiedState</a>)-&gt;Unit)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Set a callback to the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="10ae0c85a6c8aeef52c94a9739371622536130da">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="a809f86e541875409b58d15c1361b98623f8c9a0">
+        <td class="sourcedoc-section section-signature">
+          <code>listener: (<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate">ModifiedState</a>)-&gt;Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The callback listener to be set.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="e695265da79676d53d3b357226bb5369e398eb12">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="22c32a6584138b09d93e9b94fca7b63be5767e53">
+      
+      <h3 class="sourcedoc-section element-name">removeOnModifiedListener</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun removeOnModifiedListener()</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Remove the modified callback listener from the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="82248409b9c5436ca12d4c0b4243d5cfb05d7698">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="fbd17c3507ce5982baeca2146e570f5a918ab8a0">
+      
+      <h3 class="sourcedoc-section element-name">set</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>open operator fun set(key: String, value: Any)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Maps the given key to the specified value in this context.
+Neither the key nor the value can be null.
+The value can be retrieved by calling the get method with a key that
+is equal to the original key.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="3d46e6cea8bc7bf1435c6b167342b1c1502c6beb">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6d962dea0ce9c8247fa8770df4f119feb1a25993">
+        <td class="sourcedoc-section section-signature">
+          <code>key: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The key with which the specified value is to be associated.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="31979fd0f250bf52bb0c55ecb09310b63e19a20b">
+        <td class="sourcedoc-section section-signature">
+          <code>value: Any</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The value which is associated with the key.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="d9f0f74ad20e791830389ac0c89138789ed81850">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The previous value associated with key, or null if there was
+no mapping for key.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="companionObject">
+
+
+  
+    <h2 class="sourcedoc-section section-name">CompanionObject</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="34fffd6667ecb21c376e214bfafdae3dd21abc70">
+      
+      <h3 class="sourcedoc-section element-name">ForestContext</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>interface <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>: Any</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>A modifiable collection that holds pairs of objects that use by <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> and <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>.</p><pre class="language-kotlin"><code class="language-kotlin">/**
+ * A type of [ForestContext] that store data in a [ConcurrentHashMap].
+ *
+ * You can instantiate an instance of this class through [ForestContext.createDataContext].
+ */
+class ForestDataContext internal constructor() : ForestContext {
+    private val map = ConcurrentHashMap<String, Any>()
+    private var listener: ((ModifiedState) -> Unit)? = null
+
+    override val size: Int
+        get() = map.size
+
+    override val keys: Set<String>
+        get() = map.keys
+
+    override val values: Collection<Any>
+        get() = map.values
+
+    override fun containsKey(key: String): Boolean {
+        return map.containsKey(key)
+    }
+
+    override fun containsValue(value: Any): Boolean {
+        return map.containsValue(value)
+    }
+
+    override operator fun get(key: String): Any? {
+        return map[key]
+    }
+
+    override fun isEmpty(): Boolean {
+        return map.isEmpty()
+    }
+
+    override fun clear() {
+        map.clear()
+    }
+
+    override fun put(key: String, value: Any): Any? {
+        val old = map.put(key, value)
+        listener?.invoke(
+            if (old == null) {
+                ModifiedState.New(key, value)
+            } else {
+                ModifiedState.Updated(key, old, value)
+            }
+        )
+        return old
+    }
+
+    override fun remove(key: String): Any? {
+        val old = map.remove(key)
+        if (old != null && listener != null) {
+            listener?.invoke(ModifiedState.Removed(key, old))
+        }
+        return old
+    }
+
+    override fun setOnModifiedListener(listener: (ModifiedState) -> Unit) {
+        this.listener = listener
+    }
+
+    override fun removeOnModifiedListener() {
+        listener = null
+    }
+
+    override fun toString(): String {
+        return map.toString()
+    }
+}</code></pre>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="fa53b14762f4bd220a4b7b5feb510bc742415841">
+
+
+  
+    <h3 class="sourcedoc-section section-name">Methods</h3>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="d5a5d13cf3106c047e5d5f9280941fa6c2b14c1f">
+      
+      <h4 class="sourcedoc-section element-name">createDataContext</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun createDataContext(): <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a></code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Create an instance of <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="fd95d4787868e479848dab6e0cf3443d4506879b">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="2ca3e02fd48a1741ff95434bcb51b53deee669de">
+        <td class="sourcedoc-section section-signature">
+          <code><a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A new instance of <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a>.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+</div>
+
+
+
+
+
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Forest</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a class="subheader">About</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://sukhai.github.io/forest">Home</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/changelog">Changelog</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a class="subheader">Wiki</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">Guides</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/installation">Installation</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/getting_started">Getting Started</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/java">Java</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Features</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/tree">Tree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/forest">Forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/log_level">Log Levels</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/adding_attributes">Adding Attributes</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/forest_context">Forest Context</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/preprocess_log">Pre-process Log</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    
+    <li>
+        <a class="subheader">API Docs</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">Classes</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/abstractforest">AbstractForest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees/debugtree">DebugTree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/global">Global</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate">ModifiedState</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/new">New</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/removed">Removed</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/updated">Updated</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Packages</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest">big.forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees">big.forest.android.trees</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context">big.forest.context</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+        <nav class="menu">
+            <header class="major">
+                <h2>ForestContext</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    <li>
+        <span class="opener">Fields</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="#f59e1fff6200eefb4fd113f98a886a4d3b65de28">size</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#c50d58bbb9b74351a85c001770aef33af5a3eef6">keys</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#41a9e1e54744150d4fae85ecf4cf6b889aec32db">values</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Methods</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="#ab2c7cec823bc89909b5e2ad5c48fda14cfa2533">containsKey</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#bd8561b542985b4378db3923f4abff1d76a3f3cf">containsValue</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#5ccb6e1695bbbdaa9f50861363ecde6f6849043c">get</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#3d36770c8d1964d5d2a5449cee80c80b7805f64a">isEmpty</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#4f25f2266862c89a77c0105ca1b56875199300cc">clear</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#13f9c5fba76b7d796b8b1a91a4b66154e6d76a82">put</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#084839987ccd51bb598794ebccbf4a2b07687092">remove</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#139665fa51cdab44a9ef2ac63f6c0b212d526431">setOnModifiedListener</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#22c32a6584138b09d93e9b94fca7b63be5767e53">removeOnModifiedListener</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#fbd17c3507ce5982baeca2146e570f5a918ab8a0">set</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">CompanionObject</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="#34fffd6667ecb21c376e214bfafdae3dd21abc70">ForestContext</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 1.1.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Forest. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_util.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_main.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/prism.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://sukhai.github.io/forest/lunr/lunr.js"></script>
+<script  src="https://sukhai.github.io/forest/assets/js/orchidSearch.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-clike.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-markup-templating.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

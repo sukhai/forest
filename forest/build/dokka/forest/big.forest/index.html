@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>big.forest - forest</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">forest</a>&nbsp;/&nbsp;<a href="./index.html">big.forest</a><br/>
+<br/>
+<h2>Package big.forest</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-abstract-forest/index.html">AbstractForest</a></h4>
+</td>
+<td>
+<p>An abstract class that implements the <a href="-forest/index.html">Forest</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractForest</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-forest/index.html"><span class="identifier">Forest</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-forest/index.html">Forest</a></h4>
+</td>
+<td>
+<p>An object that allows the user to send any log entry to a group of <a href="-tree/index.html">Tree</a>s.</p>
+<code><span class="keyword">interface </span><span class="identifier">Forest</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-forest-config/index.html">ForestConfig</a></h4>
+</td>
+<td>
+<p>An object that stores the configuration of a <a href="-forest/index.html">Forest</a>.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">ForestConfig</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-log-entry/index.html">LogEntry</a></h4>
+</td>
+<td>
+<p>An object that holds the information of a log.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">LogEntry</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-pre-process-log-callback.html">PreProcessLogCallback</a></h4>
+</td>
+<td>
+<p>A callback that will be invoked before processing a <a href="-log-entry/index.html">LogEntry</a>.</p>
+<code><span class="keyword">typealias </span><span class="identifier">PreProcessLogCallback</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><a href="-log-entry/index.html"><span class="identifier">LogEntry</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="-log-entry/index.html"><span class="identifier">LogEntry</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-tree/index.html">Tree</a></h4>
+</td>
+<td>
+<p>A handler to all the logs that sent to <a href="-forest/index.html">Forest</a>.</p>
+<code><span class="keyword">interface </span><span class="identifier">Tree</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get-forest.html">getForest</a></h4>
+</td>
+<td>
+<p>Get or create a <a href="-forest/index.html">Forest</a> with the given <a href="get-forest.html#big.forest$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;""<span class="symbol">, </span><span class="identifier" id="big.forest$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="-forest/index.html"><span class="identifier">Forest</span></a></code>
+<p>Get or create a <a href="-forest/index.html">Forest</a> with the given <a href="get-forest.html#big.forest$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>.
+This method will use the canonical name of the <a href="get-forest.html#big.forest$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a> if it is not
+<code>null</code> or empty, otherwise it will use the package name of the <a href="get-forest.html#big.forest$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>,
+such as from an anonymous class.</p>
+<code><span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="big.forest$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="-forest/index.html"><span class="identifier">Forest</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

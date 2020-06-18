@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="big.forest.context.ForestDataContextTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-06-18T04:01:40" hostname="fv-az29" time="0.035">
+  <properties/>
+  <testcase name="clear will remove all data()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="containsKey will return correct value()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="isEmpty will return correct value()" classname="big.forest.context.ForestDataContextTest" time="0.0"/>
+  <testcase name="remove will remove a data from the context()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="keys will return correct value()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="update existing value to the Context will notify listener()" classname="big.forest.context.ForestDataContextTest" time="0.002"/>
+  <testcase name="add new value to the Context will notify listener()" classname="big.forest.context.ForestDataContextTest" time="0.002"/>
+  <testcase name="toString will return a string contains all key-value pairs()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="putAll will add all data into the context()" classname="big.forest.context.ForestDataContextTest" time="0.002"/>
+  <testcase name="values will return correct value()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="size will return correct value()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <testcase name="remove existing value from the Context will notify listener()" classname="big.forest.context.ForestDataContextTest" time="0.004"/>
+  <testcase name="containsValue will return correct value()" classname="big.forest.context.ForestDataContextTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

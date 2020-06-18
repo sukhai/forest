@@ -1,0 +1,303 @@
+{
+  "ownKey": "wiki",
+  "childrenPages": {"wiki": {
+    "ownKey": "wiki",
+    "childrenPages": {
+      "features": {
+        "ownKey": "features",
+        "childrenPages": {
+          "forest": {
+            "ownKey": "forest",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "forest",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/forest"
+              },
+              "next": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "log_level",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/log_level"
+              },
+              "previous": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "tree",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/tree"
+              },
+              "description": "",
+              "title": "Forest",
+              "content": "<ul>\n<li><a href=\"#forest\">Forest<\/a>\n<ul>\n<li><a href=\"#creating-a-forest\">Creating a Forest<\/a><\/li>\n<li><a href=\"#forest-properties\">Forest Properties<\/a><\/li>\n<li><a href=\"#forest-config\">Forest Config<\/a><\/li>\n<li><a href=\"#plant-a-tree\">Plant A Tree<\/a><\/li>\n<li><a href=\"#cut-a-tree\">Cut A Tree<\/a><\/li>\n<li><a href=\"#logging-an-event\">Logging An Event<\/a><\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#global-forest\">Global Forest<\/a>\n<ul>\n<li><a href=\"#allowglobaloverride\">allowGlobalOverride<\/a><\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p>There are 2 types of <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest\">Forests<\/a>, regular\n<a href=\"#forest\">Forest<\/a> and <a href=\"#global-forest\">Global Forest<\/a>.<\/p>\n<h2 id=\"forest\"><a href=\"#forest\" id=\"forest\" class=\"anchor\"><\/a>Forest<\/h2>\n<p>A <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest\">Forest<\/a> is a logger with a name and use for logging\na message.<\/p>\n<p>This type of Forest is recommended as it allows you to set a name to the Forest, and\nthe name of the Forest will be available as the <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry\">LogEntry.tag<\/a>. You\ncan then use this <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry\">LogEntry.tag<\/a> to find out where the logs get\nsent from.<\/p>\n<h3 id=\"creating-a-forest\"><a href=\"#creating-a-forest\" id=\"creating-a-forest\" class=\"anchor\"><\/a>Creating a Forest<\/h3>\n<p>Creating a Forest with a name is optional, but it's recommended. When you create a Forest,\nit will get added to the <a href=\"#global-forest\">Global Forest<\/a>. Next time when you request to create\na Forest with the same name, <a href=\"#global-forest\">Global Forest<\/a> will return the same instance\nof Forest instead.<\/p>\n<pre><code class=\"language-kotlin\">// Name of the Forest would be &quot;&quot;\nval forestWithoutName = getForest()\n\nval forestWithName = getForest(&quot;forest_name&quot;)\n\nval forestWithClassName = getForest(MyClass::class.java)\n<\/code><\/pre>\n<h3 id=\"forest-properties\"><a href=\"#forest-properties\" id=\"forest-properties\" class=\"anchor\"><\/a>Forest Properties<\/h3>\n<p>By default, all the properties you set in the <a href=\"#global-forest\">Global Forest<\/a> will be passed\ndown to a Forest whenever the <a href=\"#global-forest\">Global Forest<\/a> is updated, and these properties\ninclude:<\/br>\n<strong>Note: The override will happen even after Forest has been created.<\/strong><\/p>\n<ul>\n<li>The collection of <a href=\"https://sukhai.github.io/forest/wiki/features/tree\">Trees<\/a>.<\/li>\n<li>All the properties in <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig\">ForestConfig<\/a>.<\/li>\n<\/ul>\n<p>You can override this behavior and prevent <a href=\"#global-forest\">Global Forest<\/a> from overriding\nyour particular Forest by configuring the <code>allowGlobalOverride<\/code> flag:<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java) { allowGlobalOverride = false }\n<\/code><\/pre>\n<p>Or if you prefer to override this behavior for all Forests, you can set it in the\n<a href=\"#global-forest\">Global Forest<\/a>:<\/p>\n<pre><code class=\"language-kotlin\">Forest.allowGlobalOverride = false\n<\/code><\/pre>\n<h3 id=\"forest-config\"><a href=\"#forest-config\" id=\"forest-config\" class=\"anchor\"><\/a>Forest Config<\/h3>\n<p>You can configure a Forest when it's created, and some of the properties can also be\nconfigured after it's created. All the values are defaulted to the values set in the\n<a href=\"#global-forest\">Global Forest<\/a>.<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java) {\n    allowGlobalOverride = false    // Default value from Global Forest, otherwise default is true\n    level = Forest.Level.ERROR     // Default value from Global Forest, otherwise default is Forest.Level.VERBOSE\n    preProcessLog = { it }         // Default value from Global Forest, otherwise default is null\n    \n    // All the trees are defaulted to the trees we set from Global Forest,\n    // otherwise default to no tree.\n\n    // You can also plant extra trees\n    plant(DebugTree())\n    plant(OtherTree())\n    \n    // You can also cut down trees\n    cut(tree1)\n    cut(tree2)\n}\n\n// You can also change these properties after the Forest has been created\nforest.level = Forest.Level.DEBUG\nforest.preProcessLog { it.copy(message = &quot;My Log - ${it.message}&quot;) }\nforest.plant(NewTree())\nforest.cut(oldTree)\n<\/code><\/pre>\n<h3 id=\"plant-a-tree\"><a href=\"#plant-a-tree\" id=\"plant-a-tree\" class=\"anchor\"><\/a>Plant A Tree<\/h3>\n<p>You can plant a tree to handle logs that sent by a Forest. Planting a tree\nmeans adding a log handler to the Forest so Forest knows where to send\na log to.<\/br>\n<strong>Note: The same tree can only be planted once. If you try to plant the same\ntree more than once, it will not be added to the Forest<\/strong>.<\/p>\n<pre><code class=\"language-kotlin\">// MyTree.kt\nclass MyTree : Tree {\n    override fun log(entry: LogEntry) {\n        // ...\n        println(entry)\n    }\n}\n\n// onCreate() of your application class or application entry point\n// Plant the tree through Global Forest so this tree is available to all Forests\nForest.plant(MyTree())\n\n// Or, plan the tree through specific Forest so the tree is only available to this Forest\nval forest = getForest(MyClass::class.java) { plant(MyTree()) }\n<\/code><\/pre>\n<h3 id=\"cut-a-tree\"><a href=\"#cut-a-tree\" id=\"cut-a-tree\" class=\"anchor\"><\/a>Cut A Tree<\/h3>\n<p>You can cut a tree from a Forest. Cutting a tree means removing the log handler\nfrom the Forest so any new log will no longer be forwarded to this tree.<\/p>\n<pre><code class=\"language-kotlin\">val myTree = // ...\n\n// Cut the tree through Global Forest so this tree is removed from all Forests\nForest.cut(myTree)\n\n// Or, just cut the tree from a specific Forest when the Forest is newly created\nval forest = getForest(MyClass::class.java) { cut(myTree) }\n<\/code><\/pre>\n<p>You can also cut all the trees by calling <code>Forest.deforest()<\/code> method.<\/p>\n<ul>\n<li>Calling this method through the <a href=\"#global-forest\">Global Forest<\/a> will remove all the trees from\nall Forests that has <code>allowGlobalOverride<\/code> set to <code>true<\/code>.<\/li>\n<li>Calling this method through a regular Forest will only remove all the trees from the\ncalling Forest.<\/li>\n<\/ul>\n<h3 id=\"logging-an-event\"><a href=\"#logging-an-event\" id=\"logging-an-event\" class=\"anchor\"><\/a>Logging An Event<\/h3>\n<p>You can log an event by using any of the following methods, and the event will be\nforwarded to the <a href=\"https://sukhai.github.io/forest/wiki/features/tree\">Trees<\/a> that\nare available to the calling Forest:<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java)\n\nval attributes = mapOf(&quot;key1&quot; to &quot;value1&quot;, &quot;key2&quot; to 2)\n\nforest.v(&quot;a message&quot;)\nforest.v(&quot;a message&quot;, attributes)\nforest.v(&quot;a message&quot;, Throwable(&quot;a throwable&quot;))\nforest.v(&quot;a message&quot;, Throwable(&quot;a throwable&quot;), attributes)\nforest.v(Throwable(&quot;a throwable&quot;))\nforest.v(Throwable(&quot;a throwable&quot;), attributes)\n\n// The same list of methods also available for other Forest.Level, for example\nforest.d(...)\nforest.i(...)\nforest.w(...)\nforest.e(...)\nforest.f(...)\nforest.log(...)\n<\/code><\/pre>\n<h2 id=\"global-forest\"><a href=\"#global-forest\" id=\"global-forest\" class=\"anchor\"><\/a>Global Forest<\/h2>\n<p>A Global Forest is just a <a href=\"#forest\">Forest<\/a> that is singleton and can be used to\nlog an event with its static methods:<\/p>\n<pre><code class=\"language-kotlin\">Forest.d(...)\nForest.i(...)\nForest.w(...)\nForest.e(...)\nForest.f(...)\nForest.log(...)\n<\/code><\/pre>\n<p>All the methods that are available to a <a href=\"#forest\">Forest<\/a> are also available to\nthe Global Forest.<\/p>\n<h3 id=\"allowglobaloverride\"><a href=\"#allowglobaloverride\" id=\"allowglobaloverride\" class=\"anchor\"><\/a>allowGlobalOverride<\/h3>\n<p>By default, calling the methods in Global Forest like <code>Forest.level<\/code>, <code>Forest.plant()<\/code>,\n<code>Forest.cut()<\/code>, <code>Forest.preProcessLog()<\/code>, and many more, will forward the task to\nall the <a href=\"#forest\">Forests<\/a> that were already created, meaning the properties in those\n<a href=\"#forest\">Forests<\/a> will be overrided. You can avoid this by calling\n<code>Forest.allowGlobalOverride = false<\/code>.<\/p>\n<p>One use case is you want to set the logging level and plant the trees once to\nall the <a href=\"#forest\">Forests<\/a>, then prevent further changes to the <a href=\"#forest\">Forests<\/a>.\nYou can achieve this behavior like the following:<\/p>\n<pre><code class=\"language-kotlin\">// MyApplication.kt\nclass MyApplication : Application() {\n    private val forest = getForest(MyApplication::class.java) { \n        // You want to allow override for application because this forest\n        // gets initialized before onCreate() is called, so you want the\n        // trees that we planted through Forest.plant() will also be planted\n        // to this forest\n        allowGlobalOverride = true\n    }\n\n    override fun onCreate() {\n        Forest.plant(Tree1())\n        Forest.plant(Tree2())\n        Forest.level = Forest.Level.INFO\n        Forest.allowGlobalOverride = false\n\n        // ...\n    }\n}\n<\/code><\/pre>\n"
+            }]
+          },
+          "adding_attributes": {
+            "ownKey": "adding_attributes",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "adding_attributes",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/adding_attributes"
+              },
+              "next": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "forest_context",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/forest_context"
+              },
+              "previous": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "log_level",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/log_level"
+              },
+              "description": "",
+              "title": "Adding Attributes",
+              "content": "<p>All Forest logging methods accept <code>attributes<\/code> paramter to the log. This allows you to pass\nadditional data along with the message you want to log, such as Android Bundle data, tags, and more.<\/p>\n<p>Passing data through the <code>attributes<\/code> parameter in any logging method is a one time thing.\nIf you are looking for a way to set data for all your logs and always available to all your\nlogs, consider using <a href=\"https://sukhai.github.io/forest/wiki/features/forest_context\">Forest Context<\/a>\ninstead.<\/p>\n<h2 id=\"set-attributes\"><a href=\"#set-attributes\" id=\"set-attributes\" class=\"anchor\"><\/a>Set Attributes<\/h2>\n<p>You can set the attributes to any logging methods available in a <a href=\"../features/forest#forest\">Forest<\/a>\nor <a href=\"../features/forest#global-forest\">Global Forest<\/a>.<\/p>\n<pre><code class=\"language-kotlin\">// MyClass.kt\n\nval forest = getForest(MyClass::class.java)\nval attributes = mapOf(&quot;name&quot; to &quot;John Doe&quot;, &quot;age&quot; to 24)\n\n// Any of the logging methods below will work\nforest.v(&quot;a message&quot;, attributes)\nforest.d(&quot;a message&quot;, attributes)\nforest.i(&quot;a message&quot;, attributes)\nforest.w(&quot;a message&quot;, attributes)\nforest.e(&quot;a message&quot;, attributes)\nforest.f(&quot;a message&quot;, attributes)\n<\/code><\/pre>\n<h2 id=\"get-attributes\"><a href=\"#get-attributes\" id=\"get-attributes\" class=\"anchor\"><\/a>Get Attributes<\/h2>\n<p>All the attributes that you passed to a log will be available to the <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry\">LogEntry<\/a>.<\/p>\n<pre><code class=\"language-kotlin\">// MyTree.kt\n\nclass MyTree : Tree {\n    override fun log(entry: LogEntry) {\n        val name = entry.attributes[&quot;name&quot;]  // &quot;John Doe&quot;\n        val age = entry.attributes[&quot;age&quot;]    // 24\n    \n        // ...\n    }\n}\n<\/code><\/pre>\n"
+            }]
+          },
+          "forest_context": {
+            "ownKey": "forest_context",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "forest_context",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/forest_context"
+              },
+              "next": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "preprocess_log",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/preprocess_log"
+              },
+              "previous": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "adding_attributes",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/adding_attributes"
+              },
+              "description": "",
+              "title": "Forest Context",
+              "content": "<ul>\n<li><a href=\"#set-data\">Set Data<\/a><\/li>\n<li><a href=\"#get-data\">Get Data<\/a><\/li>\n<li><a href=\"#context-listener\">Context Listener<\/a><\/li>\n<\/ul>\n<p><a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext\">Forest Context<\/a> allows you to set data that are available to all\nForests and trees, so you do not need to pass these data for every logging calls. You can only\nupdate the context in the global Forest, but the data will be available to all trees in all Forests.<\/p>\n<p>For example, you can use <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext\">Forest Context<\/a> to set user's\nfirst and last name when application loaded, so the data is available to all the trees during\nthe whole session.<\/p>\n<h2 id=\"set-data\"><a href=\"#set-data\" id=\"set-data\" class=\"anchor\"><\/a>Set Data<\/h2>\n<pre><code class=\"language-kotlin\">// Set values\nForest.context[&quot;first_name&quot;] = &quot;John&quot;\nForest.context[&quot;last_name&quot;] = &quot;Doe&quot;\n\n// Update value\nForest.context[&quot;first_name&quot;] = &quot;Joe&quot;\n\n// Remove value\nForest.context.remove(&quot;first_name&quot;)\n<\/code><\/pre>\n<h2 id=\"get-data\"><a href=\"#get-data\" id=\"get-data\" class=\"anchor\"><\/a>Get Data<\/h2>\n<p>You can get the data in the context through <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry\">LogEntry.context<\/a>:<\/p>\n<pre><code class=\"language-kotlin\">class MyTree : Tree {\n    override fun log(entry: LogEntry) {\n        val lastName = entry.context[&quot;last_name&quot;]    // Doe\n    }\n}\n<\/code><\/pre>\n<h2 id=\"context-listener\"><a href=\"#context-listener\" id=\"context-listener\" class=\"anchor\"><\/a>Context Listener<\/h2>\n<p>You can set a listener to receive callbacks whenever the context data has\nbeen modified. This is useful if you want to also update other objects when\nthe <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext\">Forest Context<\/a> has been modified.\nFor example:<\/p>\n<pre><code class=\"language-kotlin\">Forest.context.setOnModifiedListener { state -&gt;\n    when (state) {\n        is ModifiedState.New -&gt; {\n            if (state.key == &quot;user_id&quot;) {\n                // Add the user ID value to Firebase Crashlytics\n                FirebaseCrashlytics.getInstance().setUserId(state.value)\n            } else {\n                // Add the new custom key to Firebase Crashlytics\n                FirebaseCrashlytics.getInstance().setCustomKey(state.key, state.value)\n            }\n        }\n        is ModifiedState.Updated -&gt; {\n            // Update the custom key from Firebase Crashlytics\n            FirebaseCrashlytics.getInstance().setCustomKey(state.key, state.newValue)\n        }\n        is ModifiedState.Removed -&gt; {\n            // Remove the custom key from Firebase Crashlytics\n            FirebaseCrashlytics.getInstance().setCustomKey(state.key, null)\n        }\n    }\n}\n<\/code><\/pre>\n"
+            }]
+          },
+          "tree": {
+            "ownKey": "tree",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "tree",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/tree"
+              },
+              "next": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "forest",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/forest"
+              },
+              "previous": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "java",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/java"
+              },
+              "description": "",
+              "title": "Tree",
+              "content": "<ul>\n<li><a href=\"#implement-a-tree\">Implement A Tree<\/a><\/li>\n<li><a href=\"#plant-a-tree\">Plant A Tree<\/a><\/li>\n<\/ul>\n<p>A <code>Tree<\/code> is a handler for all the logs that you send through Forest logging\nmethods. This library comes with <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees/debugtree\">DebugTree<\/a>, which logs the\nlog entry to the Android logcat. You can also implement your own <code>Tree<\/code> and plant it to a\nForest so you can process the logs.<\/p>\n<h2 id=\"implement-a-tree\"><a href=\"#implement-a-tree\" id=\"implement-a-tree\" class=\"anchor\"><\/a>Implement A Tree<\/h2>\n<p>In order to handle or process a log event, you must implement your own\n<a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree\">Tree<\/a>. Here is an example of implementing a tree that\nsend all the logs to <a href=\"https://firebase.google.com/docs/crashlytics/get-started?platform=android\">Firebase Crashlytics<\/a>:<\/p>\n<pre><code class=\"language-kotlin\">// FirebaseCrashlyticsTree.kt\n\nclass FirebaseCrashlyticsTree : Tree {\n    override fun log(entry: LogEntry) {\n        val tag = if (!entry.tag.isNullOrEmpty()) {\n            &quot;$tag - &quot;\n        } else {\n            &quot;&quot;\n        }\n\n        FirebaseCrashlytics.getInstance().log(&quot;${tag}${entry.message}&quot;)\n    }\n}\n<\/code><\/pre>\n<h2 id=\"plant-a-tree\"><a href=\"#plant-a-tree\" id=\"plant-a-tree\" class=\"anchor\"><\/a>Plant A Tree<\/h2>\n<p>You can plant your tree to <a href=\"../features/forest#global-forest\">Global Forest<\/a> so the\ntree is available to all the <a href=\"../features/forest#forest\">Forests<\/a>:<\/p>\n<pre><code class=\"language-kotlin\">Forest.plant(FirebaseCrashlyticsTree())\n<\/code><\/pre>\n<p>Or if you prefer to plant to a particular <a href=\"../features/forest#forest\">Forest<\/a>:<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java)\nforest.plant(FirebaseCrashlyticsTree())\n<\/code><\/pre>\n<p>Note, a <code>Tree<\/code> will only receive a <code>Tree.log<\/code> call if\n<a href=\"https://sukhai.github.io/forest/wiki/features/preprocess_log\">Forest.preProcessLog<\/a> method return <code>non-null<\/code> value, and\n<a href=\"https://sukhai.github.io/forest/wiki/features/log_level\">Forest.level<\/a> is higher than the logging level.<\/p>\n"
+            }]
+          },
+          "log_level": {
+            "ownKey": "log_level",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "log_level",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/log_level"
+              },
+              "next": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "adding_attributes",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/adding_attributes"
+              },
+              "previous": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "forest",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/forest"
+              },
+              "description": "",
+              "title": "Log Levels",
+              "content": "<ul>\n<li><a href=\"#update-log-level\">Update Log Leve<\/a><\/li>\n<li><a href=\"#log-filtering\">Log Filtering<\/a><\/li>\n<\/ul>\n<p>The following log levels and their numerical values are supported:<\/p>\n<table>\n<thead>\n<tr><th>Level<\/th><th>Numerical Value<\/th><\/tr>\n<\/thead>\n<tbody>\n<tr><td>OFF<\/td><td>0<\/td><\/tr>\n<tr><td>FATAL<\/td><td>1<\/td><\/tr>\n<tr><td>ERROR<\/td><td>2<\/td><\/tr>\n<tr><td>WARN<\/td><td>3<\/td><\/tr>\n<tr><td>INFO<\/td><td>4<\/td><\/tr>\n<tr><td>DEBUG<\/td><td>5<\/td><\/tr>\n<tr><td>VERBOSE<\/td><td>6<\/td><\/tr>\n<\/tbody>\n<\/table>\n<h2 id=\"update-log-level\"><a href=\"#update-log-level\" id=\"update-log-level\" class=\"anchor\"><\/a>Update Log Level<\/h2>\n<p>You can change the log level on a particular <a href=\"../features/forest#forest\">Forest<\/a> by:<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java) { level = Forest.Level.INFO }\n\n// Or\nforest.level = Forest.Level.INFO\n<\/code><\/pre>\n<p>Or change the log level globally on the <a href=\"../features/forest#global-forest\">Global Forest<\/a>:<\/p>\n<pre><code class=\"language-kotlin\">Forest.level = Forest.Level.INFO\n<\/code><\/pre>\n<h2 id=\"log-filtering\"><a href=\"#log-filtering\" id=\"log-filtering\" class=\"anchor\"><\/a>Log Filtering<\/h2>\n<p>Logs will only be forwarded to a tree if the given log level is lower than the one\nyou set for the Forest, and the level is not <code>Forest.Level.OFF<\/code>. For example:<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java)\nforest.level = Forest.Level.INFO\n\nmyForest.d(&quot;I will NOT get logged.&quot;)\nmyForest.i(&quot;I will get logged.&quot;)\nmyForest.w(&quot;I will get logged.&quot;)\n\n// The behavior is same for the Global Forest\nForest.level = Forest.Level.WARN\nForest.i(&quot;I will NOT get logged.&quot;)\nForest.w(&quot;I will get logged.&quot;)\nForest.e(&quot;I will get logged.&quot;)\n\nForest.level = Forest.Level.OFF\nForest.v(&quot;I will NOT get logged.&quot;)\nForest.f(&quot;I will NOT get logged.&quot;)\n<\/code><\/pre>\n"
+            }]
+          },
+          "preprocess_log": {
+            "ownKey": "preprocess_log",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "preprocess_log",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/preprocess_log"
+              },
+              "previous": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "forest_context",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/forest_context"
+              },
+              "description": "",
+              "title": "Pre-process Log",
+              "content": "<p>You can apply a callback to process all the logs that are about to be forwarded to\nall the trees. This is useful if you want to modify some values in the log entry\n(i.e masking sensitive data) or filter out some type of log entries, so you don't have\nto apply these logic in every single tree you implemented.<\/p>\n<p><strong>Note, this callback is triggered after the <code>LogEntry<\/code> has gone through <code>Forest.level<\/code> filter.\nSee <a href=\"https://sukhai.github.io/forest/wiki/features/log_level\">Log Levels<\/a> for more details.<\/strong><\/p>\n<p>Apply to a single Forest:<\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java)\nforest.preProcessLog { logEntry -&gt;\n    when {\n        logEntry.message.contains(&quot;secret&quot;) -&gt; {\n            // Forward a LogEntry that has the word &quot;secret&quot; and replace it with &quot;******&quot;\n            // before forwarding to all the trees\n            logEntry.copy(message = logEntry.message.replace(&quot;secret&quot;, &quot;******&quot;))\n        }\n        logEntry.attributes.containsKey(&quot;dont_log&quot;) -&gt; {\n            // Return null will not forward this logEntry to any tree\n            null\n        }\n        else -&gt; {\n            // Forward the given logEntry to all the trees as is\n            logEntry\n        }\n    }\n}\n<\/code><\/pre>\n<p>Apply to all Forests:<\/p>\n<pre><code class=\"language-kotlin\">Forest.preProcessLog { logEntry -&gt;\n    when {\n        logEntry.message.contains(&quot;secret&quot;) -&gt; {\n            // Forward a LogEntry that has the word &quot;secret&quot; and replace with &quot;******&quot;\n            // before forwarding to all the trees\n            logEntry.copy(message = logEntry.message.replace(&quot;secret&quot;, &quot;******&quot;))\n        }\n        logEntry.attributes.containsKey(&quot;dont_log&quot;) -&gt; {\n            // Return null will not forward this logEntry to any tree\n            null\n        }\n        else -&gt; {\n            // Forward the given logEntry to all the trees as is\n            logEntry\n        }\n    }\n}\n<\/code><\/pre>\n"
+            }]
+          }
+        }
+      },
+      "guides": {
+        "ownKey": "guides",
+        "childrenPages": {
+          "getting_started": {
+            "ownKey": "getting_started",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "getting_started",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/getting_started"
+              },
+              "next": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "java",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/java"
+              },
+              "previous": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "installation",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/installation"
+              },
+              "description": "",
+              "title": "Getting Started",
+              "content": "<ul>\n<li><a href=\"#basic-usage\">Basic Usage<\/a>\n<ul>\n<li><a href=\"#global-forest\">Global Forest<\/a><\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#core-concepts\">Core Concepts<\/a><\/li>\n<li><a href=\"#next-step\">Next Step<\/a><\/li>\n<\/ul>\n<p><strong>Before you get started, make sure you have install this library by following this\n<a href=\"https://sukhai.github.io/forest/wiki/guides/installation\">installation guide<\/a>.<\/strong><\/p>\n<h2 id=\"basic-usage\"><a href=\"#basic-usage\" id=\"basic-usage\" class=\"anchor\"><\/a>Basic Usage<\/h2>\n<p>You will have to plant at least a <a href=\"https://sukhai.github.io/forest/wiki/features/tree\">Tree<\/a>\nto the <code>Forest<\/code> first so you can receive a log event from the <code>Forest<\/code>. By default, this library\ncomes with <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees/debugtree\">DebugTree<\/a>, which print the logs to the logcat,\nand we will be using this as an example on this page.<\/p>\n<h4 id=\"step-1-plant-a-tree\"><a href=\"#step-1-plant-a-tree\" id=\"step-1-plant-a-tree\" class=\"anchor\"><\/a>Step 1: Plant a Tree<\/h4>\n<pre><code class=\"language-kotlin\">// onCreate() of your application class or application entry point\nForest.plant(DebugTree())\n<\/code><\/pre>\n<h4 id=\"step-2-create-a-forest-in-any-of-your-class\"><a href=\"#step-2-create-a-forest-in-any-of-your-class\" id=\"step-2-create-a-forest-in-any-of-your-class\" class=\"anchor\"><\/a>Step 2: Create a Forest in any of your class<\/h4>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java)\n<\/code><\/pre>\n<h4 id=\"step-3-start-logging\"><a href=\"#step-3-start-logging\" id=\"step-3-start-logging\" class=\"anchor\"><\/a>Step 3: Start logging!<\/h4>\n<pre><code class=\"language-kotlin\">forest.v(&quot;a message&quot;)\nforest.d(&quot;a message&quot;)\nforest.i(&quot;a message&quot;)\nforest.w(&quot;a message&quot;)\nforest.e(&quot;a message&quot;)\nforest.f(&quot;a message&quot;)\n<\/code><\/pre>\n<h3 id=\"global-forest\"><a href=\"#global-forest\" id=\"global-forest\" class=\"anchor\"><\/a>Global Forest<\/h3>\n<p>You can optionally use the <a href=\"../features/forest#global-forest\">Global Forest<\/a>\nto log event. The benefit of using the Global Forest\nis it's easy to use and you do not have to create a Forest on any of your class.\nYou can just use the static methods to log event:<\/p>\n<pre><code class=\"language-kotlin\">// onCreate() of your application class or application entry point\nForest.plant(DebugTree())\n\n// Start logging!\nForest.v(&quot;a message&quot;)\nForest.d(&quot;a message&quot;)\nForest.i(&quot;a message&quot;)\nForest.w(&quot;a message&quot;)\nForest.e(&quot;a message&quot;)\nForest.f(&quot;a message&quot;)\n<\/code><\/pre>\n<h2 id=\"core-concepts\"><a href=\"#core-concepts\" id=\"core-concepts\" class=\"anchor\"><\/a>Core Concepts<\/h2>\n<p>Let's first understand 2 important classes in this library and their purposes:<\/p>\n<ul>\n<li><a href=\"https://sukhai.github.io/forest/wiki/features/forest\">Forest<\/a> - Serves as a logger,\nin which you will use it to log an event.<\/li>\n<li><a href=\"https://sukhai.github.io/forest/wiki/features/tree\">Tree<\/a> - Serves as a log handler,\nin which you will use it to handle the log event sent by <code>Forest<\/code>.<\/li>\n<\/ul>\n<p>There are 2 types of <code>Forest<\/code>, <a href=\"../features/forest#forest\">Forest<\/a> and\n<a href=\"../features/forest#global-forest\">Global Forest<\/a>. For simplicity, unless specify, the code\nexamples use on this wiki will be using <a href=\"../features/forest#forest\">Forest<\/a>.<\/p>\n<h2 id=\"next-step\"><a href=\"#next-step\" id=\"next-step\" class=\"anchor\"><\/a>Next Step<\/h2>\n<p><a href=\"https://sukhai.github.io/forest\">Forest<\/a> has many features to help you log an event much easily.\nCheckout the following features by visiting the link below:<\/p>\n<ul>\n<li>Create your own log handler. See <a href=\"https://sukhai.github.io/forest/wiki/features/tree\">Tree<\/a>.<\/li>\n<li>In-depth understanding of the Forest object. See <a href=\"https://sukhai.github.io/forest/wiki/features/forest\">Forest<\/a>.<\/li>\n<li>Different types of log levels. See <a href=\"https://sukhai.github.io/forest/wiki/features/log_level\">Log Levels<\/a>.<\/li>\n<li>Adding attributes to your log event. See <a href=\"https://sukhai.github.io/forest/wiki/features/adding_attributes\">Adding Attributes<\/a>.<\/li>\n<li>Sharing data across all loggers. See <a href=\"https://sukhai.github.io/forest/wiki/features/forest_context\">Forest Context<\/a>.<\/li>\n<li>Pre-process a log event to modify or filter the log event. See <a href=\"https://sukhai.github.io/forest/wiki/features/preprocess_log\">Pre-process Log<\/a>.<\/li>\n<\/ul>\n"
+            }]
+          },
+          "java": {
+            "ownKey": "java",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "java",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/java"
+              },
+              "next": {
+                "path": "wiki/features",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "tree",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/features/tree"
+              },
+              "previous": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "getting_started",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/getting_started"
+              },
+              "description": "",
+              "title": "Java",
+              "content": "<ul>\n<li><a href=\"#java-installation\">Java Installation<\/a><\/li>\n<li><a href=\"#java-usage\">Java Usage<\/a><\/li>\n<\/ul>\n<h2 id=\"java-installation\"><a href=\"#java-installation\" id=\"java-installation\" class=\"anchor\"><\/a>Java Installation<\/h2>\n<p>You can follow the <a href=\"https://sukhai.github.io/forest/wiki/guides/installation\">installation guide<\/a>\nto install this library.<\/p>\n<p>However, if you are <strong>not<\/strong> running on an Android application, you will need to\nselectively install the module and not install the <code>forest-android<\/code> module.\nFor example, in gradle, you should just install the <code>forest<\/code> module:<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n    implementation 'com.github.sukhai.forest:forest:1.1.0'\n}\n<\/code><\/pre>\n<h2 id=\"java-usage\"><a href=\"#java-usage\" id=\"java-usage\" class=\"anchor\"><\/a>Java Usage<\/h2>\n<p>All of the code snippets shown in this documentation use Kotlin. Unless specify,\nall of the classes and methods are supported in Java as well with a few workarounds:<\/p>\n<p><strong>1. You will need to use <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/global\">Forest.Global<\/a> to\naccess the global Forest methods. For example,<\/strong><\/p>\n<pre><code class=\"language-kotlin\">Forest.plant(DebugTree())\nForest.d(&quot;a message&quot;)\n<\/code><\/pre>\n<p>Equivalent Java code:<\/p>\n<pre><code class=\"language-java\">Forest.Global.plant(new DebugTree());\nForest.Global.d(&quot;a message&quot;);\n<\/code><\/pre>\n<p><strong>2. You can create a <a href=\"https://sukhai.github.io/forest/wiki/features/forest\">Forest<\/a>\nthrough the <a href=\"https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/global\">Forest.Global<\/a>:<\/strong><\/p>\n<pre><code class=\"language-kotlin\">val forest = getForest(MyClass::class.java)\n\n// With configuration\nval forest = getForest(MyClass::class.java) { config -&gt;\n    config.level = Forest.Level.INFO\n    config.preProcessLog { ... }\n}\n<\/code><\/pre>\n<p>Equivalent Java code:<\/p>\n<pre><code class=\"language-java\">Forest forest = Forest.Global.getForest(MyClass.class);\n\n// With configuration\nForest forest = Forest.Global.getForest(MyClass.class, config -&gt; {\n    config.setLevel(Forest.Level.INFO);\n    config.setPreProcessLog(logEntry -&gt; { ... });\n});\n<\/code><\/pre>\n<p><strong>3. You can use the same methods to log a message:<\/strong><\/p>\n<pre><code class=\"language-kotlin\">forest.w(&quot;a message&quot;)\nforest.w(&quot;a message&quot;, Throwable(&quot;an exception&quot;))\nforest.w(&quot;a message&quot;, Throwable(&quot;an exception&quot;), mapOf(&quot;key1&quot; to &quot;value 1&quot;, &quot;key2&quot; to 2))\n<\/code><\/pre>\n<p>Equivalent Java code:<\/p>\n<pre><code class=\"language-java\">forest.w(&quot;a message&quot;);\nforest.w(&quot;a message&quot;, new Throwable(&quot;an exception&quot;));\n\nMap&lt;String, Object&gt; attributes = new HashMap&lt;&gt;();\nattributes.put(&quot;key1&quot;, &quot;value 1&quot;);\nattributes.put(&quot;key2&quot;, 2);\nforest.w(&quot;a message&quot;, new Throwable(&quot;an exception&quot;), attributes);\n<\/code><\/pre>\n"
+            }]
+          },
+          "installation": {
+            "ownKey": "installation",
+            "ownPages": [{
+              "reference": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "installation",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/installation"
+              },
+              "next": {
+                "path": "wiki/guides",
+                "baseUrl": "https://sukhai.github.io/forest",
+                "fileName": "getting_started",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://sukhai.github.io/forest/wiki/guides/getting_started"
+              },
+              "description": "",
+              "title": "Installation",
+              "content": "<ul>\n<li><a href=\"#gradle\">Gradle<\/a><\/li>\n<li><a href=\"#maven\">Maven<\/a><\/li>\n<\/ul>\n<h2 id=\"gradle\"><a href=\"#gradle\" id=\"gradle\" class=\"anchor\"><\/a>Gradle<\/h2>\n<p><strong>Step 1: Add the JitPack repository to your build file<\/strong><\/br>\nAdd it in your root <code>build.gradle<\/code> at the end of repositories:<\/p>\n<pre><code class=\"language-groovy\">allprojects {\n    repositories {\n        ...\n        maven { url 'https://jitpack.io' }\n    }\n}\n<\/code><\/pre>\n<p><strong>Step 2: Add the dependency<\/strong><\/br>\nThe following installation will add all the modules from this library:<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n    implementation 'com.github.sukhai:forest:1.1.0'\n}\n<\/code><\/pre>\n<p>You can also selectively install the module you want from this library:<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n    implementation 'com.github.sukhai.forest:forest:1.1.0'\n    \n    // Note: You will not have DebugTree if you do not import this module\n    implementation 'com.github.sukhai.forest:forest-android:1.1.0'\n}\n<\/code><\/pre>\n<h2 id=\"maven\"><a href=\"#maven\" id=\"maven\" class=\"anchor\"><\/a>Maven<\/h2>\n<p><strong>Step 1: Add the JitPack repository to your build file<\/strong><\/br><\/p>\n<pre><code class=\"language-xml\">&lt;repositories&gt;\n\t&lt;repository&gt;\n\t    &lt;id&gt;jitpack.io&lt;/id&gt;\n\t    &lt;url&gt;https://jitpack.io&lt;/url&gt;\n\t&lt;/repository&gt;\n&lt;/repositories&gt;\n<\/code><\/pre>\n<p><strong>Step 2: Add the dependency<\/strong><\/br>\nThe following installation will add all the modules from this library:<\/p>\n<pre><code class=\"language-xml\">&lt;dependency&gt;\n    &lt;groupId&gt;com.github.sukhai&lt;/groupId&gt;\n    &lt;artifactId&gt;forest&lt;/artifactId&gt;\n    &lt;version&gt;1.1.0&lt;/version&gt;\n&lt;/dependency&gt;\n<\/code><\/pre>\n<p>You can also selectively install the module you want from this library:<\/p>\n<pre><code class=\"language-xml\">&lt;dependency&gt;\n    &lt;groupId&gt;com.github.sukhai.forest&lt;/groupId&gt;\n    &lt;artifactId&gt;forest&lt;/artifactId&gt;\n    &lt;version&gt;1.1.0&lt;/version&gt;\n&lt;/dependency&gt;\n\n&lt;!-- Note: You will not have DebugTree if you do not import this module --&gt;\n&lt;dependency&gt;\n    &lt;groupId&gt;com.github.sukhai.forest&lt;/groupId&gt;\n    &lt;artifactId&gt;forest-android&lt;/artifactId&gt;\n    &lt;version&gt;1.1.0&lt;/version&gt;\n&lt;/dependency&gt;\n<\/code><\/pre>\n<h2 id=\"next-step\"><a href=\"#next-step\" id=\"next-step\" class=\"anchor\"><\/a>Next Step<\/h2>\n<ul>\n<li>Learn about how to use Forest by visiting the <a href=\"https://sukhai.github.io/forest/wiki/guides/getting_started\">Getting Started<\/a>\npage.<\/li>\n<li>Using Forest for Java application? Visit <a href=\"https://sukhai.github.io/forest/wiki/guides/java\">Java Usage<\/a> to learn more\nabout how you can use this library for your Java application.<\/li>\n<\/ul>\n"
+            }]
+          }
+        }
+      }
+    },
+    "ownPages": [{
+      "reference": {
+        "path": "",
+        "baseUrl": "https://sukhai.github.io/forest",
+        "fileName": "wiki",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://sukhai.github.io/forest/wiki"
+      },
+      "description": "",
+      "title": "Wiki",
+      "content": "<html>\n <head><\/head>\n <body>\n  <ul> \n   <li>Guides \n    <ul> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/guides/installation\">Installation<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/guides/getting_started\">Getting Started<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/guides/java\">Java<\/a><\/li> \n    <\/ul> <\/li> \n   <li>Features \n    <ul> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/features/tree\">Tree<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/features/forest\">Forest<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/features/log_level\">Log Levels<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/features/adding_attributes\">Adding Attributes<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/features/forest_context\">Forest Context<\/a><\/li> \n     <li><a href=\"https://sukhai.github.io/forest/wiki/features/preprocess_log\">Pre-process Log<\/a><\/li> \n    <\/ul> <\/li> \n  <\/ul> \n <\/body>\n<\/html>\n"
+    }]
+  }}
+}

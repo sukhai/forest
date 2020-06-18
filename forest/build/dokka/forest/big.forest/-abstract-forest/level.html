@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbstractForest.level - forest</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">forest</a>&nbsp;/&nbsp;<a href="../index.html">big.forest</a>&nbsp;/&nbsp;<a href="index.html">AbstractForest</a>&nbsp;/&nbsp;<a href="./level.html">level</a><br/>
+<br/>
+<h1>level</h1>
+<a name="big.forest.AbstractForest$level"></a>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">level</span><span class="symbol">: </span><span class="identifier">Level</span></code>
+<p>The logging level of this <a href="../-forest/index.html">Forest</a>. This level will be used to
+determine if it should log a given <a href="../-log-entry/index.html">LogEntry</a>.</p>
+<p>The order of the levels is (except <a href="../-forest/-level/-o-f-f.html">Level.OFF</a>:</p>
+<ol><li><a href="../-forest/-level/-f-a-t-a-l.html">FATAL</a></li>
+<li><a href="../-forest/-level/-e-r-r-o-r.html">ERROR</a></li>
+<li><a href="../-forest/-level/-w-a-r-n.html">WARN</a></li>
+<li><a href="../-forest/-level/-i-n-f-o.html">INFO</a></li>
+<li><a href="../-forest/-level/-d-e-b-u-g.html">DEBUG</a></li>
+<li><a href="../-forest/-level/-v-e-r-b-o-s-e.html">VERBOSE</a></li>
+</ol>
+<p>This <a href="../-forest/index.html">Forest</a> will only log a <a href="../-log-entry/index.html">LogEntry</a> if the given level is
+less than this <a href="../-forest/level.html">level</a>. For example, if this <a href="../-forest/level.html">level</a> is set to
+<a href="../-forest/-level/-v-e-r-b-o-s-e.html">VERBOSE</a>, then calling <a href="../-forest/i.html">Forest.i</a> will log a given <a href="../-log-entry/index.html">LogEntry</a>
+because <a href="../-forest/-level/-v-e-r-b-o-s-e.html">VERBOSE</a> is higher level than <a href="../-forest/-level/-i-n-f-o.html">INFO</a>.
+In contrast, if this <a href="../-forest/level.html">level</a> is set to <a href="../-forest/-level/-i-n-f-o.html">INFO</a> and <a href="../-forest/v.html">Forest.v</a> is
+called, then the <a href="../-log-entry/index.html">LogEntry</a> will not be logged because <a href="../-forest/-level/-i-n-f-o.html">INFO</a>
+level is lower than <a href="../-forest/-level/-v-e-r-b-o-s-e.html">VERBOSE</a>.</p>
+<p>Setting this value to <a href="../-forest/-level/-o-f-f.html">Level.OFF</a> will not log any <a href="../-log-entry/index.html">LogEntry</a> and none
+of the <a href="../-tree/index.html">Tree</a> this <a href="../-forest/index.html">Forest</a> holds will receive a <a href="../-tree/log.html">Tree.log</a> call.</p>
+</BODY>
+</HTML>

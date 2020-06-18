@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Forest.preProcessLog - forest</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">forest</a>&nbsp;/&nbsp;<a href="../index.html">big.forest</a>&nbsp;/&nbsp;<a href="index.html">Forest</a>&nbsp;/&nbsp;<a href="./pre-process-log.html">preProcessLog</a><br/>
+<br/>
+<h1>preProcessLog</h1>
+<a name="big.forest.Forest$preProcessLog(kotlin.Function1((big.forest.LogEntry, big.forest.LogEntry)))"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">preProcessLog</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$preProcessLog(kotlin.Function1((big.forest.LogEntry, big.forest.LogEntry)))/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-pre-process-log-callback.html"><span class="identifier">PreProcessLogCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the <a href="../-pre-process-log-callback.html">PreProcessLogCallback</a> to this <a href="index.html">Forest</a>. This will allow the
+<a href="index.html">Forest</a> to send the <a href="../-log-entry/index.html">LogEntry</a> every time before it's sent to the
+<a href="../-tree/index.html">Tree</a>s.
+You can use this callback to filter or modify a <a href="../-log-entry/index.html">LogEntry</a> before the
+<a href="../-log-entry/index.html">LogEntry</a> is being sent to the <a href="../-tree/index.html">Tree</a>s in this <a href="index.html">Forest</a>.</p>
+<h3>Parameters</h3>
+<p><a name="callback"></a>
+<code>callback</code> - The <a href="../-pre-process-log-callback.html">PreProcessLogCallback</a> to be set into this <a href="index.html">Forest</a>.</p>
+</BODY>
+</HTML>

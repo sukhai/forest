@@ -1,0 +1,280 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Forest - forest</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">forest</a>&nbsp;/&nbsp;<a href="../index.html">big.forest</a>&nbsp;/&nbsp;<a href="./index.html">Forest</a><br/>
+<br/>
+<h1>Forest</h1>
+<code><span class="keyword">interface </span><span class="identifier">Forest</span></code>
+<p>An object that allows the user to send any log entry to a group of <a href="../-tree/index.html">Tree</a>s.</p>
+<p>You can create or get an implementation of this interface through
+<a href="-global/get-forest.html">Forest.getForest</a>.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-global/index.html">Global</a></h4>
+</td>
+<td>
+<p>A singleton class that represents the global <a href="./index.html">Forest</a>. This global <a href="./index.html">Forest</a>
+holds a collection of <a href="./index.html">Forest</a>s that are created through <a href="-global/get-forest.html">getForest</a>.</p>
+<code><span class="keyword">companion</span> <span class="keyword">object </span><span class="identifier">Global</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-forest/index.html"><span class="identifier">AbstractForest</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-level/index.html">Level</a></h4>
+</td>
+<td>
+<p>A class that represents the logging level. A <a href="./index.html">Forest</a> will use the level
+to determine if it should log a given <a href="../-log-entry/index.html">LogEntry</a>.</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">Level</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="level.html">level</a></h4>
+</td>
+<td>
+<p>The logging level of this <a href="./index.html">Forest</a>. This level will be used to
+determine if it should log a given <a href="../-log-entry/index.html">LogEntry</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">level</span><span class="symbol">: </span><span class="identifier">Level</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name.html">name</a></h4>
+</td>
+<td>
+<p>The name of the <a href="./index.html">Forest</a>. This value will be used as the <a href="../-log-entry/tag.html">LogEntry.tag</a>
+if this value is not <code>null</code>. This value is set when <a href="-global/get-forest.html">Forest.getForest</a>
+is called.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="trees.html">trees</a></h4>
+</td>
+<td>
+<p>A collection of <a href="../-tree/index.html">Tree</a>s in this <a href="./index.html">Forest</a> that were planted through
+<a href="plant.html">plant</a> method.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">trees</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="cut.html">cut</a></h4>
+</td>
+<td>
+<p>Cut the <a href="cut.html#big.forest.Forest$cut(big.forest.Tree)/tree">tree</a> from this <a href="./index.html">Forest</a>. This <a href="cut.html#big.forest.Forest$cut(big.forest.Tree)/tree">tree</a> will no longer handle
+the log coming from this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">cut</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$cut(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="d.html">d</a></h4>
+</td>
+<td>
+<p>Log a message with <a href="-level/-d-e-b-u-g.html">Level.DEBUG</a> level.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">d</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$d(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$d(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">d</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$d(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$d(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$d(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">d</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$d(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$d(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="deforest.html">deforest</a></h4>
+</td>
+<td>
+<p>Clear up all the <a href="../-tree/index.html">Tree</a>s in this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">deforest</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="e.html">e</a></h4>
+</td>
+<td>
+<p>Log a message with <a href="-level/-e-r-r-o-r.html">Level.ERROR</a> level.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">e</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$e(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$e(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">e</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$e(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$e(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$e(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">e</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$e(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$e(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="f.html">f</a></h4>
+</td>
+<td>
+<p>Log a message with <a href="-level/-f-a-t-a-l.html">Level.FATAL</a> level.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">f</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$f(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$f(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">f</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$f(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$f(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$f(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">f</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$f(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$f(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="i.html">i</a></h4>
+</td>
+<td>
+<p>Log a message with <a href="-level/-i-n-f-o.html">Level.INFO</a> level.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$i(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$i(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$i(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$i(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$i(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$i(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$i(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="log.html">log</a></h4>
+</td>
+<td>
+<p>Log a message.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$log(big.forest.Forest.Level, kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/level">level</span><span class="symbol">:</span>&nbsp;<span class="identifier">Level</span><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$log(big.forest.Forest.Level, kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$log(big.forest.Forest.Level, kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$log(big.forest.Forest.Level, kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="plant.html">plant</a></h4>
+</td>
+<td>
+<p>Plant the <a href="plant.html#big.forest.Forest$plant(big.forest.Tree)/tree">tree</a> to this <a href="./index.html">Forest</a>. This <a href="plant.html#big.forest.Forest$plant(big.forest.Tree)/tree">tree</a> will handle the log
+from this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">plant</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$plant(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="pre-process-log.html">preProcessLog</a></h4>
+</td>
+<td>
+<p>Set the <a href="../-pre-process-log-callback.html">PreProcessLogCallback</a> to this <a href="./index.html">Forest</a>. This will allow the
+<a href="./index.html">Forest</a> to send the <a href="../-log-entry/index.html">LogEntry</a> every time before it's sent to the
+<a href="../-tree/index.html">Tree</a>s.
+You can use this callback to filter or modify a <a href="../-log-entry/index.html">LogEntry</a> before the
+<a href="../-log-entry/index.html">LogEntry</a> is being sent to the <a href="../-tree/index.html">Tree</a>s in this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">preProcessLog</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$preProcessLog(kotlin.Function1((big.forest.LogEntry, big.forest.LogEntry)))/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-pre-process-log-callback.html"><span class="identifier">PreProcessLogCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="v.html">v</a></h4>
+</td>
+<td>
+<p>Log a message with <a href="-level/-v-e-r-b-o-s-e.html">Level.VERBOSE</a> level.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">v</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$v(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$v(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">v</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$v(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$v(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$v(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">v</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$v(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$v(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="w.html">w</a></h4>
+</td>
+<td>
+<p>Log a message with <a href="-level/-w-a-r-n.html">Level.WARN</a> level.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">w</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$w(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$w(kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">w</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$w(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$w(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$w(kotlin.String, kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">w</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest$w(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/throwable">throwable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="big.forest.Forest$w(kotlin.Throwable, kotlin.collections.Map((kotlin.String, kotlin.Any)))/attributes">attributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyMap()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="allow-global-override.html">allowGlobalOverride</a></h4>
+</td>
+<td>
+<p><code>true</code> to allow properties override from global <a href="./index.html">Forest</a> to other
+<a href="./index.html">Forest</a>s, <code>false</code> otherwise.</p>
+<code><span class="keyword">var </span><span class="identifier">allowGlobalOverride</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="context.html">context</a></h4>
+</td>
+<td>
+<p>Gets the <a href="../../big.forest.context/-forest-context/index.html">ForestContext</a> this <a href="./index.html">Forest</a> is in.
+The data that gets set in this context will be available to all the <a href="../-abstract-forest/trees.html">trees</a> globally.</p>
+<code><span class="keyword">var </span><span class="identifier">context</span><span class="symbol">: </span><a href="../../big.forest.context/-forest-context/index.html"><span class="identifier">ForestContext</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="level.html">level</a></h4>
+</td>
+<td>
+<p>The logging level of this <a href="./index.html">Forest</a>. This level will be used to
+determine if it should log a given <a href="../-log-entry/index.html">LogEntry</a>.</p>
+<code><span class="keyword">var </span><span class="identifier">level</span><span class="symbol">: </span><span class="identifier">Level</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="change-context.html">changeContext</a></h4>
+</td>
+<td>
+<p>Change this global <a href="./index.html">Forest</a>'s <a href="../../big.forest.context/-forest-context/index.html">ForestContext</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">changeContext</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$changeContext(big.forest.context.ForestContext)/newContext">newContext</span><span class="symbol">:</span>&nbsp;<a href="../../big.forest.context/-forest-context/index.html"><span class="identifier">ForestContext</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="cut.html">cut</a></h4>
+</td>
+<td>
+<p>Cut the <a href="cut.html#big.forest.Forest$cut(big.forest.Tree)/tree">tree</a> from this <a href="./index.html">Forest</a>. This <a href="cut.html#big.forest.Forest$cut(big.forest.Tree)/tree">tree</a> will no longer handle
+the log coming from this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">cut</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$cut(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="deforest.html">deforest</a></h4>
+</td>
+<td>
+<p>Clear up all the <a href="../-tree/index.html">Tree</a>s in this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">deforest</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-forest.html">getForest</a></h4>
+</td>
+<td>
+<p>Get or create a <a href="./index.html">Forest</a> with the given <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;""<span class="symbol">, </span><span class="identifier" id="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="../-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Forest</span></a></code>
+<p>Get or create a <a href="./index.html">Forest</a> with the given <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>.
+This method will use the canonical name of the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a> if it is not
+<code>null</code> or empty, otherwise it will use the package name of the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>,
+such as from an anonymous class.</p>
+<code><span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="../-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Forest</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="plant.html">plant</a></h4>
+</td>
+<td>
+<p>Plant the <a href="plant.html#big.forest.Forest$plant(big.forest.Tree)/tree">tree</a> to this <a href="./index.html">Forest</a>. This <a href="plant.html#big.forest.Forest$plant(big.forest.Tree)/tree">tree</a> will handle the log
+from this <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">plant</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$plant(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../-abstract-forest/index.html">AbstractForest</a></h4>
+</td>
+<td>
+<p>An abstract class that implements the <a href="./index.html">Forest</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractForest</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Forest</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

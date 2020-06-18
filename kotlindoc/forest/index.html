@@ -1,0 +1,636 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://sukhai.github.io/forest/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>forest</title>
+
+
+<meta name="description" content="A lightweight Android-Kotlin first logging library.">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/prism.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/forest.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/assets/css/orchidSearch.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://sukhai.github.io/forest","environment":"prod","version":"1.1.0"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="is-loading">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://sukhai.github.io/forest" class="logo">Forest</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="/" class="icon fas fa-home">
+                <span class="label">Home</span>
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/sukhai/forest" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>forest</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <p><img src="https://github.com/sukhai/forest/workflows/CI/badge.svg" alt="" /> <a href="https://jitpack.io/#sukhai/forest"><img src="https://jitpack.io/v/sukhai/forest.svg" alt="" /></a></p>
+<h1 id="forest"><a href="#forest" id="forest" class="anchor"></a>Forest</h1>
+<p>Forest is A lightweight Android-Kotlin first logging library. It is inspired by the
+<a href="https://github.com/JakeWharton/timber">Timber</a> project. Although Timber is good and easy to use,
+but it's missing some features that can work better on an Android project.</p>
+<h2 id="basic-usage"><a href="#basic-usage" id="basic-usage" class="anchor"></a>Basic Usage</h2>
+<p>You will have to plant at least a {{ anchor(title='Tree', itemId='Tree', collectionType='wiki') }}
+to the <code>Forest</code> first so you can receive a log event from the <code>Forest</code>. By default, this library
+comes with {{ anchor(title='DebugTree', itemId='DebugTree') }}, which print the logs to the logcat,
+and we will be using this as an example on this page.</p>
+<h4 id="step-1-plant-a-tree"><a href="#step-1-plant-a-tree" id="step-1-plant-a-tree" class="anchor"></a>Step 1: Plant a Tree</h4>
+<pre><code class="language-kotlin">// onCreate() of your application class or application entry point
+Forest.plant(DebugTree())
+</code></pre>
+<h4 id="step-2-create-a-forest-in-any-of-your-class"><a href="#step-2-create-a-forest-in-any-of-your-class" id="step-2-create-a-forest-in-any-of-your-class" class="anchor"></a>Step 2: Create a Forest in any of your class</h4>
+<pre><code class="language-kotlin">val forest = getForest(MyClass::class.java)
+</code></pre>
+<h4 id="step-3-start-logging"><a href="#step-3-start-logging" id="step-3-start-logging" class="anchor"></a>Step 3: Start logging!</h4>
+<pre><code class="language-kotlin">forest.v(&quot;a message&quot;)
+forest.d(&quot;a message&quot;)
+forest.i(&quot;a message&quot;)
+forest.w(&quot;a message&quot;)
+forest.e(&quot;a message&quot;)
+forest.f(&quot;a message&quot;)
+</code></pre>
+<h3 id="global-forest"><a href="#global-forest" id="global-forest" class="anchor"></a>Global Forest</h3>
+<p>You can optionally use the <a href="../features/forest#global-forest">Global Forest</a>
+to log event. The benefit of using the {{ anchor(title='Global Forest', itemId='Global Forest', collectionType='wiki') }}
+is it's easy to use and you do not have to create a Forest on any of your class.
+You can just use the static methods to log event:</p>
+<pre><code class="language-kotlin">// onCreate() of your application class or application entry point
+Forest.plant(DebugTree())
+
+// Start logging!
+Forest.v(&quot;a message&quot;)
+Forest.d(&quot;a message&quot;)
+Forest.i(&quot;a message&quot;)
+Forest.w(&quot;a message&quot;)
+Forest.e(&quot;a message&quot;)
+Forest.f(&quot;a message&quot;)
+</code></pre>
+<h2 id="features"><a href="#features" id="features" class="anchor"></a>Features</h2>
+<p>Features offer by this library includes:</p>
+<ul>
+<li>Log messages with a named logger. See {{ anchor(title='Forest', itemId='Forest', collectionType='wiki') }}.</li>
+<li>Log message with a global logger. See <a href="wiki/features/forest#global-forest">Global Forest</a>.</li>
+<li>Multiple log handlers. See {{ anchor(title='Tree', itemId='Tree', collectionType='wiki') }}.</li>
+<li>Adding additional attributes to a log. See {{ anchor(title='adding attributes', itemId='Adding Attributes', collectionType='wiki') }}.</li>
+<li>Share data globally with all the log handlers. See {{ anchor(title='Forest Context', itemId='Forest Context', collectionType='wiki') }}.</li>
+<li>Pre-process a log. See {{ anchor(title='pre-processing callback', itemId='Pre-process Log', collectionType='wiki') }}.</li>
+</ul>
+<h2 id="full-documentation"><a href="#full-documentation" id="full-documentation" class="anchor"></a>Full Documentation</h2>
+<h2 id="license"><a href="#license" id="license" class="anchor"></a>License</h2>
+<pre><code>Copyright 2020 Su Khai Koh
+
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+
+
+
+<p><b>Roots:</b></p>
+<ul>
+  <li><a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest">big.forest</a></li>
+
+</ul>
+
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Forest</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a class="subheader">About</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://sukhai.github.io/forest">Home</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/changelog">Changelog</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a class="subheader">Wiki</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">Guides</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/installation">Installation</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/getting_started">Getting Started</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/java">Java</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Features</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/tree">Tree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/forest">Forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/log_level">Log Levels</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/adding_attributes">Adding Attributes</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/forest_context">Forest Context</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/preprocess_log">Pre-process Log</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    
+    <li>
+        <a class="subheader">API Docs</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">Classes</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/abstractforest">AbstractForest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees/debugtree">DebugTree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/global">Global</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate">ModifiedState</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/new">New</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/removed">Removed</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/updated">Updated</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Packages</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest">big.forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees">big.forest.android.trees</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context">big.forest.context</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 1.1.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Forest. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_util.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_main.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/prism.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://sukhai.github.io/forest/lunr/lunr.js"></script>
+<script  src="https://sukhai.github.io/forest/assets/js/orchidSearch.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-clike.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-markup-templating.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ForestConfig - forest</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">forest</a>&nbsp;/&nbsp;<a href="../index.html">big.forest</a>&nbsp;/&nbsp;<a href="./index.html">ForestConfig</a><br/>
+<br/>
+<h1>ForestConfig</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">ForestConfig</span></code>
+<p>An object that stores the configuration of a <a href="../-forest/index.html">Forest</a>.</p>
+<h3>Parameters</h3>
+<p><a name="level"></a>
+<code>level</code> - The logging level. This sets what level of log to be passed to a <a href="../-tree/index.html">Tree</a>.</p>
+<p><a name="preProcessLog"></a>
+<code>preProcessLog</code> - A callback to be invoked before passing a <a href="../-log-entry/index.html">LogEntry</a> to the
+<a href="../-tree/index.html">Tree</a>. This is useful to filter or modify a <a href="../-log-entry/index.html">LogEntry</a> before the log is being
+passed to <a href="../-tree/log.html">Tree.log</a>.</p>
+<p><a name="allowGlobalOverride"></a>
+<code>allowGlobalOverride</code> - Setting <code>true</code> will allow any configuration change from
+<a href="../-forest/-global/index.html">Forest.Global</a> to override this <a href="../-forest/index.html">Forest</a>, <code>false</code> will prevent this override.</p>
+<p><a name="trees"></a>
+<code>trees</code> - A collection of <a href="../-tree/index.html">Tree</a>s to be added to the <a href="../-forest/index.html">Forest</a>.</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="allow-global-override.html">allowGlobalOverride</a></h4>
+</td>
+<td>
+<p>Setting <code>true</code> will allow any configuration change from
+<a href="../-forest/-global/index.html">Forest.Global</a> to override this <a href="../-forest/index.html">Forest</a>, <code>false</code> will prevent this override.</p>
+<code><span class="keyword">var </span><span class="identifier">allowGlobalOverride</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="level.html">level</a></h4>
+</td>
+<td>
+<p>The logging level. This sets what level of log to be passed to a <a href="../-tree/index.html">Tree</a>.</p>
+<code><span class="keyword">var </span><span class="identifier">level</span><span class="symbol">: </span><span class="identifier">Level</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="pre-process-log.html">preProcessLog</a></h4>
+</td>
+<td>
+<p>A callback to be invoked before passing a <a href="../-log-entry/index.html">LogEntry</a> to the
+<a href="../-tree/index.html">Tree</a>. This is useful to filter or modify a <a href="../-log-entry/index.html">LogEntry</a> before the log is being
+passed to <a href="../-tree/log.html">Tree.log</a>.</p>
+<code><span class="keyword">var </span><span class="identifier">preProcessLog</span><span class="symbol">: </span><a href="../-pre-process-log-callback.html"><span class="identifier">PreProcessLogCallback</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="cut.html">cut</a></h4>
+</td>
+<td>
+<p>Cut the <a href="cut.html#big.forest.ForestConfig$cut(big.forest.Tree)/tree">tree</a> from this <a href="../-forest/index.html">Forest</a>. Any logging method call (i.e <a href="../-forest/d.html">Forest.d</a>,
+<a href="../-forest/i.html">Forest.i</a>, etc) will no longer be forwarded to this <a href="cut.html#big.forest.ForestConfig$cut(big.forest.Tree)/tree">tree</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">cut</span><span class="symbol">(</span><span class="identifier" id="big.forest.ForestConfig$cut(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="plant.html">plant</a></h4>
+</td>
+<td>
+<p>Plant the <a href="plant.html#big.forest.ForestConfig$plant(big.forest.Tree)/tree">tree</a> to this <a href="../-forest/index.html">Forest</a>. Any logging method call (i.e <a href="../-forest/d.html">Forest.d</a>,
+<a href="../-forest/i.html">Forest.i</a>, etc) will be forwarded to this <a href="plant.html#big.forest.ForestConfig$plant(big.forest.Tree)/tree">tree</a> if the <a href="../-forest/index.html">Forest</a> determine
+it should log the given message.</p>
+<code><span class="keyword">fun </span><span class="identifier">plant</span><span class="symbol">(</span><span class="identifier" id="big.forest.ForestConfig$plant(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

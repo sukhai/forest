@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Forest.getForest - forest</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">forest</a>&nbsp;/&nbsp;<a href="../index.html">big.forest</a>&nbsp;/&nbsp;<a href="index.html">Forest</a>&nbsp;/&nbsp;<a href="./get-forest.html">getForest</a><br/>
+<br/>
+<h1>getForest</h1>
+<a name="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))"></a>
+<code><span class="identifier">@JvmOverloads</span> <span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;""<span class="symbol">, </span><span class="identifier" id="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="../-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="index.html"><span class="identifier">Forest</span></a></code>
+<p>Get or create a <a href="index.html">Forest</a> with the given <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</a>.</p>
+<p>You can configure the <a href="index.html">Forest</a> by using <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</a> if this method is
+creating the <a href="index.html">Forest</a>, otherwise the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</a> will not apply the
+configuration to the returning <a href="index.html">Forest</a>.</p>
+<h3>Parameters</h3>
+<p><a name="name"></a>
+<code>name</code> - The name of the <a href="index.html">Forest</a> to be returned.</p>
+<p><a name="configure"></a>
+<code>configure</code> - To configure the returning <a href="index.html">Forest</a> if it's being
+created from this method.</p>
+<p><strong>Return</strong><br/>
+A <a href="index.html">Forest</a> that has name equals to the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</a> parameter.</p>
+<a name="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))"></a>
+<code><span class="identifier">@JvmOverloads</span> <span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="../-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="index.html"><span class="identifier">Forest</span></a></code>
+<p>Get or create a <a href="index.html">Forest</a> with the given <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>.
+This method will use the canonical name of the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a> if it is not
+<code>null</code> or empty, otherwise it will use the package name of the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>,
+such as from an anonymous class.</p>
+<p>You can configure the <a href="index.html">Forest</a> by using <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</a> if this method is
+creating the <a href="index.html">Forest</a>, otherwise the <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</a> will not apply the
+configuration to the returning <a href="index.html">Forest</a>.</p>
+<h3>Parameters</h3>
+<p><a name="clazz"></a>
+<code>clazz</code> - The class that is going to use the returning <a href="index.html">Forest</a>.</p>
+<p><a name="configure"></a>
+<code>configure</code> - To configure the returning <a href="index.html">Forest</a> if it's being
+created from this method.</p>
+<p><strong>Return</strong><br/>
+A <a href="index.html">Forest</a> that has a name registered with the given <a href="-global/get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>.</p>
+</BODY>
+</HTML>

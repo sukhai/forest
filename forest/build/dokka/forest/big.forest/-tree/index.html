@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Tree - forest</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">forest</a>&nbsp;/&nbsp;<a href="../index.html">big.forest</a>&nbsp;/&nbsp;<a href="./index.html">Tree</a><br/>
+<br/>
+<h1>Tree</h1>
+<code><span class="keyword">interface </span><span class="identifier">Tree</span></code>
+<p>A handler to all the logs that sent to <a href="../-forest/index.html">Forest</a>.</p>
+<p>The implementation class will just have to implement the only method in this interface,
+which is <a href="log.html">log</a>.</p>
+<p>Whenever <a href="../-forest/log.html">Forest.log</a>-type method is called, it will construct a <a href="../-log-entry/index.html">LogEntry</a> and delegate
+the actual handling to the <a href="log.html">log</a> method in this class.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="log.html">log</a></h4>
+</td>
+<td>
+<p>A method to handle the given log <a href="log.html#big.forest.Tree$log(big.forest.LogEntry)/entry">entry</a> that was sent from <a href="../-forest/index.html">Forest</a> or caller of
+this class.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="big.forest.Tree$log(big.forest.LogEntry)/entry">entry</span><span class="symbol">:</span>&nbsp;<a href="../-log-entry/index.html"><span class="identifier">LogEntry</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Forest.Global - forest</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">forest</a>&nbsp;/&nbsp;<a href="../../index.html">big.forest</a>&nbsp;/&nbsp;<a href="../index.html">Forest</a>&nbsp;/&nbsp;<a href="./index.html">Global</a><br/>
+<br/>
+<h1>Global</h1>
+<code><span class="keyword">companion</span> <span class="keyword">object </span><span class="identifier">Global</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../-abstract-forest/index.html"><span class="identifier">AbstractForest</span></a></code>
+<p>A singleton class that represents the global <a href="../index.html">Forest</a>. This global <a href="../index.html">Forest</a>
+holds a collection of <a href="../index.html">Forest</a>s that are created through <a href="get-forest.html">getForest</a>.</p>
+<p>Any changes to this global <a href="../index.html">Forest</a>, except logging through this global
+<a href="../index.html">Forest</a>, will be forwarded to the collection of <a href="../index.html">Forest</a>s that this
+global <a href="../index.html">Forest</a> holds. You can however set <a href="allow-global-override.html">Forest.allowGlobalOverride</a>
+to <code>false</code> to disable this setting. By default <a href="allow-global-override.html">Forest.allowGlobalOverride</a>
+is <code>true</code>.</p>
+<p>This global <a href="../index.html">Forest</a> has a special property called <a href="context.html">context</a>, which holds a
+sharable data across all the <a href="../../-tree/index.html">Tree</a>s every <a href="../index.html">Forest</a>s hold. This <a href="context.html">context</a> can
+be used to set global data that will be passed to every <a href="../../-tree/index.html">Tree</a> every
+<a href="../index.html">Forest</a>s this object hold.
+You can add data to the <a href="context.html">context</a> like the following example:</p>
+<pre><code>Forest.context["key1"] = "value1"
+Forest.context["key2"] = 123
+</code></pre>
+<p>both examples do the same thing.</p>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="allow-global-override.html">allowGlobalOverride</a></h4>
+</td>
+<td>
+<p><code>true</code> to allow properties override from global <a href="../index.html">Forest</a> to other
+<a href="../index.html">Forest</a>s, <code>false</code> otherwise.</p>
+<code><span class="keyword">var </span><span class="identifier">allowGlobalOverride</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="context.html">context</a></h4>
+</td>
+<td>
+<p>Gets the <a href="../../../big.forest.context/-forest-context/index.html">ForestContext</a> this <a href="../index.html">Forest</a> is in.
+The data that gets set in this context will be available to all the <a href="../../-abstract-forest/trees.html">trees</a> globally.</p>
+<code><span class="keyword">var </span><span class="identifier">context</span><span class="symbol">: </span><a href="../../../big.forest.context/-forest-context/index.html"><span class="identifier">ForestContext</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="level.html">level</a></h4>
+</td>
+<td>
+<p>The logging level of this <a href="../index.html">Forest</a>. This level will be used to
+determine if it should log a given <a href="../../-log-entry/index.html">LogEntry</a>.</p>
+<code><span class="keyword">var </span><span class="identifier">level</span><span class="symbol">: </span><span class="identifier">Level</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="change-context.html">changeContext</a></h4>
+</td>
+<td>
+<p>Change this global <a href="../index.html">Forest</a>'s <a href="../../../big.forest.context/-forest-context/index.html">ForestContext</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">changeContext</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$changeContext(big.forest.context.ForestContext)/newContext">newContext</span><span class="symbol">:</span>&nbsp;<a href="../../../big.forest.context/-forest-context/index.html"><span class="identifier">ForestContext</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="cut.html">cut</a></h4>
+</td>
+<td>
+<p>Cut the <a href="../cut.html#big.forest.Forest$cut(big.forest.Tree)/tree">tree</a> from this <a href="../index.html">Forest</a>. This <a href="../cut.html#big.forest.Forest$cut(big.forest.Tree)/tree">tree</a> will no longer handle
+the log coming from this <a href="../index.html">Forest</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">cut</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$cut(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="deforest.html">deforest</a></h4>
+</td>
+<td>
+<p>Clear up all the <a href="../../-tree/index.html">Tree</a>s in this <a href="../index.html">Forest</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">deforest</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-forest.html">getForest</a></h4>
+</td>
+<td>
+<p>Get or create a <a href="../index.html">Forest</a> with the given <a href="get-forest.html#big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;""<span class="symbol">, </span><span class="identifier" id="big.forest.Forest.Global$getForest(kotlin.String, kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="../../-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="../index.html"><span class="identifier">Forest</span></a></code>
+<p>Get or create a <a href="../index.html">Forest</a> with the given <a href="get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>.
+This method will use the canonical name of the <a href="get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a> if it is not
+<code>null</code> or empty, otherwise it will use the package name of the <a href="get-forest.html#big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</a>,
+such as from an anonymous class.</p>
+<code><span class="keyword">fun </span><span class="identifier">getForest</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="big.forest.Forest.Global$getForest(java.lang.Class((kotlin.Any)), kotlin.Function1((big.forest.ForestConfig, kotlin.Unit)))/configure">configure</span><span class="symbol">:</span>&nbsp;<a href="../../-forest-config/index.html"><span class="identifier">ForestConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="../index.html"><span class="identifier">Forest</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="plant.html">plant</a></h4>
+</td>
+<td>
+<p>Plant the <a href="../plant.html#big.forest.Forest$plant(big.forest.Tree)/tree">tree</a> to this <a href="../index.html">Forest</a>. This <a href="../plant.html#big.forest.Forest$plant(big.forest.Tree)/tree">tree</a> will handle the log
+from this <a href="../index.html">Forest</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">plant</span><span class="symbol">(</span><span class="identifier" id="big.forest.Forest.Global$plant(big.forest.Tree)/tree">tree</span><span class="symbol">:</span>&nbsp;<a href="../../-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="big.forest.ForestTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2020-06-18T04:01:38" hostname="fv-az29" time="1.954">
+  <properties/>
+  <testcase name="when log message and throwable using the global Forest, then the tree will receive correct LogEntry()" classname="big.forest.ForestTest" time="1.381"/>
+  <testcase name="we can plant multiple trees to the global Forest()" classname="big.forest.ForestTest" time="0.023"/>
+  <testcase name="when the level is OFF, then the tree will not receive LogEntry()" classname="big.forest.ForestTest" time="0.196"/>
+  <testcase name="when log throwable using the global Forest, then the tree will receive correct LogEntry()" classname="big.forest.ForestTest" time="0.005"/>
+  <testcase name="getForest - when provide the same name to multiple calls, then return the same Forest()" classname="big.forest.ForestTest" time="0.018"/>
+  <testcase name="getForest - when provide different names to multiple calls, then return different Forest()" classname="big.forest.ForestTest" time="0.004"/>
+  <testcase name="when cut a tree from a Forest, then the tree will be removed()" classname="big.forest.ForestTest" time="0.005"/>
+  <testcase name="when log an exception from a class with a logger name, then set tag to the logger name()" classname="big.forest.ForestTest" time="0.008"/>
+  <testcase name="when set a new context, then the tree will receive this new context()" classname="big.forest.ForestTest" time="0.21"/>
+  <testcase name="when log message using the global Forest, then the tree will receive correct LogEntry()" classname="big.forest.ForestTest" time="0.002"/>
+  <testcase name="getForest - when passing an anonymous class to parameter, then return Forest with package name()" classname="big.forest.ForestTest" time="0.001"/>
+  <testcase name="when update the context, then the tree will receive the latest update from the context()" classname="big.forest.ForestTest" time="0.002"/>
+  <testcase name="when log message and throwable using a Forest, then the tree will receive correct LogEntry()" classname="big.forest.ForestTest" time="0.003"/>
+  <testcase name="when plant a tree to global Forest, then only add tree to other Forests if the Forest does not have the tree()" classname="big.forest.ForestTest" time="0.0"/>
+  <testcase name="getForest - when passing a name to parameter, then return Forest with the given name()" classname="big.forest.ForestTest" time="0.003"/>
+  <testcase name="when a level is set to Forest and log methods are called, then the tree will only receive LogEntry if the level is less than the triggered level()" classname="big.forest.ForestTest" time="0.015"/>
+  <testcase name="when allowGlobalOverride is set to true, then local Forest will get level set by global forest()" classname="big.forest.ForestTest" time="0.003"/>
+  <testcase name="when log throwable using a Forest, then the tree will receive correct LogEntry()" classname="big.forest.ForestTest" time="0.007"/>
+  <testcase name="when plant a tree to global Forest, then the tree is added to all Forests()" classname="big.forest.ForestTest" time="0.002"/>
+  <testcase name="getForest - when properties are set in global Forest and when create new Forest, then pass properties to the new Forest()" classname="big.forest.ForestTest" time="0.002"/>
+  <testcase name="when log message using a Forest, then the tree will receive correct LogEntry()" classname="big.forest.ForestTest" time="0.003"/>
+  <testcase name="when cut a tree from the global Forest, then the tree will be removed from all Forests()" classname="big.forest.ForestTest" time="0.002"/>
+  <testcase name="when log an exception from a class without a logger name, then set tag to first stacktrace class name()" classname="big.forest.ForestTest" time="0.003"/>
+  <testcase name="getForest - when passing a class to parameter, then return Forest with canonical name()" classname="big.forest.ForestTest" time="0.001"/>
+  <testcase name="when allowGlobalOverride is set to true, then local Forest will get trees planted by global forest()" classname="big.forest.ForestTest" time="0.001"/>
+  <testcase name="when allowGlobalOverride is set to false, then local Forest will not get overrided()" classname="big.forest.ForestTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

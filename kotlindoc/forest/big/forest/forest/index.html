@@ -1,0 +1,3775 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://sukhai.github.io/forest/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Forest</title>
+
+
+<meta name="description" content="A lightweight Android-Kotlin first logging library.">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/prism.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/css/forest.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://sukhai.github.io/forest/assets/css/orchidSourceDoc.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://sukhai.github.io/forest","environment":"prod","version":"1.1.0"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="is-loading">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://sukhai.github.io/forest" class="logo">Forest</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="/" class="icon fas fa-home">
+                <span class="label">Home</span>
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/sukhai/forest" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>Forest</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="sourcedoc-page orchid-sourcedoc content">
+  
+<div class="sourcedoc-section section-root section-level-1" id="Forest">
+
+
+  
+
+  
+    <div class="sourcedoc-section section-element" id="8da7ce44771445e42469449b91d9fe948d553a38">
+      
+      <p class="sourcedoc-section section-signature">
+        <code>interface <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>: Any</code>
+      </p>
+
+      
+        
+    <!-- start:inject components -->
+    
+    <!-- end:inject components -->
+
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>An object that allows the user to send any log entry to a group of <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s.</p><p>You can create or get an implementation of this interface through
+Forest.getForest.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="fields">
+
+
+  <p class="sourcedoc-section section-name"><strong>Fields</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f3f62e083f842e936a11912bb96a83eb5ee45a80">
+        <td class="sourcedoc-section section-signature">
+          <code>abstract var level: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The logging level of this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This level will be used to
+determine if it should log a given <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>.</p><p>The order of the levels is (except Level.OFF:</p><ol><li>FATAL</li><li>ERROR</li><li>WARN</li><li>INFO</li><li>DEBUG</li><li>VERBOSE</li></ol><p>This <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> will only log a <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> if the given level is
+less than this level. For example, if this level is set to
+VERBOSE, then calling Forest.i will log a given <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>
+because VERBOSE is higher level than INFO.
+In contrast, if this level is set to INFO and Forest.v is
+called, then the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> will not be logged because INFO
+level is lower than VERBOSE.</p><p>Setting this value to Level.OFF will not log any <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> and none
+of the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a> this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> holds will receive a Tree.log call.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="83c9a6348756187f42378034891ea6313f4f93f6">
+        <td class="sourcedoc-section section-signature">
+          <code>abstract name: String?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The name of the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This value will be used as the LogEntry.tag
+if this value is not <code>null</code>. This value is set when Forest.getForest
+is called.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="d1e3d836ebce45140926650dbdc214a97b3ca209">
+        <td class="sourcedoc-section section-signature">
+          <code>abstract trees: List&lt;<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s in this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> that were planted through
+plant method.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="methods">
+
+
+  
+    <h2 class="sourcedoc-section section-name">Methods</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="84d727b85b14b47cdbb6eede711af6d5221b12a3">
+      
+      <h3 class="sourcedoc-section element-name">plant</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun plant(tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Plant the tree to this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This tree will handle the log
+from this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="f549eaf67694bad393a32d37dc9766859494293b">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="bdd15c4d62a36a081b2611559708f4106843362a">
+        <td class="sourcedoc-section section-signature">
+          <code>tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="814e195c4b83a888313732c786eb32a9582bf793">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="dd9f1f3dee9d70968f9d8a5d5c9efc752c269a9e">
+      
+      <h3 class="sourcedoc-section element-name">cut</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun cut(tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Cut the tree from this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This tree will no longer handle
+the log coming from this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="b09d1258dcb5aacee817435b90a8e928c5172071">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="bdd15c4d62a36a081b2611559708f4106843362a">
+        <td class="sourcedoc-section section-signature">
+          <code>tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="95bf6cd51a40939fba481666f4316d6bb7bd2fdd">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="a871f49ee47c9b46f181d0d91d3116252017dc46">
+      
+      <h3 class="sourcedoc-section element-name">deforest</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun deforest()</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Clear up all the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s in this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="ddb0a85aef5fabbd78663e14781364c4629bc72f">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="1bfe463a849bdfd862f5650db6f845610c5fc6f6">
+      
+      <h3 class="sourcedoc-section element-name">preProcessLog</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun preProcessLog(callback: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a>)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Set the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a> to this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This will allow the
+<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> to send the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> every time before it's sent to the
+<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s.
+You can use this callback to filter or modify a <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> before the
+<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> is being sent to the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s in this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="4ad76e70251dc06835426faba878b288e67ad194">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="ca12c3ce9631021c697bf418bdce6813a2eac431">
+        <td class="sourcedoc-section section-signature">
+          <code>callback: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a> to be set into this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="53180443fd96396c8a34d6816688a44b5272adf2">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="34e1efb056c4f3e3046cf0cebff01ffc3f6a055b">
+      
+      <h3 class="sourcedoc-section element-name">v</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun v(message: String, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.VERBOSE level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="a2616aad134b0710f2b5786a552c0c3edfccf5fb">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="8580d68b8f72d7bca8d16beb0dee1ecdce39059f">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="877f514375be97d4c63937d6425b909abee9c052">
+      
+      <h3 class="sourcedoc-section element-name">v</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun v(message: String, throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.VERBOSE level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="79c263aaff2f920c8cafd44a0fab5d0671442d6a">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="51d1bc83663dcb4e9807b15f53300f76693a4479">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="bda149d7cb4503c8c2dc2f11570c5f6cf2e9ed25">
+      
+      <h3 class="sourcedoc-section element-name">v</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun v(throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.VERBOSE level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="f1d463903236dd002611fc9e00d63b4aa5e313b6">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="1fec5be17407b2bde694132a40797b7dde06c6d5">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="b1c033b316526aedf936bb6991d73a5c2e3b325f">
+      
+      <h3 class="sourcedoc-section element-name">d</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun d(message: String, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.DEBUG level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="12debff5320deced3f074bf8ac165b12da28bd0f">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="ff0af419c5be0360a3c132177feaa04c0a3bfc79">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="e0b3e750fb8bee8d2f80ac6db9292b3a6fb8f437">
+      
+      <h3 class="sourcedoc-section element-name">d</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun d(message: String, throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.DEBUG level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="04dc9c9932757ec120a9efff80cd69ce312bfe61">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="c2672cb833a76c7949002928bd8743d4dc40c6fc">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="e20354b55fde4b7c4991871cdc259a457d74ea4c">
+      
+      <h3 class="sourcedoc-section element-name">d</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun d(throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.DEBUG level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="ab5750a7753f7f10b7beb69cf1141e7622d790fa">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="5c6297926442dc07560295e29d6f34a8997ab73a">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="6df4808b9c2bcd4c2f22d8e2967a531fbedf0ee1">
+      
+      <h3 class="sourcedoc-section element-name">i</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun i(message: String, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.INFO level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="d5e01a0192d541a260dccd7326cd0f09c829c54a">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="75de57ffefbcd5c61f5af37a84d6935f298dba21">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="d1747df66596a198de9a3bd616a51a4a102bce66">
+      
+      <h3 class="sourcedoc-section element-name">i</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun i(message: String, throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.INFO level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="afd18d0ba880d2c6d1020885fa8c25f74e30d863">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="f54d9c0b3b32a12872f226fa188121e661dae61a">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="e93e057f14b454126d359a27fc89208ebb4c90cf">
+      
+      <h3 class="sourcedoc-section element-name">i</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun i(throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.INFO level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="7bcdaea15c8fe68338d01fdb1ecadec433812467">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="18b67e875225d50e05fec5684004a4f54dcc93a0">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="a66c4865912eb02026b2a616ea4e193e55271e3c">
+      
+      <h3 class="sourcedoc-section element-name">w</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun w(message: String, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.WARN level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="eae6f7b716fc59a65912d1bebb1ab6d181358bdf">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="1509a3ecafc6c1af7ea259d8cbe2683270588621">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="9ca511dfc186988773a0042bb8f0ac43b6f195e7">
+      
+      <h3 class="sourcedoc-section element-name">w</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun w(message: String, throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.WARN level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="33dbe8a9da5d793831167a7abced22046785fa86">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="26a48d271d6fbd0b25f753244f325e6f2d8ef2db">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="2755d4558f79687cda288b564d746d2bea001213">
+      
+      <h3 class="sourcedoc-section element-name">w</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun w(throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.WARN level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="eafa6698e55247a30691b0310f941d6143ffbb10">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="82ae2102bff03676c9f892f020dfe6ccd4ac90d1">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="6d72074dd6634a1a260e203c27bb546687bea51f">
+      
+      <h3 class="sourcedoc-section element-name">e</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun e(message: String, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.ERROR level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="92468a7340379e9ec7e6611cde21cf8733d6a2f5">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="bd4f32c1facf8606126af63b4c002b17952b69ff">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="731a3588cde658ac4ad102da7572918d2347a4dd">
+      
+      <h3 class="sourcedoc-section element-name">e</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun e(message: String, throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.ERROR level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="6381e8d1904c5a182475186cf8c62e26f29245bf">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="212c80e2faa4e3df140e004e609996d9315cfaa1">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="e1c47383635983b38d55a400143fd3ec51de9872">
+      
+      <h3 class="sourcedoc-section element-name">e</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun e(throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.ERROR level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="7b9dac9e25ec00c99994ea6134cdf7bf525782da">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="58731e622f98f9d9a791314bd2d578aaa11c72c8">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="95c4225b9d4bd0f649a7631b9a116441707f9b09">
+      
+      <h3 class="sourcedoc-section element-name">f</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun f(message: String, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.FATAL level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="57706627a88ee0d4ab873434d77e18aea9ff237c">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="20c4d9ae55c4794b04aa40d0c2e69a8453688035">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="e039c5b667554d1b0ca774a1b32bc06759d6c770">
+      
+      <h3 class="sourcedoc-section element-name">f</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun f(message: String, throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.FATAL level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="08d841db826e2b60b676b837cbee74639f1b47f7">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3a8250bfb71a84769052d18ed54501af33ab46f1">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="c4f10d00f2c99930eee7390dc48feb29a4f6f96a">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="d8354c727ca6c23cf34c08dacb1d8e98f88f5efc">
+      
+      <h3 class="sourcedoc-section element-name">f</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun f(throwable: Throwable, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message with Level.FATAL level.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="aab576cd93e066e5bb072401c75eda689a60019f">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="6433466a057fbce862a4e6e90ecb495685ff23a9">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="56ad08d5cccbe3a8e6c0da751bc6439b1ca5e077">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="19a938f3fe360f802f4b752e2f921b359fd1c3ee">
+      
+      <h3 class="sourcedoc-section element-name">log</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>abstract fun log(level: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a>, message: String?, throwable: Throwable?, attributes: Map&lt;String, Any&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Log a message.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="35ca3e86eb815e650ccedee844f15dc3eb39e8a0">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="c8d129b9471b207e506268f48ad342959b9a52cb">
+        <td class="sourcedoc-section section-signature">
+          <code>level: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The level of this log message.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="e7752668a6c921b4cc6e3461eb5bcea4e06d2a5f">
+        <td class="sourcedoc-section section-signature">
+          <code>message: String?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The message to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="c17ae4a7d91e8f7b5369d25fde5831199cc6b335">
+        <td class="sourcedoc-section section-signature">
+          <code>throwable: Throwable?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The Throwable to be logged.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="601fd26cbae5cb3341aca3a7ab35a3ae7f420c8a">
+        <td class="sourcedoc-section section-signature">
+          <code>attributes: Map&lt;String, Any&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A collection of additional data to be added to this log.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="1798c90a9ce72add8c604297a084e6df20d33e33">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="companionObject">
+
+
+  
+    <h2 class="sourcedoc-section section-name">CompanionObject</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="8da7ce44771445e42469449b91d9fe948d553a38">
+      
+      <h3 class="sourcedoc-section element-name">Forest</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>interface <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>: Any</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>An object that allows the user to send any log entry to a group of <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s.</p><p>You can create or get an implementation of this interface through
+Forest.getForest.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="c0443646cc609446a55e4a4ecc16e4540b145527">
+
+
+  <p class="sourcedoc-section section-name"><strong>Fields</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="c2f4156cb025ed705686d271fc8a032206559198">
+        <td class="sourcedoc-section section-signature">
+          <code>var level: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The logging level of this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This level will be used to
+determine if it should log a given <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>.</p><p>The order of the levels is (except Level.OFF:</p><ol><li>FATAL</li><li>ERROR</li><li>WARN</li><li>INFO</li><li>DEBUG</li><li>VERBOSE</li></ol><p>This <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> will only log a <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> if the given level is
+less than this level. For example, if this level is set to
+VERBOSE, then calling Forest.i will log a given <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>
+because VERBOSE is higher level than INFO.
+In contrast, if this level is set to INFO and Forest.v is
+called, then the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> will not be logged because INFO
+level is lower than VERBOSE.</p><p>Setting this value to Level.OFF will not log any <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a> and none
+of the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a> this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> holds will receive a Tree.log call.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="aca27a2ad251ac1711e7db6c6c37e5e0dc6b0577">
+        <td class="sourcedoc-section section-signature">
+          <code>var context: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>Gets the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a> this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> is in.
+The data that gets set in this context will be available to all the trees globally.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="e9f3375d95e62e99b64b30b9dd715b7d2dd0bd46">
+        <td class="sourcedoc-section section-signature">
+          <code>var allowGlobalOverride: Boolean</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p><code>true</code> to allow properties override from global <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> to other
+<a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>s, <code>false</code> otherwise.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="84217ffae344e7554e73bd5617e0aea79176f476">
+
+
+  
+    <h3 class="sourcedoc-section section-name">Methods</h3>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="f4dadf841b5451fed2ec0a4be1bc2e355fb972bb">
+      
+      <h4 class="sourcedoc-section element-name">getForest</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun getForest(name: String, configure: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>.()-&gt;Unit): <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a></code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Get or create a <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> with the given name.</p><p>You can configure the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> by using configure if this method is
+creating the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>, otherwise the configure will not apply the
+configuration to the returning <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="f70edec3d90b96b39d169b9c624e628e7538629d">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="cf7d76aa18f0e598757d79a8a9df09d9c2aad977">
+        <td class="sourcedoc-section section-signature">
+          <code>name: String</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The name of the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> to be returned.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="298e0b5cd68ff35f6eb9a1019189df7ffae0ba0e">
+        <td class="sourcedoc-section section-signature">
+          <code>configure: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>.()-&gt;Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>To configure the returning <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> if it's being
+created from this method.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="32fbcf619c31775c70673c63cdb46dd24331d02b">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f41c4e4dab0b44d75dad0c04a0156d326c95b774">
+        <td class="sourcedoc-section section-signature">
+          <code><a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> that has name equals to the name parameter.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="7ad9a36faf50b75d4fa44e172339e15c1570a0ea">
+      
+      <h4 class="sourcedoc-section element-name">getForest</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun getForest(clazz: Class&lt;*&gt;, configure: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>.()-&gt;Unit): <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a></code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Get or create a <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> with the given clazz.
+This method will use the canonical name of the clazz if it is not
+<code>null</code> or empty, otherwise it will use the package name of the clazz,
+such as from an anonymous class.</p><p>You can configure the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> by using configure if this method is
+creating the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>, otherwise the configure will not apply the
+configuration to the returning <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="bf55e104893a0840f6e6f5ad68a3014f91e0e9cb">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="2a0d8d59afa5161e129115b60f9a13eca6ceba6c">
+        <td class="sourcedoc-section section-signature">
+          <code>clazz: Class&lt;*&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The class that is going to use the returning <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="298e0b5cd68ff35f6eb9a1019189df7ffae0ba0e">
+        <td class="sourcedoc-section section-signature">
+          <code>configure: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>.()-&gt;Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>To configure the returning <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> if it's being
+created from this method.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="a2c2b7b8aeddac02e256b9b0c98735a57e966f04">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f41c4e4dab0b44d75dad0c04a0156d326c95b774">
+        <td class="sourcedoc-section section-signature">
+          <code><a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>A <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a> that has a name registered with the given clazz.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="8d2b53c27b889e47b7f7cb3891e65c906451a69a">
+      
+      <h4 class="sourcedoc-section element-name">changeContext</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun changeContext(newContext: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Change this global <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>'s <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="4625ba151c971ae33ee778f5a7781803c6b49ed1">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="fb965acac5b791f5f3a9a38e301ee5d053e0ac97">
+        <td class="sourcedoc-section section-signature">
+          <code>newContext: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>The new <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a> that store the data that are passed
+to all the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="a66bd7cc888a0df096a6f0732d6b543814d89f2f">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="275f8502320e2d10b227f04b683e26c41499ced7">
+      
+      <h4 class="sourcedoc-section element-name">deforest</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun deforest()</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Clear up all the <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>s in this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="5ffec14fe5199a737336feea118afc6cb4a13a32">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="634005468bfed18a61bb4ec7b42c0235d4120e9e">
+      
+      <h4 class="sourcedoc-section element-name">plant</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun plant(tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Plant the tree to this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This tree will handle the log
+from this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="c573226ed26f23e6b82a1d0d4b2d33322af946b7">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="bdd15c4d62a36a081b2611559708f4106843362a">
+        <td class="sourcedoc-section section-signature">
+          <code>tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="f24d641d4b57d70b0db549085e0e5f12e89e6fb3">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="ea15d7632814cff5f306da58848ce4e37768a430">
+      
+      <h4 class="sourcedoc-section element-name">cut</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun cut(tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Cut the tree from this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>. This tree will no longer handle
+the log coming from this <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="554aec60c13dd4eede6269ae8abe015ab53487e4">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="bdd15c4d62a36a081b2611559708f4106843362a">
+        <td class="sourcedoc-section section-signature">
+          <code>tree: <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a></code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="b5963b4c38d3879a8216a2e7ac72d99298ac4873">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+</div>
+
+
+
+
+
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Forest</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a class="subheader">About</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://sukhai.github.io/forest">Home</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/changelog">Changelog</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a class="subheader">Wiki</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">Guides</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/installation">Installation</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/getting_started">Getting Started</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/guides/java">Java</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Features</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/tree">Tree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/forest">Forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/log_level">Log Levels</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/adding_attributes">Adding Attributes</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/forest_context">Forest Context</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/wiki/features/preprocess_log">Pre-process Log</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    
+    <li>
+        <a class="subheader">API Docs</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">Classes</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/abstractforest">AbstractForest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees/debugtree">DebugTree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest">Forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forestconfig">ForestConfig</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestcontext">ForestContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/forestdatacontext">ForestDataContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/global">Global</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/forest/level">Level</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/logentry">LogEntry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate">ModifiedState</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/new">New</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/preprocesslogcallback">PreProcessLogCallback</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/removed">Removed</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/tree">Tree</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context/modifiedstate/updated">Updated</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Packages</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest">big.forest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/android/trees">big.forest.android.trees</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://sukhai.github.io/forest/kotlindoc/forest/big/forest/context">big.forest.context</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+        <nav class="menu">
+            <header class="major">
+                <h2>Forest</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    <li>
+        <span class="opener">Fields</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="#f3f62e083f842e936a11912bb96a83eb5ee45a80">level</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#83c9a6348756187f42378034891ea6313f4f93f6">name</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#d1e3d836ebce45140926650dbdc214a97b3ca209">trees</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">Methods</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="#84d727b85b14b47cdbb6eede711af6d5221b12a3">plant</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#dd9f1f3dee9d70968f9d8a5d5c9efc752c269a9e">cut</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#a871f49ee47c9b46f181d0d91d3116252017dc46">deforest</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#1bfe463a849bdfd862f5650db6f845610c5fc6f6">preProcessLog</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#34e1efb056c4f3e3046cf0cebff01ffc3f6a055b">v</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#877f514375be97d4c63937d6425b909abee9c052">v</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#bda149d7cb4503c8c2dc2f11570c5f6cf2e9ed25">v</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#b1c033b316526aedf936bb6991d73a5c2e3b325f">d</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#e0b3e750fb8bee8d2f80ac6db9292b3a6fb8f437">d</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#e20354b55fde4b7c4991871cdc259a457d74ea4c">d</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#6df4808b9c2bcd4c2f22d8e2967a531fbedf0ee1">i</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#d1747df66596a198de9a3bd616a51a4a102bce66">i</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#e93e057f14b454126d359a27fc89208ebb4c90cf">i</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#a66c4865912eb02026b2a616ea4e193e55271e3c">w</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#9ca511dfc186988773a0042bb8f0ac43b6f195e7">w</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#2755d4558f79687cda288b564d746d2bea001213">w</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#6d72074dd6634a1a260e203c27bb546687bea51f">e</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#731a3588cde658ac4ad102da7572918d2347a4dd">e</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#e1c47383635983b38d55a400143fd3ec51de9872">e</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#95c4225b9d4bd0f649a7631b9a116441707f9b09">f</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#e039c5b667554d1b0ca774a1b32bc06759d6c770">f</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#d8354c727ca6c23cf34c08dacb1d8e98f88f5efc">f</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="#19a938f3fe360f802f4b752e2f921b359fd1c3ee">log</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">CompanionObject</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="#8da7ce44771445e42469449b91d9fe948d553a38">Forest</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 1.1.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Forest. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_util.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_main.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://sukhai.github.io/forest/Editorial/c2945bf5/assets/js/prism.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://sukhai.github.io/forest/lunr/lunr.js"></script>
+<script  src="https://sukhai.github.io/forest/assets/js/orchidSearch.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-clike.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-markup-templating.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://sukhai.github.io/forest/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>
