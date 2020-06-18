@@ -1,0 +1,278 @@
+public abstract class big/forest/AbstractForest : big/forest/Forest {
+	public fun <init> (Lkotlin/jvm/functions/Function0;Ljava/lang/String;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun cut (Lbig/forest/Tree;)V
+	public final fun d (Ljava/lang/String;)V
+	public final fun d (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun d (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun d (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun d (Ljava/lang/Throwable;)V
+	public fun d (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun deforest ()V
+	public final fun e (Ljava/lang/String;)V
+	public final fun e (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun e (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun e (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun e (Ljava/lang/Throwable;)V
+	public fun e (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public final fun f (Ljava/lang/String;)V
+	public final fun f (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun f (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun f (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun f (Ljava/lang/Throwable;)V
+	public fun f (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun getLevel ()Lbig/forest/Forest$Level;
+	public fun getName ()Ljava/lang/String;
+	public fun getTrees ()Ljava/util/List;
+	public final fun i (Ljava/lang/String;)V
+	public final fun i (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun i (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun i (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun i (Ljava/lang/Throwable;)V
+	public fun i (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun log (Lbig/forest/Forest$Level;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun plant (Lbig/forest/Tree;)V
+	public fun preProcessLog (Lkotlin/jvm/functions/Function1;)V
+	public fun setLevel (Lbig/forest/Forest$Level;)V
+	public final fun v (Ljava/lang/String;)V
+	public final fun v (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun v (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun v (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun v (Ljava/lang/Throwable;)V
+	public fun v (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public final fun w (Ljava/lang/String;)V
+	public final fun w (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun w (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public fun w (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun w (Ljava/lang/Throwable;)V
+	public fun w (Ljava/lang/Throwable;Ljava/util/Map;)V
+}
+
+public abstract interface class big/forest/Forest {
+	public static final field Global Lbig/forest/Forest$Global;
+	public abstract fun cut (Lbig/forest/Tree;)V
+	public abstract fun d (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun d (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun d (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun deforest ()V
+	public abstract fun e (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun e (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun e (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun f (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun f (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun f (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun getLevel ()Lbig/forest/Forest$Level;
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun getTrees ()Ljava/util/List;
+	public abstract fun i (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun i (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun i (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun log (Lbig/forest/Forest$Level;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun plant (Lbig/forest/Tree;)V
+	public abstract fun preProcessLog (Lkotlin/jvm/functions/Function1;)V
+	public abstract fun setLevel (Lbig/forest/Forest$Level;)V
+	public abstract fun v (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun v (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun v (Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun w (Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public abstract fun w (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun w (Ljava/lang/Throwable;Ljava/util/Map;)V
+}
+
+public final class big/forest/Forest$DefaultImpls {
+	public static synthetic fun d$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun d$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun d$default (Lbig/forest/Forest;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun e$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun e$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun e$default (Lbig/forest/Forest;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun f$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun f$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun f$default (Lbig/forest/Forest;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun i$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun i$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun i$default (Lbig/forest/Forest;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun log$default (Lbig/forest/Forest;Lbig/forest/Forest$Level;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun v$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun v$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun v$default (Lbig/forest/Forest;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun w$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun w$default (Lbig/forest/Forest;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun w$default (Lbig/forest/Forest;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public final class big/forest/Forest$Global : big/forest/AbstractForest {
+	public final fun changeContext (Lbig/forest/context/ForestContext;)V
+	public fun cut (Lbig/forest/Tree;)V
+	public fun deforest ()V
+	public final fun getAllowGlobalOverride ()Z
+	public final fun getContext ()Lbig/forest/context/ForestContext;
+	public final fun getForest ()Lbig/forest/Forest;
+	public final fun getForest (Ljava/lang/Class;)Lbig/forest/Forest;
+	public final fun getForest (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
+	public final fun getForest (Ljava/lang/String;)Lbig/forest/Forest;
+	public final fun getForest (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
+	public static synthetic fun getForest$default (Lbig/forest/Forest$Global;Ljava/lang/Class;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
+	public static synthetic fun getForest$default (Lbig/forest/Forest$Global;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
+	public fun getLevel ()Lbig/forest/Forest$Level;
+	public fun plant (Lbig/forest/Tree;)V
+	public final fun setAllowGlobalOverride (Z)V
+	public fun setLevel (Lbig/forest/Forest$Level;)V
+}
+
+public final class big/forest/Forest$Level : java/lang/Enum {
+	public static final field DEBUG Lbig/forest/Forest$Level;
+	public static final field ERROR Lbig/forest/Forest$Level;
+	public static final field FATAL Lbig/forest/Forest$Level;
+	public static final field INFO Lbig/forest/Forest$Level;
+	public static final field OFF Lbig/forest/Forest$Level;
+	public static final field VERBOSE Lbig/forest/Forest$Level;
+	public static final field WARN Lbig/forest/Forest$Level;
+	public static fun valueOf (Ljava/lang/String;)Lbig/forest/Forest$Level;
+	public static fun values ()[Lbig/forest/Forest$Level;
+}
+
+public final class big/forest/ForestConfig {
+	public final fun component1 ()Lbig/forest/Forest$Level;
+	public final fun component2 ()Lkotlin/jvm/functions/Function1;
+	public final fun component3 ()Z
+	public final fun copy (Lbig/forest/Forest$Level;Lkotlin/jvm/functions/Function1;ZLjava/util/List;)Lbig/forest/ForestConfig;
+	public static synthetic fun copy$default (Lbig/forest/ForestConfig;Lbig/forest/Forest$Level;Lkotlin/jvm/functions/Function1;ZLjava/util/List;ILjava/lang/Object;)Lbig/forest/ForestConfig;
+	public final fun cut (Lbig/forest/Tree;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAllowGlobalOverride ()Z
+	public final fun getLevel ()Lbig/forest/Forest$Level;
+	public final fun getPreProcessLog ()Lkotlin/jvm/functions/Function1;
+	public fun hashCode ()I
+	public final fun plant (Lbig/forest/Tree;)V
+	public final fun setAllowGlobalOverride (Z)V
+	public final fun setLevel (Lbig/forest/Forest$Level;)V
+	public final fun setPreProcessLog (Lkotlin/jvm/functions/Function1;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class big/forest/ForestKt {
+	public static final fun getForest (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
+	public static final fun getForest (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
+	public static synthetic fun getForest$default (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
+	public static synthetic fun getForest$default (Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
+}
+
+public final class big/forest/LogEntry {
+	public fun <init> (Lbig/forest/Forest$Level;Ljava/lang/String;)V
+	public fun <init> (Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;)V
+	public fun <init> (Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;Ljava/lang/String;)V
+	public fun <init> (Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;Ljava/lang/String;Ljava/lang/Throwable;)V
+	public fun <init> (Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public synthetic fun <init> (Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lbig/forest/Forest$Level;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lbig/forest/context/ForestContext;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/Throwable;
+	public final fun component6 ()Ljava/util/Map;
+	public final fun copy (Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)Lbig/forest/LogEntry;
+	public static synthetic fun copy$default (Lbig/forest/LogEntry;Lbig/forest/Forest$Level;Ljava/lang/String;Lbig/forest/context/ForestContext;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)Lbig/forest/LogEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttributes ()Ljava/util/Map;
+	public final fun getContext ()Lbig/forest/context/ForestContext;
+	public final fun getLevel ()Lbig/forest/Forest$Level;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getTag ()Ljava/lang/String;
+	public final fun getThrowable ()Ljava/lang/Throwable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class big/forest/Tree {
+	public abstract fun log (Lbig/forest/LogEntry;)V
+}
+
+public abstract interface class big/forest/context/ForestContext {
+	public static final field Factory Lbig/forest/context/ForestContext$Factory;
+	public abstract fun clear ()V
+	public abstract fun containsKey (Ljava/lang/String;)Z
+	public abstract fun containsValue (Ljava/lang/Object;)Z
+	public abstract fun get (Ljava/lang/String;)Ljava/lang/Object;
+	public abstract fun getKeys ()Ljava/util/Set;
+	public abstract fun getSize ()I
+	public abstract fun getValues ()Ljava/util/Collection;
+	public abstract fun isEmpty ()Z
+	public abstract fun put (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+	public abstract fun remove (Ljava/lang/String;)Ljava/lang/Object;
+	public abstract fun removeOnModifiedListener ()V
+	public abstract fun set (Ljava/lang/String;Ljava/lang/Object;)V
+	public abstract fun setOnModifiedListener (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class big/forest/context/ForestContext$DefaultImpls {
+	public static fun set (Lbig/forest/context/ForestContext;Ljava/lang/String;Ljava/lang/Object;)V
+}
+
+public final class big/forest/context/ForestContext$Factory {
+	public final fun createDataContext ()Lbig/forest/context/ForestDataContext;
+}
+
+public final class big/forest/context/ForestDataContext : big/forest/context/ForestContext {
+	public fun clear ()V
+	public fun containsKey (Ljava/lang/String;)Z
+	public fun containsValue (Ljava/lang/Object;)Z
+	public fun get (Ljava/lang/String;)Ljava/lang/Object;
+	public fun getKeys ()Ljava/util/Set;
+	public fun getSize ()I
+	public fun getValues ()Ljava/util/Collection;
+	public fun isEmpty ()Z
+	public fun put (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+	public fun remove (Ljava/lang/String;)Ljava/lang/Object;
+	public fun removeOnModifiedListener ()V
+	public fun set (Ljava/lang/String;Ljava/lang/Object;)V
+	public fun setOnModifiedListener (Lkotlin/jvm/functions/Function1;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class big/forest/context/ModifiedState {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getKey ()Ljava/lang/String;
+}
+
+public final class big/forest/context/ModifiedState$New : big/forest/context/ModifiedState {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Object;)Lbig/forest/context/ModifiedState$New;
+	public static synthetic fun copy$default (Lbig/forest/context/ModifiedState$New;Ljava/lang/String;Ljava/lang/Object;ILjava/lang/Object;)Lbig/forest/context/ModifiedState$New;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getKey ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class big/forest/context/ModifiedState$Removed : big/forest/context/ModifiedState {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Object;)Lbig/forest/context/ModifiedState$Removed;
+	public static synthetic fun copy$default (Lbig/forest/context/ModifiedState$Removed;Ljava/lang/String;Ljava/lang/Object;ILjava/lang/Object;)Lbig/forest/context/ModifiedState$Removed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getKey ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class big/forest/context/ModifiedState$Updated : big/forest/context/ModifiedState {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Lbig/forest/context/ModifiedState$Updated;
+	public static synthetic fun copy$default (Lbig/forest/context/ModifiedState$Updated;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Lbig/forest/context/ModifiedState$Updated;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getKey ()Ljava/lang/String;
+	public final fun getNewValue ()Ljava/lang/Object;
+	public final fun getOldValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
