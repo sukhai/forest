@@ -14,7 +14,8 @@ trap "{ rm -rf ${temp_dir}; }" EXIT
 mv docs/build/docs/orchid/* "$temp_dir"
 
 git stash
-git checkout gh-pages
+git fetch
+git checkout origin/gh-pages
 
 mv "$temp_dir/*" .
 
