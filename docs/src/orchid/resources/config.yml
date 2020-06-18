@@ -9,7 +9,7 @@ theme:
   legacySearch: false
   social:
     other:
-      - link: '/'
+      - link: '/forest'
         label: 'Home'
         icon: 'fas fa-home'
     github: 'sukhai/forest'
