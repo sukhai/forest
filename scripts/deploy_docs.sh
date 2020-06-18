@@ -20,5 +20,8 @@ git checkout gh-pages
 cp -r $temp_dir/* .
 
 git add .
-git commit -m "Update documentation."
+git commit -m "Update documentation." || {
+  # Nothing to commit
+  exit 0
+}
 git push origin
