@@ -17,7 +17,7 @@ git stash
 git fetch
 git checkout gh-pages
 
-mv $temp_dir/* .
+cp -r $temp_dir/* .
 
 git add .
 git commit -m "Update documentation."
