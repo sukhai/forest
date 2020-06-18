@@ -15,9 +15,9 @@ mv docs/build/docs/orchid/* "$temp_dir"
 
 git stash
 git fetch
-git checkout origin/gh-pages
+git checkout gh-pages
 
-mv "$temp_dir/*" .
+mv $temp_dir/* .
 
 git add .
 git commit -m "Update documentation."
