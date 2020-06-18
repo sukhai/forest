@@ -5,6 +5,8 @@ Forest is A lightweight Android-Kotlin first logging library. It is inspired by 
 [Timber](https://github.com/JakeWharton/timber) project. Although Timber is good and easy to use, 
 but it's missing some features that can work better on an Android project.
 
+For more information please visit the [website](https://sukhai.github.io/forest/).
+
 ## Basic Usage
 You will have to plant at least a {{ anchor(title='Tree', itemId='Tree', collectionType='wiki') }} 
 to the `Forest` first so you can receive a log event from the `Forest`. By default, this library 
@@ -60,7 +62,7 @@ Features offer by this library includes:
 - Pre-process a log. See {{ anchor(title='pre-processing callback', itemId='Pre-process Log', collectionType='wiki') }}.
 
 ## Full Documentation
-
+- [Website](https://sukhai.github.io/forest/)
 
 ## License
 ```
