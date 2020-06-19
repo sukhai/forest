@@ -33,7 +33,7 @@ jobs:
         with:
           tag_name: ${{ env.NEW_TAG_NAME }}
           release_name: ${{ env.NEW_TAG_NAME }}
-          body: ${{ env.CHANGELOG }}
+          body: ${{ "env.CHANGELOG" }}
           draft: false
           prerelease: false
 
