@@ -2,7 +2,7 @@ name: release
 
 on:
   push:
-    branches: [ update-github-actions-to-create-changelog-on-webpage ]
+    branches: [ master, update-github-actions-to-create-changelog-on-webpage ]
   release:
     types: [ published ]
 
@@ -18,8 +18,10 @@ jobs:
         run: |
           new_changelog_version=$(./scripts/version.sh)
           if [[ -n "$new_changelog_version" ]]; then
+              changelog=$(./scripts/version.sh get_latest_changelog_content)
               echo ::set-env name=CREATE_RELEASE::"true"
               echo ::set-env name=NEW_TAG_NAME::"$new_changelog_version"
+              echo ::set-env name=CHANGELOG::"$changelog"
           fi
 
       - name: Create release
@@ -31,10 +33,7 @@ jobs:
         with:
           tag_name: ${{ env.NEW_TAG_NAME }}
           release_name: ${{ env.NEW_TAG_NAME }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+          body: ${{ env.CHANGELOG }}
           draft: false
           prerelease: false
 
