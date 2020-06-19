@@ -49,13 +49,13 @@ jobs:
       #      ./scripts/deploy_docs.sh
       #
       - name: Update project version
-          if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
-          env:
-            githubToken: ${{ secrets.GITHUBTOKEN }}
-            USER_EMAIL: ${{ secrets.USER_EMAIL }}
-            TAG_NAME: ${{ github.event.tag_name }}
-          run: |
-            git config --global user.email "$USER_EMAIL"
-            git config --global user.name "Forest"
+        if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
+        env:
+          githubToken: ${{ secrets.GITHUBTOKEN }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          TAG_NAME: ${{ github.event.tag_name }}
+        run: |
+          git config --global user.email "$USER_EMAIL"
+          git config --global user.name "Forest"
 
-            echo "Updating project version to $TAG_NAME"
+          echo "Updating project version to $TAG_NAME"
