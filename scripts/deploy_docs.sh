@@ -5,23 +5,33 @@ ROOT=$(git rev-parse --show-toplevel)
 
 cd "$ROOT"
 
-temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'temp_dir')
-trap "{ rm -rf ${temp_dir}; }" EXIT
+TEMP_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'TEMP_DIR')
+trap "{ rm -rf ${TEMP_DIR}; }" EXIT
 
-# Generate all the docs
-./gradlew :docs:orchidDeploy -PorchidEnvironment=prod
+function _generate_docs() {
+  ./gradlew install
+  ./gradlew dokka
 
-mv docs/build/docs/orchid/* "$temp_dir"
+  # Generate all the docs
+  ./gradlew :docs:orchidDeploy -PorchidEnvironment=prod
 
-git stash
-git fetch
-git checkout gh-pages
-
-cp -r $temp_dir/* .
-
-git add .
-git commit -m "Update documentation." || {
-  # Nothing to commit
-  exit 0
+  mv docs/build/docs/orchid/* "$TEMP_DIR"
 }
-git push origin
+
+function _git_commit() {
+  git stash
+  git fetch
+  git checkout gh-pages
+
+  cp -r $TEMP_DIR/* .
+
+  git add .
+  git commit -m "Update documentation." || {
+    # Nothing to commit
+    exit 0
+  }
+  git push origin
+}
+
+_generate_docs
+_git_commit
