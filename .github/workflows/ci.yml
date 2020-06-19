@@ -6,7 +6,7 @@ on:
   #  pull_request:
   #    branches: [ master ]
   release:
-    types: [ created ]
+    types: [ published ]
 
 jobs:
   build:
@@ -16,10 +16,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Test vars
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           set -x
-          echo "${github.action}"
-          echo "${github.event_name}"
+          echo "$GITHUB_CONTEXT"
 
       - name: Run install
         run: ./gradlew install
