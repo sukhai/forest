@@ -17,12 +17,8 @@
 package big.forest
 
 import big.forest.Forest.Global.context
-import big.forest.Forest.Level.DEBUG
-import big.forest.Forest.Level.ERROR
-import big.forest.Forest.Level.FATAL
 import big.forest.Forest.Level.INFO
 import big.forest.Forest.Level.VERBOSE
-import big.forest.Forest.Level.WARN
 import big.forest.context.ForestContext
 import java.util.concurrent.ConcurrentHashMap
 
@@ -97,13 +93,13 @@ interface Forest {
      * The logging level of this [Forest]. This level will be used to
      * determine if it should log a given [LogEntry].
      *
-     * The order of the levels is (except [Level.OFF]:
-     * 1. [FATAL]
-     * 2. [ERROR]
-     * 3. [WARN]
-     * 4. [INFO]
-     * 5. [DEBUG]
-     * 6. [VERBOSE]
+     * The order of the levels is (except [Level.OFF]):
+     * 1. [Level.FATAL]
+     * 2. [Level.ERROR]
+     * 3. [Level.WARN]
+     * 4. [Level.INFO]
+     * 5. [Level.DEBUG]
+     * 6. [Level.VERBOSE]
      *
      * This [Forest] will only log a [LogEntry] if the given level is
      * less than this [level]. For example, if this [level] is set to
