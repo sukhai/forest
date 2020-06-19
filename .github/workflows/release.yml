@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master, update-github-actions-to-create-changelog-on-webpage ]
   release:
-    types: [ released, published ]
+    types: [ published ]
 
 jobs:
   build:
@@ -19,9 +19,14 @@ jobs:
           new_changelog_version=$(./scripts/version.sh)
           if [[ -n "$new_changelog_version" ]]; then
               changelog="$(./scripts/version.sh get_latest_changelog_content)"
+
+              changelog="${changelog//'%'/'%25'}"
+              changelog="${changelog//$'\n'/'%0A'}"
+              changelog="${changelog//$'\r'/'%0D'}"
+              echo "::set-output name=changelog::${changelog}"
+              echo "::set-env name=body::${changelog}"
               echo ::set-env name=CREATE_RELEASE::"true"
               echo ::set-env name=NEW_TAG_NAME::"$new_changelog_version"
-              echo ::set-env name=CHANGELOG::"${changelog}"
           fi
 
       - name: Create release
@@ -33,7 +38,7 @@ jobs:
         with:
           tag_name: ${{ env.NEW_TAG_NAME }}
           release_name: ${{ env.NEW_TAG_NAME }}
-          body: ${{ "env.CHANGELOG" }}
+          body: ${{ steps.set_env_var.outputs.changelog }}
           draft: false
           prerelease: false
 
