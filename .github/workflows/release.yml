@@ -44,7 +44,7 @@ jobs:
         env:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
-          TAG_NAME: ${{ github.event.tag_name }}
+          TAG_NAME: ${{ env.NEW_TAG_NAME }}
         run: |
           git config --global user.email "$USER_EMAIL"
           git config --global user.name "Forest"
@@ -59,7 +59,7 @@ jobs:
         env:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
-          TAG_NAME: ${{ github.event.tag_name }}
+          TAG_NAME: ${{ env.NEW_TAG_NAME }}
         run: |
           git config --global user.email "$USER_EMAIL"
           git config --global user.name "Forest"

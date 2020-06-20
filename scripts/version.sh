@@ -87,6 +87,10 @@ function main() {
     fi
 
     if [[ "$update_project_version" == "true" ]]; then
+        if [[ -z "$new_project_version" ]]; then
+            echo "Mising argument for -v|--project-version"
+            exit 1
+        fi
         _update_properties "$new_project_version"
         exit 0
     fi
