@@ -1,0 +1,67 @@
+name: release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check new changelog
+        if: ${{ github.event_name == 'push' && contains(github.ref, 'master') }}
+        run: |
+          new_changelog_version=$(./scripts/version.sh)
+          if [[ -n "$new_changelog_version" ]]; then
+              changelog="$(./scripts/version.sh --changelog)"
+              changelog="${changelog//'%'/'%25'}"
+              changelog="${changelog//$'\n'/'%0A'}"
+              changelog="${changelog//$'\r'/'%0D'}"
+              echo "::set-output name=CHANGELOG::${changelog}"
+              echo "::set-env name=CHANGELOG::${changelog}"
+              echo ::set-env name=CREATE_RELEASE::"true"
+              echo ::set-env name=NEW_TAG_NAME::"$new_changelog_version"
+          fi
+
+      - name: Create release
+        if: ${{ env.CREATE_RELEASE == 'true' }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.NEW_TAG_NAME }}
+          release_name: ${{ env.NEW_TAG_NAME }}
+          body: ${{ env.CHANGELOG }}
+          draft: false
+          prerelease: false
+
+      - name: Update project version
+        if: ${{ env.CREATE_RELEASE == 'true' }}
+        env:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          TAG_NAME: ${{ env.NEW_TAG_NAME }}
+        run: |
+          git config --global user.email "$USER_EMAIL"
+          git config --global user.name "Forest"
+          ./scripts/version.sh -v "$TAG_NAME"
+
+          git add "gradle/release.properties"
+          git commit -m "Update to version $TAG_NAME"
+          git push origin
+
+      - name: Deploy docs
+        if: ${{ env.CREATE_RELEASE == 'true' }}
+        env:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          TAG_NAME: ${{ env.NEW_TAG_NAME }}
+        run: |
+          git config --global user.email "$USER_EMAIL"
+          git config --global user.name "Forest"
+          ./scripts/version.sh -v "$TAG_NAME"
+          ./scripts/deploy_docs.sh
