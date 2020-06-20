@@ -3,8 +3,6 @@ name: release
 on:
   push:
     branches: [ master, update-github-actions-to-create-changelog-on-webpage ]
-  release:
-    types: [ published ]
 
 jobs:
   build:
@@ -42,7 +40,7 @@ jobs:
           prerelease: false
 
       - name: Update project version
-        if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
+        if: ${{ env.CREATE_RELEASE == 'true' }}
         env:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
@@ -57,7 +55,7 @@ jobs:
           git push origin
 
       - name: Deploy docs
-        if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
+        if: ${{ env.CREATE_RELEASE == 'true' }}
         env:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
