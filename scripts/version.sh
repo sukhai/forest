@@ -76,8 +76,6 @@ function main() {
         esac
     done
 
-    echo "new_project_version: $new_project_version"
-
     if [[ "$get_changelog" == "true" ]] && [[ "$update_project_version" == "true" ]]; then
         echo "Only one of the two options can be enabled at a time."
         exit 1
