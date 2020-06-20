@@ -5,52 +5,52 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://sukhai.github.io/forest/wiki</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/guides/installation</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/guides/getting_started</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/guides/java</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/features/tree</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/features/forest</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/features/log_level</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/features/adding_attributes</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/features/forest_context</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://sukhai.github.io/forest/wiki/features/preprocess_log</loc>
-        <lastmod>2020-06-19</lastmod>
+        <lastmod>2020-06-20</lastmod>
         <priority>0.5</priority>
     </url>
 </urlset>
