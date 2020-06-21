@@ -189,6 +189,24 @@ Forest.w(&quot;a message&quot;)
 Forest.e(&quot;a message&quot;)
 Forest.f(&quot;a message&quot;)
 </code></pre>
+<h2 id="installation"><a href="#installation" id="installation" class="anchor"></a>Installation</h2>
+<p><strong>Step 1: Add the JitPack repository to your build file</strong></br>
+Add it in your root <code>build.gradle</code> at the end of repositories:</p>
+<pre><code class="language-groovy">allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+</code></pre>
+<p><strong>Step 2: Add the dependency</strong></br>
+The following installation will add all the modules from this library:</p>
+<pre><code class="language-groovy">dependencies {
+    implementation 'com.github.sukhai:forest:x.y.z'
+}
+</code></pre>
+<p>Please replace <code>x.y.z</code> with the latest version: <a href="https://jitpack.io/#sukhai/forest"><img src="https://jitpack.io/v/sukhai/forest.svg" alt="" /></a>
+For more information please visit the <a href="https://sukhai.github.io/forest/wiki/guides/installation/">installation guide</a></p>
 <h2 id="features"><a href="#features" id="features" class="anchor"></a>Features</h2>
 <p>Features offer by this library includes:</p>
 <ul>
