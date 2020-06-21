@@ -52,6 +52,28 @@ Forest.e("a message")
 Forest.f("a message")
 ```
 
+## Installation
+**Step 1: Add the JitPack repository to your build file**</br>
+Add it in your root `build.gradle` at the end of repositories:
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+**Step 2: Add the dependency**</br>
+The following installation will add all the modules from this library:
+```groovy
+dependencies {
+    implementation 'com.github.sukhai:forest:x.y.z'
+}
+```
+Please replace `x.y.z` with the latest version: [![](https://jitpack.io/v/sukhai/forest.svg)](https://jitpack.io/#sukhai/forest)
+For more information please visit the [installation guide](https://sukhai.github.io/forest/wiki/guides/installation/)
+
 ## Features
 Features offer by this library includes:
 - Log messages with a named logger. See {{ anchor(title='Forest', itemId='Forest', collectionType='wiki') }}.
