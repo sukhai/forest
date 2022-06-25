@@ -21,7 +21,7 @@ Forest.plant(DebugTree())
 
 #### Step 2: Create a Forest in any of your class
 ```kotlin
-val forest = getForest(MyClass::class.java)
+val forest = getForest()
 ```
 
 #### Step 3: Start logging!

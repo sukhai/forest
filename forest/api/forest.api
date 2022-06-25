@@ -153,8 +153,10 @@ public final class big/forest/ForestConfig {
 
 public final class big/forest/ForestKt {
 	public static final fun getForest (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
+	public static final fun getForest (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
 	public static final fun getForest (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lbig/forest/Forest;
 	public static synthetic fun getForest$default (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
+	public static synthetic fun getForest$default (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
 	public static synthetic fun getForest$default (Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lbig/forest/Forest;
 }
 

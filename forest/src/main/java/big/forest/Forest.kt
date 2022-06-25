@@ -447,6 +447,21 @@ interface Forest {
 }
 
 /**
+ * Get or create a [Forest] for this object.
+ *
+ * You can configure the [Forest] by using [configure] if this method is
+ * creating the [Forest], otherwise the [configure] will not apply the
+ * configuration to the returning [Forest].
+ *
+ * @param configure To configure the returning [Forest] if it's being
+ * created from this method.
+ * @return A [Forest] that has a name registered with this object type.
+ */
+fun Any.getForest(configure: (ForestConfig.() -> Unit) = {}): Forest {
+    return Forest.getForest(this::class.java, configure)
+}
+
+/**
  * Get or create a [Forest] with the given [name].
  *
  * You can configure the [Forest] by using [configure] if this method is
