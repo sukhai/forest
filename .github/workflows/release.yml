@@ -20,10 +20,11 @@ jobs:
               changelog="${changelog//'%'/'%25'}"
               changelog="${changelog//$'\n'/'%0A'}"
               changelog="${changelog//$'\r'/'%0D'}"
-              echo "::set-output name=CHANGELOG::${changelog}"
-              echo "::set-env name=CHANGELOG::${changelog}"
-              echo ::set-env name=CREATE_RELEASE::"true"
-              echo ::set-env name=NEW_TAG_NAME::"$new_changelog_version"
+              echo "Changelog:"
+              echo "${changelog}"
+              echo "CHANGELOG=${changelog}" >> $GITHUB_ENV
+              echo "CREATE_RELEASE=true" >> $GITHUB_ENV
+              echo "NEW_TAG_NAME=${new_changelog_version}" >> $GITHUB_ENV
           fi
 
       - name: Create release
